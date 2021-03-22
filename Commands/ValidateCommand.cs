@@ -17,7 +17,6 @@ namespace TourPlanner.Commands
             _viewModel = viewModel;
         }
 
-
         public event EventHandler CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;

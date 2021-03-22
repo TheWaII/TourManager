@@ -12,12 +12,12 @@ namespace TourPlanner.Logic
 {
     public class GetDistance
     {
-        private readonly Connection _connection = new Connection();
+        private readonly MapApiStrings _mapApiStrings = new MapApiStrings();
 
         public double Distance(string source, string destination)
         {
             //https://stackoverflow.com/questions/27108264/how-to-properly-make-a-http-web-get-request
-            var request = (HttpWebRequest) WebRequest.Create(_connection.DistanceUrl(source, destination));
+            var request = (HttpWebRequest) WebRequest.Create(_mapApiStrings.DistanceUrl(source, destination));
             var response = (HttpWebResponse) request.GetResponse();
             string responseString;
 

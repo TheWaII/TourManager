@@ -10,6 +10,7 @@ namespace TourPlanner.Views
     {
         public MainWindow()
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
         }
     }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using TourPlanner.Commands;
@@ -13,6 +16,7 @@ namespace TourPlanner.ViewModels
 {
     public class AddTourViewModel : INotifyPropertyChanged
     {
+        
         #region Properties
         private string _titleName;
 
@@ -100,8 +104,8 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _route;
-        public string Route
+        private ImageSource _route;
+        public ImageSource Route
         {
             get => _route;
             set
@@ -115,11 +119,13 @@ namespace TourPlanner.ViewModels
         public ICommand AddTourCommand { get; }
 
         public ICommand ValidateCommand { get; }
-        #endregion
+        public string ArrowImage => @"..\..\img\icons\arrow.png";
 
+        #endregion
 
         public AddTourViewModel()
         {
+
             AddTourCommand = new AddTourCommand(this);
             ValidateCommand = new ValidateCommand(this);
         }
@@ -134,63 +140,41 @@ namespace TourPlanner.ViewModels
         }
 
 
+        
         public bool CanUpdate =>
             !string.IsNullOrWhiteSpace(TitleName) && !string.IsNullOrWhiteSpace(Description) &&
             !string.IsNullOrWhiteSpace(Source) && !string.IsNullOrWhiteSpace(Destination) &&
             TourDistance != 0;
+        
 
         public bool CanUpdateValidate =>
             !string.IsNullOrWhiteSpace(Source) && !string.IsNullOrWhiteSpace(Destination);
-
-
+        
 
         public void SaveChanges()
         {
-            GetDistance getDistance = new GetDistance();
-            //httpclass c = new httpclass
-            //c.getDirections();
-
-            //HTTP REQUEST SEND TO MAP API...
-
-            //send to map updater.
-            //MessageBox.Show("Title: " + TitleName + "\nSource -> Destination: " + Source + " -> " +
-            //Destination + "\nDescription: " + Description + "\n was added");
-
+            var getDistance = new GetDistance();
             MessageBox.Show(Convert.ToString(getDistance.Distance(Source, Destination), CultureInfo.InvariantCulture));
-
-            //Debug.Assert(false, $"{Tour.TitleName + " " + Tour.Destination} was updated.");
         }
-
-        
 
 
         public void Validate()
         {
             var getDistance = new GetDistance();
 
-            GetMap getMap = new GetMap();
+            var getMap = new GetMap();
 
-            this.TourDistance =  Convert.ToDouble(getDistance.Distance(Source, Destination),
+            this.TourDistance = Convert.ToDouble(getDistance.Distance(Source, Destination),
                 CultureInfo.InvariantCulture);
 
+            getMap.SaveImage(Source, Destination);
 
-             getMap.SaveImage(Source, Destination);
+            //var src = @"..\..\img\" + Source + "_" + Destination + ".jpeg";
+            //this.Route = new BitmapImage(new Uri(src, UriKind.Relative));
 
-             var src = @"..\images\" + Source + "_" + Destination + ".jpeg";
-             //var src = Source + "_" + Destination + ".jpeg";
-             
-             this.Route = src;
-
-             //this.Route = new BitmapImage(new Uri(src, UriKind.Relative));
-
-             //MessageBox.Show(Convert.ToString(getDistance.Distance(Source, Destination), CultureInfo.InvariantCulture));
-        }
-
-
-        public void SaveLogChanges()
-        {
+            var src = @"C:\Users\thewa\source\repos\TourPlanner\img\" + Source + "_" + Destination + ".jpeg";
+            this.Route = new BitmapImage(new Uri(src, UriKind.Absolute));
 
         }
-
     }
 }
