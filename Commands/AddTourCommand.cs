@@ -27,7 +27,6 @@ namespace TourPlanner.Commands
             return _viewModel.CanUpdate;
         }
         
-
         public void Execute(object parameter)
         {
             _viewModel.SaveChanges();

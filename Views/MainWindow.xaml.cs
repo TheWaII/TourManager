@@ -9,8 +9,7 @@ namespace TourPlanner.Views
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
-            DataContext = new MainViewModel();
+        { 
             InitializeComponent();
         }
     }

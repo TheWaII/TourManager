@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -9,8 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using TourPlanner.BL;
 using TourPlanner.Commands;
-using TourPlanner.Logic;
+using TourPlanner.Model;
 
 namespace TourPlanner.ViewModels
 {
@@ -115,6 +117,8 @@ namespace TourPlanner.ViewModels
             }
         }
 
+        public ObservableCollection<TourData> Data { get; set; } = new ObservableCollection<TourData>();
+
 
         public ICommand AddTourCommand { get; }
 
@@ -153,27 +157,43 @@ namespace TourPlanner.ViewModels
 
         public void SaveChanges()
         {
+            var tourData = new TourData
+            {
+                TourName = this.TitleName,
+                Source = this.Source,
+                Destination = this.Destination,
+                Distance = this.TourDistance
+            };
+
+
+
             var getDistance = new GetDistance();
-            MessageBox.Show(Convert.ToString(getDistance.Distance(Source, Destination), CultureInfo.InvariantCulture));
+            
+            Data.Add(tourData);
+            //MessageBox.Show(Convert.ToString(getDistance.Distance(Source, Destination), CultureInfo.InvariantCulture));
         }
 
 
         public void Validate()
         {
+            var getMap = new MapApiStrings();
+
             var getDistance = new GetDistance();
 
-            var getMap = new GetMap();
+            //var getMap = new GetMap();
 
             this.TourDistance = Convert.ToDouble(getDistance.Distance(Source, Destination),
                 CultureInfo.InvariantCulture);
 
-            getMap.SaveImage(Source, Destination);
+            //getMap.SaveImage(Source, Destination);
 
-            //var src = @"..\..\img\" + Source + "_" + Destination + ".jpeg";
+            //var src = @"..\..\img" + Source + "_" + Destination + ".jpeg";
             //this.Route = new BitmapImage(new Uri(src, UriKind.Relative));
 
-            var src = @"C:\Users\thewa\source\repos\TourPlanner\img\" + Source + "_" + Destination + ".jpeg";
-            this.Route = new BitmapImage(new Uri(src, UriKind.Absolute));
+            //var src = @"C:\Users\thewa\source\repos\TourPlanner\img\" + Source + "_" + Destination + ".jpeg";
+            //this.Route = new BitmapImage(new Uri(src, UriKind.Absolute));
+
+            this.Route = new BitmapImage(new Uri(getMap.MapUrl(Source, Destination)));
 
         }
     }
