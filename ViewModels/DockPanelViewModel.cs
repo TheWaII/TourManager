@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using System.Security.Policy;
@@ -11,7 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using TourPlanner.Annotations;
 using TourPlanner.Commands;
-using TourPlanner.Commands.DockPanel.File;
+
 
 namespace TourPlanner.ViewModels
 {
@@ -21,11 +20,19 @@ namespace TourPlanner.ViewModels
         public bool CanUpdate => true;
 
 
-        public ICommand CloseCommand { get; }
+        //public ICommand CloseCommand { get; }
+
+        public RelayCommand CloseCommand { get; }
+        
 
         public DockPanelViewModel()
         {
-            CloseCommand = new CloseCommand(this);
+            CloseCommand = new RelayCommand((_) =>
+            {
+                ApplicationExit();
+            });
+
+            //CloseCommand = new CloseCommand(this);
         }
 
 

@@ -8,7 +8,7 @@ namespace TourPlanner.Model
 {
     public class TourData
     {
-        public string TourName { get; set; }
+        public string Name { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
         public double Distance { get; set; }
@@ -16,7 +16,7 @@ namespace TourPlanner.Model
 
         public TourData(string tourName, string source, string destination, double distance, string description)
         {
-            this.TourName = tourName;
+            this.Name = tourName;
             this.Source = source;
             this.Destination = destination;
             this.Distance = distance;
@@ -25,7 +25,7 @@ namespace TourPlanner.Model
 
         public TourData(string tourName)
         {
-            this.TourName = tourName;
+            this.Name = tourName;
         }
 
         public TourData() { }

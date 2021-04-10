@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="TourPlanner.Views.UserControls.AddTourControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourPlanner.Views"
+             xmlns:vm ="clr-namespace:TourPlanner.ViewModels"
+             xmlns:adorners="http://gu.se/Adorners"
+             mc:Ignorable="d">
+
+    <Grid Background="AntiqueWhite" Height="Auto" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition MinHeight="50"/>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Tour Name:" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="From:" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="To:" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="Distance (in miles):" Grid.Row="4" Grid.Column="0"/>
+        <ProgressBar Grid.Row="3" Grid.Column="0" Background="{Binding (vm:MainViewModel.AddTourViewModel).ProgressBarColor}"/>
+        <Label Content="Description:" Grid.Row="5" Grid.Column="0"/>
+
+        <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Source, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Destination, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTOurDistance" Grid.Row="4" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).TourDistance, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+
+        <RichTextBox x:Name="RbxDescription" Grid.Row="5" Grid.Column="1">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding (vm:MainViewModel.AddTourViewModel).Description, UpdateSourceTrigger=PropertyChanged}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate" Command="{Binding (vm:MainViewModel.AddTourViewModel).ValidateCommand}"/>
+        <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add" Command="{Binding (vm:MainViewModel.AddTourViewModel).AddTourCommand}"/>
+
+
+
+
+    </Grid>
+</UserControl>
