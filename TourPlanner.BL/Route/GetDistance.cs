@@ -3,12 +3,11 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-
-namespace TourPlanner.BL
+namespace TourPlanner.BL.Route
 {
     public class GetDistance
     {
-        private readonly MapApiStrings _mapApiStrings = new MapApiStrings();
+        private readonly MapApiStrings _mapApiStrings = new();
 
         public double Distance(string source, string destination)
         {
@@ -19,10 +18,8 @@ namespace TourPlanner.BL
 
             using (var stream = response.GetResponseStream())
             {
-                using (var reader = new StreamReader(stream ?? throw new InvalidOperationException()))
-                {
-                    responseString = reader.ReadToEnd();
-                }
+                using var reader = new StreamReader(stream ?? throw new InvalidOperationException());
+                responseString = reader.ReadToEnd();
             }
 
             dynamic json = JObject.Parse(responseString);

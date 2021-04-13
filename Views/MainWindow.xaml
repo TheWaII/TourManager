@@ -10,7 +10,7 @@
             xmlns:control="clr-namespace:TourPlanner.Views.UserControls"
             xmlns:views="clr-namespace:TourPlanner.Views"
 
-            Title="Tour-Planner" Height="565" Width="741" MinHeight="565" MinWidth="741" Icon="{Binding LogoImage}"
+            Title="Tour-Planner" Height="565" Width="741" MinHeight="565" MinWidth="800" Icon="{Binding LogoImage}"
             >
     <Window.DataContext>
         <viewModels:MainViewModel/>
@@ -18,10 +18,10 @@
 
     <intr:Interaction.Triggers>
         <intr:EventTrigger>
-            <intr:InvokeCommandAction Command="{Binding AddTourViewModel.WindowLoaded}"/>
+            <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowLoaded}"/>
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
-    
+
 
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
@@ -52,24 +52,25 @@
         </DockPanel>
 
         <!--Search box-->
-        <TextBox Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" adorners:Watermark.Text="Search..."/>
+        <TextBox Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="2" adorners:Watermark.Text="Search..." Text="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!--Head of AddTour-->
         <DockPanel Grid.Column="0" Grid.Row="2">
             <Label x:Name="LblTours" Content="Tours" Width="40" DockPanel.Dock="Left"/>
-            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right">
-                <Image Source="{Binding OptionsImage}"/>
+            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right" Command="{Binding TourViewModel.EditTourToggle}">
+                <Image Source="{Binding EditImage}"/>
             </ToggleButton>
-            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right">
+            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right" Command="{Binding TourViewModel.DeleteTourCommand}">
                 <Image Source="{Binding MinusImage}"/>
             </Button>
-            <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right" Command="{Binding AddTourViewModel.AddTourToggle}">
+            <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right" Command="{Binding TourViewModel.AddTourToggle}">
                 <Image Source="{Binding PlusImage}"/>
             </ToggleButton>
         </DockPanel>
 
         <!--Tour List-->
-        <ListBox Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" ItemsSource="{Binding AddTourViewModel.Data}">
+        <ListBox Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" ItemsSource="{Binding TourViewModel.MyFilteredItems}"
+                 SelectedItem="{Binding TourViewModel.SelectedTour}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -77,7 +78,7 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding  Name}" />
+                        <TextBlock Text="{Binding  TourName}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -86,34 +87,35 @@
         <!--Grid Splitter-->
         <GridSplitter Grid.Row="3" Grid.RowSpan="3" Grid.Column="0" Width="5"/>
 
-        <!--Tour Title Display--> 
+        <!--Tour Title Display-->
         <Label x:Name="LblTitle" Grid.Column="1" Grid.Row="2" Content="Title: " />
-        <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center"/>
-        
+        <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" Content="{Binding TourViewModel.SelectedTour.TourName}"  FontWeight="UltraBold"/>
+
         <!--Log Buttons-->
         <DockPanel Grid.Column="1" Grid.Row="4">
             <Label  x:Name="LblLogs" Content="Logs:" DockPanel.Dock="Left"/>
             <ToggleButton Width="40" Name="TbtOptionsLog" DockPanel.Dock="Right">
-                <Image Source="{Binding OptionsImage}"/>
+                <Image Source="{Binding EditImage}"/>
             </ToggleButton>
             <Button Width="40" Name="BtnRemoveLog" DockPanel.Dock="Right">
                 <Image Source="{Binding MinusImage}"/>
             </Button>
-            <ToggleButton Width="40" Name="TbtAddLog" HorizontalAlignment="Right">
+            <ToggleButton Width="40" Name="TbtAddLog" HorizontalAlignment="Right" Command ="{Binding LogViewModel.AddLogToggle}">
                 <Image Source="{Binding PlusImage}"/>
             </ToggleButton>
         </DockPanel>
 
         <!-- Tour Controls-->
         <Grid Column="1" Row="3">
-            <control:TourRouteDescriptionControl  Visibility="{Binding AddTourViewModel.RouteDescriptionVisibility}"/>
-            <control:AddTourControl Visibility="{Binding AddTourViewModel.AddTourVisibility}"/>
+            <control:TourRouteDescriptionControl  Visibility="{Binding TourViewModel.RouteDescriptionVisibility}"/>
+            <control:AddTourControl Visibility="{Binding TourViewModel.AddTourVisibility}"/>
+            <control:EditTourControl Visibility="{Binding TourViewModel.EditTourVisibility}"/>
         </Grid>
 
         <!--Log Controls-->
         <Grid Column="1" Row="5">
-            <control:LogControl Visibility="{Binding AddTourViewModel.RouteDescriptionVisibility}"/>
-            <control:AddLogControl/>
+            <control:LogControl Visibility="{Binding LogViewModel.LogVisibility}"/>
+            <control:AddLogControl Visibility="{Binding LogViewModel.AddLogVisibility}"/>
         </Grid>
 
     </Grid>

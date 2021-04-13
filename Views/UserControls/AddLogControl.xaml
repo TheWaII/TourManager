@@ -6,7 +6,9 @@
              mc:Ignorable="d"
              xmlns:local="clr-namespace:TourPlanner.Views.UserControls"
              xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:vm ="clr-namespace:TourPlanner.ViewModels"
+             >
 
     <Grid Background="AntiqueWhite" Height="Auto" Width="Auto">
         <Grid.RowDefinitions>
@@ -39,7 +41,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" Name="TbxLogName"/>
         <DatePicker Grid.Row="1" Grid.Column="1" Name="DpkLogDate"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="TbxDistance"/>
-        <xctk:TimePicker Grid.Row="3" Grid.Column="1" Name="TpkLogTime"/>  
+        <xctk:TimePicker Grid.Row="3" Grid.Column="1" Name="TpkLogTime"/>
         <!--<TextBox Grid.Row="3" Grid.Column="1" Name="tbxTotalTime"/>-->
         <controls:Rating Grid.Row="4" Grid.Column="1"  ItemCount="5" Name="RtgLogRating"/>
         <RichTextBox Grid.Row="5" Grid.Column="1" Name="RbxLogReport"/>
@@ -49,13 +51,13 @@
         <!--Tour type-->
 
         <DockPanel Grid.Row="0" Grid.Column="2">
-            <RadioButton Content="None " IsChecked="True"/>
-            <RadioButton Content="Bike Tour " IsChecked="True"/>
-            <RadioButton Content="Car Tour " IsChecked="True"/>
+            <RadioButton Content="None   "  Command="{Binding (vm:MainViewModel.LogViewModel).NoneRadioButton }" IsChecked="True"  Background="Azure"/>
+            <RadioButton Content="Bike Tour   "  Command="{Binding (vm:MainViewModel.LogViewModel).BikeRadioButton }" Background="Azure"/>
+            <RadioButton Content="Car Tour   "  HorizontalAlignment="Left" Command="{Binding (vm:MainViewModel.LogViewModel).CarRadioButton}" Background="Azure"/>
         </DockPanel>
 
         <!--Bike Tour-->
-        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Name="BikeTour" Visibility="Hidden">
+        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Name="BikeTour" Visibility="{Binding (vm:MainViewModel.LogViewModel).BikeVisibility}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -84,7 +86,7 @@
         </Grid>
 
         <!--Car Tour-->
-        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Name="CarTour" >
+        <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="5" Name="CarTour" Visibility="{Binding (vm:MainViewModel.LogViewModel).CarVisibility}" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

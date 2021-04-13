@@ -88,10 +88,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseLogic.cs" />
-    <Compile Include="GetDistance.cs" />
-    <Compile Include="GetMap.cs" />
-    <Compile Include="MapApiStrings.cs" />
+    <Compile Include="Database\DatabaseLogic.cs" />
+    <Compile Include="Route\GetDistance.cs" />
+    <Compile Include="Route\GetMap.cs" />
+    <Compile Include="Route\MapApiStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

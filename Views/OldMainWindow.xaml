@@ -30,24 +30,24 @@
                     </Grid.ColumnDefinitions>
 
                     <Label x:Name="LblTitle" Content="Name:" HorizontalAlignment="Left" Margin="23,9,0,0" VerticalAlignment="Top" Height="26" Width="51"/>
-                    <TextBox Grid.Column="0" x:Name="TbxTitle" HorizontalAlignment="Left" Height="25" Margin="23,40,0,0" TextWrapping="Wrap" Text="{Binding AddTourViewModel.TitleName, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="114"/>
+                    <TextBox Grid.Column="0" x:Name="TbxTitle" HorizontalAlignment="Left" Height="25" Margin="23,40,0,0" TextWrapping="Wrap" Text="{Binding TourViewModel.TitleName, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="114"/>
 
                     <Label Grid.Column="0" x:Name="LblRouteInformation" Content="Route information: " HorizontalAlignment="Left" Margin="23,87,0,0" VerticalAlignment="Top" Height="26" Width="112"/>
-                    <TextBox Grid.Column="0" x:Name="TbxFrom" adorners:Watermark.Text="From..."  HorizontalAlignment="Left" Height="23" Margin="23,118,0,0" TextWrapping="Wrap" Text="{Binding AddTourViewModel.Source, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Grid.Column="0" x:Name="TbxTo" adorners:Watermark.Text="To..." HorizontalAlignment="Left" Height="23" Margin="200,118,0,0" TextWrapping="Wrap" Text="{Binding  AddTourViewModel.Destination, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
-                    <Button Grid.Column="0" x:Name="BtnCheck" Margin="325,118,0,460" Command="{Binding AddTourViewModel.ValidateCommand}" Content="Validate" ></Button>
+                    <TextBox Grid.Column="0" x:Name="TbxFrom" adorners:Watermark.Text="From..."  HorizontalAlignment="Left" Height="23" Margin="23,118,0,0" TextWrapping="Wrap" Text="{Binding TourViewModel.Source, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Grid.Column="0" x:Name="TbxTo" adorners:Watermark.Text="To..." HorizontalAlignment="Left" Height="23" Margin="200,118,0,0" TextWrapping="Wrap" Text="{Binding  TourViewModel.Destination, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+                    <Button Grid.Column="0" x:Name="BtnCheck" Margin="325,118,0,460" Command="{Binding TourViewModel.ValidateCommand}" Content="Validate" ></Button>
                     <Label Grid.Column="0" x:Name="LblTourDistance" Content="Tour distance (miles): " HorizontalAlignment="Left" Margin="23,370,0,0" VerticalAlignment="Top" Height="26" Width="129"/>
-                    <TextBox Grid.Column="0" x:Name="TbxTourDistance" HorizontalAlignment="Left" Height="24" Margin="23,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" Text="{Binding AddTourViewModel.TourDistance}" IsEnabled="False"/>
+                    <TextBox Grid.Column="0" x:Name="TbxTourDistance" HorizontalAlignment="Left" Height="24" Margin="23,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" Text="{Binding TourViewModel.Distance}" IsEnabled="False"/>
                     <RichTextBox Grid.Column="0" x:Name="RbxDescription"  HorizontalAlignment="Left" Height="73" Margin="23,472,0,0" VerticalAlignment="Top" Width="430">
                         <FlowDocument>
                             <Paragraph>
-                                <Run Text="{Binding AddTourViewModel.Description}"/>
+                                <Run Text="{Binding TourViewModel.Description}"/>
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
                     <Label Grid.Column="0" x:Name="LblDescription" Content="Description:" HorizontalAlignment="Left" Margin="17,441,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.589,-0.308" Height="26" Width="73"/>
-                    <Button Grid.Column="0" x:Name="BtnAdd" Command="{Binding AddTourViewModel.AddTourCommand}"  Content="Confirm" HorizontalAlignment="Stretch" Margin="0,578,0,0" VerticalAlignment="Stretch"/>
-                    <Image Grid.Column="0" x:Name="ImgRoute" HorizontalAlignment="Left" Height="211" Margin="23,154,0,0" VerticalAlignment="Top" Source="{Binding AddTourViewModel.Route}"/>
+                    <Button Grid.Column="0" x:Name="BtnAdd" Command="{Binding TourViewModel.AddTourCommand}"  Content="Confirm" HorizontalAlignment="Stretch" Margin="0,578,0,0" VerticalAlignment="Stretch"/>
+                    <Image Grid.Column="0" x:Name="ImgRoute" HorizontalAlignment="Left" Height="211" Margin="23,154,0,0" VerticalAlignment="Top" Source="{Binding TourViewModel.Route}"/>
                 </Grid>
             </GroupBox>
 
@@ -55,7 +55,7 @@
             <GroupBox x:Name="GbxTourList" Header="Tours" HorizontalAlignment="Stretch" Margin="0,32,15,9" Grid.Column="1" VerticalAlignment="Stretch">
 
                 <Grid HorizontalAlignment="Left" Height="595" Margin="0,10,-12,-4" VerticalAlignment="Top" Width="229">
-                    <ListBox x:Name="LbxTours" ItemsSource="{Binding AddTourViewModel.Data}" HorizontalAlignment="Stretch" Margin="0,-10,10,66" VerticalAlignment="Stretch">
+                    <ListBox x:Name="LbxTours" ItemsSource="{Binding TourViewModel.Data}" HorizontalAlignment="Stretch" Margin="0,-10,10,66" VerticalAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,2">
@@ -91,10 +91,10 @@
                     </ListView>
                     <Label x:Name="LblStartDate" Content="Start: " HorizontalAlignment="Left" Margin="0,422,0,0" VerticalAlignment="Top" Height="26" Width="40"/>
                     <Label x:Name="LblEndDate" Content="End: " HorizontalAlignment="Left" Margin="197,422,0,0" VerticalAlignment="Top" Height="26" Width="36" RenderTransformOrigin="4.5,-0.692"/>
-                    <DatePicker SelectedDate="{Binding AddTourViewModel.StartDate}" HorizontalAlignment="Left" Margin="0,453,0,0" VerticalAlignment="Top" Height="25" Width="114"/>
-                    <DatePicker SelectedDate="{Binding AddTourViewModel.EndDate}" HorizontalAlignment="Left" Margin="197,453,0,0" VerticalAlignment="Top" Height="25" Width="114"/>
+                    <DatePicker SelectedDate="{Binding TourViewModel.StartDate}" HorizontalAlignment="Left" Margin="0,453,0,0" VerticalAlignment="Top" Height="25" Width="114"/>
+                    <DatePicker SelectedDate="{Binding TourViewModel.EndDate}" HorizontalAlignment="Left" Margin="197,453,0,0" VerticalAlignment="Top" Height="25" Width="114"/>
                     <Button x:Name="BtnUpdateLog" Content="Update" HorizontalAlignment="Left" Margin="1,62,0,0" VerticalAlignment="Top" Width="310" RenderTransformOrigin="-0.933,1.8" Height="21" Grid.Row="1"/>
-                    <Image Grid.Row="0" x:Name="ImgArrow" Source="{Binding AddTourViewModel.ArrowImage}" Margin="-613,96,875,363" RenderTransformOrigin="0.5,0.5">
+                    <Image Grid.Row="0" x:Name="ImgArrow" Source="{Binding TourViewModel.ArrowImage}" Margin="-613,96,875,363" RenderTransformOrigin="0.5,0.5">
                         <Image.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="-1"/>

@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.ViewModels.Log
 {
-    public class Car : AddLogViewModel
+    public class CarLogViewModel : LogViewModel
     {
+
+
         private int _maxSpeed;
 
         public int MaxSpeed
@@ -86,5 +88,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
+       
     }
 }

@@ -160,10 +160,10 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\Log\AddLogViewModel.cs" />
-    <Compile Include="ViewModels\Log\Bike.cs" />
-    <Compile Include="ViewModels\Log\Car.cs" />
-    <Compile Include="ViewModels\Tour\AddTourViewModel.cs" />
+    <Compile Include="ViewModels\Log\LogViewModel.cs" />
+    <Compile Include="ViewModels\Log\BikeLogViewModel.cs" />
+    <Compile Include="ViewModels\Log\CarLogViewModel.cs" />
+    <Compile Include="ViewModels\Tour\TourViewModel.cs" />
     <Compile Include="ViewModels\DockPanelViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
@@ -177,6 +177,9 @@
     </Compile>
     <Compile Include="Views\UserControls\AddTourControl.xaml.cs">
       <DependentUpon>AddTourControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\EditTourControl.xaml.cs">
+      <DependentUpon>EditTourControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
@@ -231,6 +234,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\EditTourControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\UserControls\LogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,7 +265,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\icons\hamburger-menu.png" />
     <Resource Include="img\icons\minus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -269,6 +275,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\edit.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

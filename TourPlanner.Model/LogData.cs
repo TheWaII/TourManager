@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TourPlanner.Model
 {
     public class LogData
-    { 
+    {
 
     }
 }

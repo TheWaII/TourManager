@@ -1,4 +1,4 @@
-﻿namespace TourPlanner.BL
+﻿namespace TourPlanner.BL.Route
 {
     public class MapApiStrings
     {

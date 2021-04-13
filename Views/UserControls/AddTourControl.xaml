@@ -30,24 +30,24 @@
         <Label Content="From:" Grid.Row="1" Grid.Column="0"/>
         <Label Content="To:" Grid.Row="2" Grid.Column="0"/>
         <Label Content="Distance (in miles):" Grid.Row="4" Grid.Column="0"/>
-        <ProgressBar Grid.Row="3" Grid.Column="0" Background="{Binding (vm:MainViewModel.AddTourViewModel).ProgressBarColor}"/>
+        <ProgressBar Grid.Row="3" Grid.Column="0" Background="{Binding (vm:MainViewModel.TourViewModel).ProgressBarColor}"/>
         <Label Content="Description:" Grid.Row="5" Grid.Column="0"/>
 
-        <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Name, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Source, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).Destination, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TbxTOurDistance" Grid.Row="4" Grid.Column="1" Text="{Binding (vm:MainViewModel.AddTourViewModel).TourDistance, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+        <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).Source, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).Destination, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTOurDistance" Grid.Row="4" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).Distance, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
 
         <RichTextBox x:Name="RbxDescription" Grid.Row="5" Grid.Column="1">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="{Binding (vm:MainViewModel.AddTourViewModel).Description, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Run Text="{Binding (vm:MainViewModel.TourViewModel).Description, UpdateSourceTrigger=PropertyChanged}"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
 
-        <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate" Command="{Binding (vm:MainViewModel.AddTourViewModel).ValidateCommand}"/>
-        <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add" Command="{Binding (vm:MainViewModel.AddTourViewModel).AddTourCommand}"/>
+        <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate" Command="{Binding (vm:MainViewModel.TourViewModel).ValidateCommand}"/>
+        <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add" Command="{Binding (vm:MainViewModel.TourViewModel).AddTourCommand}"/>
 
 
 

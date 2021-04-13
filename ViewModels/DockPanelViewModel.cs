@@ -16,12 +16,6 @@ namespace TourPlanner.ViewModels
 {
     public class DockPanelViewModel : INotifyPropertyChanged
     {
-
-        public bool CanUpdate => true;
-
-
-        //public ICommand CloseCommand { get; }
-
         public RelayCommand CloseCommand { get; }
         
 
@@ -31,10 +25,7 @@ namespace TourPlanner.ViewModels
             {
                 ApplicationExit();
             });
-
-            //CloseCommand = new CloseCommand(this);
         }
-
 
         public void ApplicationExit()
         {
@@ -50,7 +41,5 @@ namespace TourPlanner.ViewModels
 
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }

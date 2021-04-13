@@ -26,9 +26,14 @@ namespace TourPlanner.Commands
             remove => CommandManager.RequerySuggested -= value;
         }
 
-        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
-        public void Execute(object parameter) => _execute.Invoke(parameter);
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute?.Invoke(parameter) ?? true;
+        }
 
-
+        public void Execute(object parameter)
+        {
+            _execute.Invoke(parameter);
+        }
     }
 }

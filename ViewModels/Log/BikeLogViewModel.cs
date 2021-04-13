@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.ViewModels.Log
 {
-    public class Bike : AddLogViewModel
+    public class BikeLogViewModel : LogViewModel
     {
         private int _peakHeartRate;
 
@@ -72,9 +72,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(CaloriesBurnt));
             }
         }
-
-
-
 
     }
 }
