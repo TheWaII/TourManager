@@ -1,9 +1,10 @@
-﻿<Application x:Class="TourManager.App"
+﻿<Application x:Class="TourPlanner.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TourManager"
+             xmlns:local="clr-namespace:TourPlanner"
+             xmlns:dal="clr-namespace:TourPlanner.DAL;assembly=TourPlanner.DAL"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+       
     </Application.Resources>
 </Application>
