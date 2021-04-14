@@ -70,7 +70,7 @@
 
         <!--Tour List-->
         <ListBox Grid.Column="0" Grid.Row="3" Grid.RowSpan="3" ItemsSource="{Binding TourViewModel.MyFilteredItems}"
-                 SelectedItem="{Binding TourViewModel.SelectedTour}">
+                 SelectedItem="{Binding TourViewModel.SelectedTourData}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -89,7 +89,7 @@
 
         <!--Tour Title Display-->
         <Label x:Name="LblTitle" Grid.Column="1" Grid.Row="2" Content="Title: " />
-        <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" Content="{Binding TourViewModel.SelectedTour.TourName}"  FontWeight="UltraBold"/>
+        <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" Content="{Binding TourViewModel.SelectedTourData.TourName}"  FontWeight="UltraBold"/>
 
         <!--Log Buttons-->
         <DockPanel Grid.Column="1" Grid.Row="4">

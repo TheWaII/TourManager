@@ -27,7 +27,7 @@ namespace TourPlanner.moq
                 .Setup(_ => _.GetTours())
                 .Returns(GetSampleTours());
 
-            var cls = mock.Create<DatabaseLogic>();
+            var cls = mock.Create<TourLogic>();
             var expected = GetSampleTours();
             var actual = cls.LoadTours();
 
@@ -45,7 +45,7 @@ namespace TourPlanner.moq
             mock.Mock<ITourRepository>()
                 .Setup(_ => _.Insert(tour));
 
-            var cls = mock.Create<DatabaseLogic>();
+            var cls = mock.Create<TourLogic>();
 
             cls.InsertTours(tour);
 
@@ -64,7 +64,7 @@ namespace TourPlanner.moq
             mock.Mock<ITourRepository>()
                 .Setup(_ => _.Delete(tour));
 
-            var cls = mock.Create<DatabaseLogic>();
+            var cls = mock.Create<TourLogic>();
 
             cls.DeleteTours(tour);
 
@@ -82,7 +82,7 @@ namespace TourPlanner.moq
             mock.Mock<ITourRepository>()
                 .Setup(_ => _.Delete(tour));
 
-            var cls = mock.Create<DatabaseLogic>();
+            var cls = mock.Create<TourLogic>();
 
             cls.DeleteTours(tour);
 
@@ -90,11 +90,11 @@ namespace TourPlanner.moq
                 .Verify(_ => _.Delete(tour), Times.Once);
         }
 
-        private static ObservableCollection<Tours> GetSampleTours()
+        private static ObservableCollection<TourData> GetSampleTours()
         {
-            var output = new ObservableCollection<Tours>
+            var output = new ObservableCollection<TourData>
             {
-                new Tours
+                new TourData
                 {
                     TourName = "testTour",
                     TourSource = "testSource",

@@ -25,21 +25,21 @@
                     <DockPanel Grid.Row="0">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="From:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourSource}"/>
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource}"/>
                             <Label Content="     "/>
                             <Label Content="To:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDestination}"/>
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination}"/>
                             <Label Content="     "/>
                             <Label Content="Distance:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDistance}"/>
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance}"/>
                         </StackPanel>
                     </DockPanel>
-                    <Image Grid.Row="1"  Source="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.RouteImage, Converter={StaticResource TourViewModel}}" />
+                    <Image Grid.Row="1"  Source="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.RouteImage, Converter={StaticResource TourViewModel}}" />
                 </Grid>
 
             </TabItem>
             <TabItem Header="Description">
-                <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDescription}" Background="Beige"></Label>
+                <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDescription}" Background="Beige"></Label>
             </TabItem>
         </TabControl>
     </Grid>

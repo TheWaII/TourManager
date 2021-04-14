@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="Log\ILogRepository.cs" />
+    <Compile Include="Log\LogRepository.cs" />
     <Compile Include="Tour\ITourRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tour\TourRepository.cs" />
@@ -99,8 +101,6 @@
       <Name>TourPlanner.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Log\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

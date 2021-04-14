@@ -28,14 +28,14 @@
         <ProgressBar Grid.Row="3" Grid.Column="0" Background="{Binding (vm:MainViewModel.TourViewModel).ProgressBarColor}"/>
         <Label Content="Description:" Grid.Row="5" Grid.Column="0"/>
 
-        <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourName, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourSource, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDestination, UpdateSourceTrigger=PropertyChanged}"/>
-        <Label x:Name="TbxTourDistance" Grid.Row="4" Grid.Column="1" Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDistance, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourName, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1" Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination, UpdateSourceTrigger=PropertyChanged}"/>
+        <Label x:Name="TbxTourDistance" Grid.Row="4" Grid.Column="1" Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance, UpdateSourceTrigger=PropertyChanged}"/>
         <RichTextBox x:Name="RbxDescription" Grid.Row="5" Grid.Column="1">
             <FlowDocument>
                 <Paragraph>
-                    <Run Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTour.TourDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Run Text="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDescription, UpdateSourceTrigger=PropertyChanged}"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>

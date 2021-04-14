@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TourPlanner.Model
 {
-    public class Tours
+    public class TourData
     {
         public int TourId { get; set; }
         public string TourName { get; set; }
@@ -17,11 +17,9 @@ namespace TourPlanner.Model
         public string TourDescription { get; set; }
         public string TourRoute { get; set; } = "error";
 
-        //public string RouteImage => @"..\..\img\icons\edit.png";
-
         public string RouteImage => @"../../img/route/" + TourRoute + ".jpeg";
 
-        public Tours(int tourId, string tourTourName, string tourSource, string tourDestination, double tourDistance, string tourDescription, string tourRoute)
+        public TourData(int tourId, string tourTourName, string tourSource, string tourDestination, double tourDistance, string tourDescription, string tourRoute)
         {
             TourId = tourId;
             TourName = tourTourName;
@@ -32,12 +30,12 @@ namespace TourPlanner.Model
             TourRoute = tourRoute;
         }
 
-        public Tours(string tourTourName)
+        public TourData(string tourTourName)
         {
             TourName = tourTourName;
         }
 
-        public Tours() { }
+        public TourData() { }
 
     }
 }

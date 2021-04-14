@@ -278,6 +278,8 @@ namespace TourPlanner.ViewModels.Log
         {
             IsCheckedNone = IsCheckedNone == false;
 
+
+
             if (!IsCheckedAdd) return;
             BikeVisibility = "Hidden";
             CarVisibility = "Hidden";
@@ -285,6 +287,8 @@ namespace TourPlanner.ViewModels.Log
             IsCheckedBike = false;
 
         }
+
+
 
 
         public event PropertyChangedEventHandler PropertyChanged;

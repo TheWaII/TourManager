@@ -49,8 +49,5 @@
         <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate" Command="{Binding (vm:MainViewModel.TourViewModel).ValidateCommand}"/>
         <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add" Command="{Binding (vm:MainViewModel.TourViewModel).AddTourCommand}"/>
 
-
-
-
     </Grid>
 </UserControl>

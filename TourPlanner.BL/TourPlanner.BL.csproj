@@ -88,7 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\DatabaseLogic.cs" />
+    <Compile Include="Database\LogLogic.cs" />
+    <Compile Include="Database\TourLogic.cs" />
     <Compile Include="Route\GetDistance.cs" />
     <Compile Include="Route\GetMap.cs" />
     <Compile Include="Route\MapApiStrings.cs" />

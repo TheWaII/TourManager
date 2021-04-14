@@ -16,6 +16,7 @@ namespace TourPlanner.ViewModels.Tour
 {
     public class TourViewModel : INotifyPropertyChanged, IValueConverter
     {
+        
 
         #region Properties
         private string _name;
@@ -167,7 +168,7 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
-        public IEnumerable<Tours> MyFilteredItems
+        public IEnumerable<TourData> MyFilteredItems
         {
             get
             {
@@ -175,9 +176,9 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
-        private ObservableCollection<Tours> _data = new();
+        private ObservableCollection<TourData> _data = new();
 
-        public ObservableCollection<Tours> Data
+        public ObservableCollection<TourData> Data
         {
             get => _data;
             set
@@ -188,15 +189,15 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
-        private Tours _selectedTour;
+        private TourData _selectedTourData;
 
-        public Tours SelectedTour
+        public TourData SelectedTourData
         {
-            get => _selectedTour;
+            get => _selectedTourData;
             set
             {
-                _selectedTour = value;
-                OnPropertyChanged(nameof(SelectedTour));
+                _selectedTourData = value;
+                OnPropertyChanged(nameof(SelectedTourData));
             }
         }
 
@@ -257,10 +258,10 @@ namespace TourPlanner.ViewModels.Tour
         {
             _data.Clear();
 
-            var dbDatabaseLogic = new DatabaseLogic();
+            var dbDatabaseLogic = new TourLogic();
             foreach (var item in dbDatabaseLogic.LoadTours())
             {
-                var tourData = new Tours
+                var tourData = new TourData
                 {
                     TourId = item.TourId,
                     TourName = item.TourName,
@@ -277,9 +278,9 @@ namespace TourPlanner.ViewModels.Tour
 
         public void SaveChanges()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
+            var dbDatabaseLogic = new TourLogic();
 
-            var tour = new Tours
+            var tour = new TourData
             {
                 TourName = Name,
                 TourSource = Source,
@@ -354,27 +355,27 @@ namespace TourPlanner.ViewModels.Tour
 
             var getMap = new GetMap();
 
-            SelectedTour.TourDistance = System.Convert.ToDouble(getDistance.Distance(SelectedTour.TourSource, SelectedTour.TourDestination));
+            SelectedTourData.TourDistance = System.Convert.ToDouble(getDistance.Distance(SelectedTourData.TourSource, SelectedTourData.TourDestination));
 
-            ProgressBarColor = SelectedTour.TourDistance != 0 ? "Green" : "Red";
+            ProgressBarColor = SelectedTourData.TourDistance != 0 ? "Green" : "Red";
 
 
 
-            getMap.SaveImage(SelectedTour.TourSource, SelectedTour.TourDestination);
+            getMap.SaveImage(SelectedTourData.TourSource, SelectedTourData.TourDestination);
         }
 
         public void UpdateChanges()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
-            var tour = new Tours
+            var dbDatabaseLogic = new TourLogic();
+            var tour = new TourData
             {
-                TourId = SelectedTour.TourId,
-                TourName = SelectedTour.TourName,
-                TourSource = SelectedTour.TourSource,
-                TourDestination = SelectedTour.TourDestination,
-                TourDistance = SelectedTour.TourDistance,
-                TourDescription = SelectedTour.TourDescription, 
-                TourRoute = SelectedTour.TourSource + "_" + SelectedTour.TourDestination
+                TourId = SelectedTourData.TourId,
+                TourName = SelectedTourData.TourName,
+                TourSource = SelectedTourData.TourSource,
+                TourDestination = SelectedTourData.TourDestination,
+                TourDistance = SelectedTourData.TourDistance,
+                TourDescription = SelectedTourData.TourDescription, 
+                TourRoute = SelectedTourData.TourSource + "_" + SelectedTourData.TourDestination
             };
 
             dbDatabaseLogic.UpdateTours(tour);
@@ -390,9 +391,9 @@ namespace TourPlanner.ViewModels.Tour
 
         public void DeleteTour()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
+            var dbDatabaseLogic = new TourLogic();
 
-            dbDatabaseLogic.DeleteTours(SelectedTour);
+            dbDatabaseLogic.DeleteTours(SelectedTourData);
 
             RefreshList();
         }

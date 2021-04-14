@@ -5,13 +5,13 @@ namespace TourPlanner.DAL.Tour
 {
     public interface ITourRepository
     {
-        IEnumerable<Tours> GetTours();
+        IEnumerable<TourData> GetTours();
 
-        void Insert(Tours tours);
+        void Insert(TourData tourData);
 
-        void Update(Tours tours);
+        void Update(TourData tourData);
 
-        void Delete(Tours tours);
+        void Delete(TourData tourData);
 
     }
 }

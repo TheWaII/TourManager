@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.Model;
 using TourPlanner.ViewModels.Log;
 using TourPlanner.ViewModels.Tour;
 
@@ -17,7 +19,6 @@ namespace TourPlanner.ViewModels
 
         public BikeLogViewModel BikeLogViewModel { get; set; }
         public CarLogViewModel CarLogViewModel { get; set; }
-
 
         public string LogoImage => @"..\..\img\icons\logo.png";
 
