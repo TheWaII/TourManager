@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourPlanner.Model
+namespace TourPlanner.Model.Log
 {
     public class LogData
     {

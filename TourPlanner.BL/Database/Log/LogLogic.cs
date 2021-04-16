@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.DAL.Log;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
 
-namespace TourPlanner.BL.Database
+namespace TourPlanner.BL.Database.Log
 {
     public class LogLogic
     {

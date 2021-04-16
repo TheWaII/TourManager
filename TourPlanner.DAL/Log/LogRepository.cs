@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Npgsql;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
 
 namespace TourPlanner.DAL.Log
 {
@@ -18,7 +19,8 @@ namespace TourPlanner.DAL.Log
             if (dbConnection.State == ConnectionState.Closed)
                 dbConnection.Open();
 
-            return dbConnection.Query<LogData>("SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport FROM Logs", commandType: CommandType.Text);
+            return dbConnection.Query<LogData>("SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport FROM Logs",
+                commandType: CommandType.Text);
         }
 
         public void Insert(LogData logs)
@@ -28,10 +30,9 @@ namespace TourPlanner.DAL.Log
                 dbConnection.Open();
 
             dbConnection.Query<LogData>(
-                "INSERT INTO Logs(LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport) VALUES (@LogId, @TourId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogTourType, @LogReport)",
+                "INSERT INTO Logs(TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport) VALUES (@TourId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogTourType, @LogReport)",
                 new
                 {
-                    logs.LogId,
                     logs.TourId,
                     logs.LogName,
                     logs.LogDate,

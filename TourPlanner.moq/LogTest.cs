@@ -3,10 +3,11 @@ using System.Configuration;
 using Autofac.Extras.Moq;
 using Moq;
 using NUnit.Framework;
-using TourPlanner.BL.Database;
+using TourPlanner.BL.Database.Log;
 using TourPlanner.DAL.Log;
 using TourPlanner.DAL.Tour;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
 
 namespace TourPlanner.Moq
 {
@@ -22,6 +23,7 @@ namespace TourPlanner.Moq
         [Test]
         public void Load_LogsAreLoaded()
         {
+
             var mock = AutoMock.GetLoose();
             mock.Mock<ILogRepository>()
                 .Setup(_ => _.GetLogs())

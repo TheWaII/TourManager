@@ -3,6 +3,8 @@ using System.Data;
 using Dapper;
 using Npgsql;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
+using TourPlanner.Model.Tour;
 
 namespace TourPlanner.DAL.Tour
 {
@@ -52,6 +54,10 @@ namespace TourPlanner.DAL.Tour
                 dbConnection.Open();
 
             dbConnection.Query<TourData>("DELETE FROM tours WHERE TourId = @TourId",
+                new { tourData.TourId },
+                commandType: CommandType.Text);
+
+            dbConnection.Query<LogData>("DELETE FROM LOGS WHERE TourId = @TourId",
                 new { tourData.TourId },
                 commandType: CommandType.Text);
         }

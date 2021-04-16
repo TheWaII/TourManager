@@ -4,15 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlanner.Views.UserControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ListView>
+             xmlns:vm ="clr-namespace:TourPlanner.ViewModels"
+             mc:Ignorable="d">
+    <Grid Width="Auto" Height="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition> 
+            <RowDefinition Height="1*"></RowDefinition> 
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Main-->
+        <ListView Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).LogCollection}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" Width="50"></GridViewColumn>
-                    <GridViewColumn Header="Duration" Width="100" ></GridViewColumn>
-                    <GridViewColumn Header="Distance" Width="100" ></GridViewColumn>
+                    <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding LogName}"/>
+                    <GridViewColumn Header="Date" Width="Auto" DisplayMemberBinding="{Binding LogDate}"/>
+                    <GridViewColumn Header="Distance" Width="Auto" DisplayMemberBinding="{Binding LogDistance}" />
+                    <GridViewColumn Header="Total Time" Width="Auto" DisplayMemberBinding="{Binding LogTotalTime}"/>
+                    <GridViewColumn Header="Rating" Width="Auto" DisplayMemberBinding="{Binding LogRating}" />
+                    <GridViewColumn Header="Type" Width="Auto" DisplayMemberBinding="{Binding LogTourType}" />
+                    <GridViewColumn Header="Report" Width="Auto" DisplayMemberBinding="{Binding LogReport}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--Bike-->
+        <ListView Grid.Row="0" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Peak Heart Rate" Width="Auto"/>
+                    <GridViewColumn Header="Lowest Heart Rate" Width="Auto" />
+                    <GridViewColumn Header="Avg Heart Rate" Width="Auto" />
+                    <GridViewColumn Header="Avg Speed" Width="Auto" />
+                    <GridViewColumn Header="Calories Burnt" Width="Auto" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--Car-->
+        <ListView Grid.Row="1" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Max Speed" Width="Auto"/>
+                    <GridViewColumn Header="Avg Speed" Width="Auto" />
+                    <GridViewColumn Header="Fuel Used" Width="Auto" />
+                    <GridViewColumn Header="Fuel Cost" Width="Auto" />
+                    <GridViewColumn Header="Caught Speeding" Width="Auto" />
                 </GridView>
             </ListView.View>
         </ListView>

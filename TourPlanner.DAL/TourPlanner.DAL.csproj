@@ -85,6 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="Log\Bike\BikeRepository.cs" />
+    <Compile Include="Log\Bike\IBikeRepository.cs" />
+    <Compile Include="Log\Car\CarRepository.cs" />
+    <Compile Include="Log\Car\ICarRepository.cs" />
     <Compile Include="Log\ILogRepository.cs" />
     <Compile Include="Log\LogRepository.cs" />
     <Compile Include="Tour\ITourRepository.cs" />

@@ -1,93 +1,113 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using ControlzEx.Standard;
 using TourPlanner.Annotations;
+using TourPlanner.BL.Database.Log;
+using TourPlanner.BL.Database.Tour;
 using TourPlanner.Commands;
+using TourPlanner.Model.Tour;
+using TourPlanner.Model.Log;
+using TourPlanner.ViewModels.Tour;
 
 namespace TourPlanner.ViewModels.Log
 {
     public class LogViewModel : INotifyPropertyChanged
     {
         #region properties
-        private string _logTitle;
 
-        public string LogTitle
+        private int _id = 0;
+
+        public int Id
         {
-            get => _logTitle;
+            get => _id;
             set
             {
-                _logTitle = value;
-                OnPropertyChanged(nameof(LogTitle));
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
 
-        private DateTime _logDate;
+        private string _name;
 
-        public DateTime LogDate
+        public string Name
         {
-            get => _logDate;
+            get => _name;
             set
             {
-                _logDate = value;
-                OnPropertyChanged(nameof(LogDate));
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _date;
+
+        public string Date
+        {
+            get => _date;
+            set
+            {
+                _date = value;
+                OnPropertyChanged(nameof(Date));
             }
         }
 
 
-        private double _logDistance;
+        private double _distance;
 
-        public double LogDistance
+        public double Distance
         {
-            get => _logDistance;
+            get => _distance;
 
             set
             {
-                _logDistance = value;
-                OnPropertyChanged(nameof(LogDistance));
+                _distance = value;
+                OnPropertyChanged(nameof(Distance));
             }
         }
 
 
-        private string _logTime;
+        private string _time;
 
-        public string LogTime
+        public string Time
         {
-            get => _logTime;
+            get => _time;
             set
             {
-                _logTime = value;
-                OnPropertyChanged(nameof(LogTime));
+                _time = value;
+                OnPropertyChanged(nameof(Time));
             }
         }
 
-        private int _logRating;
+        private int _rating = 1;
 
-        public int LogRating
+        public int Rating
         {
-            get => _logRating;
+            get => _rating;
 
             set
             {
-                _logRating = value;
-                OnPropertyChanged(nameof(LogRating));
+                _rating = value;
+                OnPropertyChanged(nameof(Rating));
             }
         }
 
-        private string _logReport;
+        private string _report;
 
-        public string LogReport
+        public string Report
         {
-            get => _logReport;
+            get => _report;
 
             set
             {
-                _logReport = value;
-                OnPropertyChanged(nameof(LogReport));
+                _report = value;
+                OnPropertyChanged(nameof(Report));
             }
         }
 
@@ -177,6 +197,17 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
+        private TourData _selectedTourData;
+
+        public TourData SelectedTourData
+        {
+            get => _selectedTourData;
+            set
+            {
+                _selectedTourData = value;
+                OnPropertyChanged(nameof(SelectedTourData));
+            }
+        }
 
         #endregion
 
@@ -186,6 +217,8 @@ namespace TourPlanner.ViewModels.Log
         public RelayCommand BikeRadioButton { get; }
         public RelayCommand CarRadioButton { get; }
 
+        public RelayCommand AddLog { get; }
+
 
         public LogViewModel()
         {
@@ -193,7 +226,11 @@ namespace TourPlanner.ViewModels.Log
             NoneRadioButton = new RelayCommand(o => ToggleShowNone());
             BikeRadioButton = new RelayCommand(o => ToggleShowBike());
             CarRadioButton = new RelayCommand(o => ToggleShowCar());
+            AddLog = new RelayCommand(o => SaveChangesLog(), o=> CanAddLog);
         }
+
+        public bool CanAddLog => Id != 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) && !string.IsNullOrWhiteSpace(Time) && Rating != 0 && !string.IsNullOrWhiteSpace(Report);
+
 
         private void ToggleAddLog()
         {
@@ -278,8 +315,6 @@ namespace TourPlanner.ViewModels.Log
         {
             IsCheckedNone = IsCheckedNone == false;
 
-
-
             if (!IsCheckedAdd) return;
             BikeVisibility = "Hidden";
             CarVisibility = "Hidden";
@@ -288,8 +323,32 @@ namespace TourPlanner.ViewModels.Log
 
         }
 
+        public void SaveChangesLog()
+        {
+            var dbDatabaseLogic = new LogLogic();
 
+            var log = new LogData
+            {
+                TourId = Id,
+                LogName = Name,
+                LogDate = Date.Split(' ')[0],
+                LogDistance = Distance,
+                LogTotalTime = Time,
+                LogRating = Rating,
+                LogReport = Report
+            };
 
+            dbDatabaseLogic.InsertLog(log);
+
+            Name = string.Empty;
+            Date = string.Empty; 
+            Distance = 0;
+            Time = string.Empty;
+            Rating = 0;
+            Report = string.Empty;
+            Id = 0;
+
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

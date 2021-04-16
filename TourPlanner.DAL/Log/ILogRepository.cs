@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
 
 namespace TourPlanner.DAL.Log
 {

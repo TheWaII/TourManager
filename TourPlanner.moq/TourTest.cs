@@ -3,10 +3,11 @@ using Moq;
 using NUnit.Framework;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using TourPlanner.BL.Database;
+using TourPlanner.BL.Database.Tour;
 using TourPlanner.DAL;
 using TourPlanner.DAL.Tour;
 using TourPlanner.Model;
+using TourPlanner.Model.Tour;
 
 namespace TourPlanner.moq
 {

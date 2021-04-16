@@ -55,7 +55,7 @@
             <GroupBox x:Name="GbxTourList" Header="Tours" HorizontalAlignment="Stretch" Margin="0,32,15,9" Grid.Column="1" VerticalAlignment="Stretch">
 
                 <Grid HorizontalAlignment="Left" Height="595" Margin="0,10,-12,-4" VerticalAlignment="Top" Width="229">
-                    <ListBox x:Name="LbxTours" ItemsSource="{Binding TourViewModel.Data}" HorizontalAlignment="Stretch" Margin="0,-10,10,66" VerticalAlignment="Stretch">
+                    <ListBox x:Name="LbxTours" ItemsSource="{Binding TourViewModel.TourCollection}" HorizontalAlignment="Stretch" Margin="0,-10,10,66" VerticalAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,2">

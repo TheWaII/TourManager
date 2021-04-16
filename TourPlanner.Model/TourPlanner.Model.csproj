@@ -90,9 +90,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogData.cs" />
+    <Compile Include="Log\BikeData.cs" />
+    <Compile Include="Log\CarData.cs" />
+    <Compile Include="Log\LogData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TourData.cs" />
+    <Compile Include="Tour\TourData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -87,7 +87,5 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(CaughtSpeeding));
             }
         }
-
-       
     }
 }

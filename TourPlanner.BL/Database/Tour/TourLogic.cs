@@ -1,12 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using TourPlanner.DAL;
 using TourPlanner.DAL.Tour;
-using TourPlanner.Model;
+using TourPlanner.Model.Tour;
 
-namespace TourPlanner.BL.Database
+namespace TourPlanner.BL.Database.Tour
 {
     public class TourLogic
     {
