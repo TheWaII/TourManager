@@ -21,7 +21,6 @@
     <ProjectReference Include="..\TourPlanner.BL\TourPlanner.BL.csproj" />
     <ProjectReference Include="..\TourPlanner.DAL\TourPlanner.DAL.csproj" />
     <ProjectReference Include="..\TourPlanner.Model\TourPlanner.Model.csproj" />
-    <ProjectReference Include="..\TourPlanner.Wpf.csproj" />
   </ItemGroup>
 
 </Project>

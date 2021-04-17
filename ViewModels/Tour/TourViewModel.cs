@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Runtime;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -206,6 +208,7 @@ namespace TourPlanner.ViewModels.Tour
             {
                 _logCollection = value;
                 OnPropertyChanged(nameof(LogCollection));
+
             }
         }
 
@@ -246,12 +249,16 @@ namespace TourPlanner.ViewModels.Tour
         public RelayCommand AddTourCommand { get; }
 
         public RelayCommand DeleteTourCommand { get; }
+        public RelayCommand DeleteLogCommand { get; }
 
         public RelayCommand ValidateCommand { get; }
 
         public RelayCommand ValidateCommandEdit { get; }
 
         public RelayCommand AddTourToggle { get; }
+
+
+        public RelayCommand RefreshLogCommand { get; }
 
         public ICommand WindowLoaded { get; set; }
 
@@ -278,10 +285,13 @@ namespace TourPlanner.ViewModels.Tour
 
             DeleteTourCommand = new RelayCommand(o => DeleteTour());
 
+            DeleteLogCommand = new RelayCommand(o => DeleteLog());
+
             WindowExit = new RelayCommand(o => ExitWindow());
 
-        }
+            RefreshLogCommand = new RelayCommand(o => RefreshLogList());
 
+        }
         #endregion
 
         #region CanUpdate
@@ -468,9 +478,19 @@ namespace TourPlanner.ViewModels.Tour
                     _logCollection.Add(logData);
                 }
             }
+        }
 
+        public void DeleteLog()
+        {
+            var dbLogLogic = new LogLogic();
+
+
+            dbLogLogic.DeleteLogs(SelectedDataForLog);
+
+            RefreshLogList();
 
         }
+
         #endregion
 
 
@@ -492,7 +512,7 @@ namespace TourPlanner.ViewModels.Tour
 
         private void ExitWindow()
         {
-            RemoveMaps removeMaps = new(TourCollection);
+            new RemoveMaps(TourCollection);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

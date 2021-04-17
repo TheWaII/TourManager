@@ -53,13 +53,14 @@ namespace TourPlanner.DAL.Tour
             if (dbConnection.State == ConnectionState.Closed)
                 dbConnection.Open();
 
+            if (tourData == null) return;
             dbConnection.Query<TourData>("DELETE FROM tours WHERE TourId = @TourId",
                 new { tourData.TourId },
                 commandType: CommandType.Text);
-
             dbConnection.Query<LogData>("DELETE FROM LOGS WHERE TourId = @TourId",
                 new { tourData.TourId },
                 commandType: CommandType.Text);
+
         }
     }
 }

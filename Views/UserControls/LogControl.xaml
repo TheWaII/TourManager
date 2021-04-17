@@ -15,8 +15,10 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <!--Main-->
-        <ListView Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).LogCollection}">
+        <ListView Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).LogCollection}" 
+                  SelectedItem="{Binding (vm:MainViewModel.TourViewModel).SelectedDataForLog}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding LogName}"/>
@@ -29,6 +31,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
         <!--Bike-->
         <ListView Grid.Row="0" Grid.Column="1">
             <ListView.View>
@@ -41,6 +44,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
         <!--Car-->
         <ListView Grid.Row="1" Grid.Column="1">
             <ListView.View>

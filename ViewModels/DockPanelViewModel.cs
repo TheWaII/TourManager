@@ -21,7 +21,7 @@ namespace TourPlanner.ViewModels
 {
     public class DockPanelViewModel : INotifyPropertyChanged
     { 
-        public readonly ObservableCollection<TourData> TourCollection = new ObservableCollection<TourData>();
+        public readonly ObservableCollection<TourData> TourCollection = new();
         public RelayCommand CloseCommand { get; }
         
 
@@ -51,8 +51,8 @@ namespace TourPlanner.ViewModels
 
                 TourCollection.Add(tourData);
             }
-
-            var removeMaps = new RemoveMaps(TourCollection);
+            
+            new RemoveMaps(TourCollection);
             
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
         }

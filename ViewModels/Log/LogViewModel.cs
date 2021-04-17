@@ -7,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using ControlzEx.Standard;
 using TourPlanner.Annotations;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
@@ -307,8 +306,6 @@ namespace TourPlanner.ViewModels.Log
             {
                 CarVisibility = "Hidden";
             }
-
-
         }
 
         private void ToggleShowNone()
@@ -347,6 +344,10 @@ namespace TourPlanner.ViewModels.Log
             Rating = 0;
             Report = string.Empty;
             Id = 0;
+
+            var tvm = new TourViewModel();
+            tvm.RefreshLogList();
+
 
         }
 

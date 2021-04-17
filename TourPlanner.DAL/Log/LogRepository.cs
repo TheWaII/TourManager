@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
@@ -76,10 +75,13 @@ namespace TourPlanner.DAL.Log
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
             if (dbConnection.State == ConnectionState.Closed)
                 dbConnection.Open();
+            if (logs != null)
+            {
+                dbConnection.Query<LogData>("DELETE FROM logs WHERE LogId = @LogId",
+                    new { logs.LogId },
+                    commandType: CommandType.Text);
+            }
 
-            dbConnection.Query<LogData>("DELETE FROM tours WHERE LogId = @LogId",
-                new { logs.LogId },
-                commandType: CommandType.Text);
         }
     }
 }
