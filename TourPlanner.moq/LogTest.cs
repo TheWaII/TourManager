@@ -103,7 +103,7 @@ namespace TourPlanner.Moq
                     LogDistance = 1234.56, 
                     LogTotalTime = "20:22:33",
                     LogRating = 2, 
-                    LogTourType = 1, 
+                    LogType = 1, 
                     LogReport = "testLogReport"
                 }
             };

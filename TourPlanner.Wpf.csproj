@@ -177,19 +177,22 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\AddLogControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\AddLogControl.xaml.cs">
       <DependentUpon>AddLogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\AddTourControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\EditLogControl.xaml.cs">
+      <DependentUpon>EditLogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Tour\AddTourControl.xaml.cs">
       <DependentUpon>AddTourControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\EditTourControl.xaml.cs">
+    <Compile Include="Views\UserControls\Tour\EditTourControl.xaml.cs">
       <DependentUpon>EditTourControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\LogControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\TourRouteDescriptionControl.xaml.cs">
+    <Compile Include="Views\UserControls\Tour\TourRouteDescriptionControl.xaml.cs">
       <DependentUpon>TourRouteDescriptionControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -227,23 +230,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\AddLogControl.xaml">
+    <Page Include="Views\UserControls\Log\AddLogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\AddTourControl.xaml">
+    <Page Include="Views\UserControls\Log\EditLogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\EditTourControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UserControls\LogControl.xaml">
+    <Page Include="Views\UserControls\Tour\AddTourControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\TourRouteDescriptionControl.xaml">
+    <Page Include="Views\UserControls\Tour\EditTourControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\Log\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Tour\TourRouteDescriptionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +286,7 @@
   <ItemGroup>
     <Resource Include="img\icons\reload.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

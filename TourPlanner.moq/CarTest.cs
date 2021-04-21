@@ -66,14 +66,14 @@ namespace TourPlanner.Moq
             var car = GetSampleCars()[0];
 
             mock.Mock<ICarRepository>()
-                .Setup(_ => _.Delete(car));
+                .Setup(_ => _.Delete(car.LogId));
 
             var cls = mock.Create<CarLogic>();
 
-            cls.DeleteLogs(car);
+            cls.DeleteLogs(car.LogId);
 
             mock.Mock<ICarRepository>()
-                .Verify(_ => _.Delete(car), Times.Once);
+                .Verify(_ => _.Delete(car.LogId), Times.Once);
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace TourPlanner.Moq
             var car = GetSampleCars()[0];
 
             mock.Mock<ICarRepository>()
-                .Setup(_ => _.Delete(car));
+                .Setup(_ => _.Delete(car.LogId));
 
             var cls = mock.Create<CarLogic>();
 

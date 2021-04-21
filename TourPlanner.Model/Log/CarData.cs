@@ -15,8 +15,9 @@ namespace TourPlanner.Model.Log
 
         public int FuelUsed { get; set; }
 
-        public int FuelCost { get; set; }
+        public decimal FuelCost { get; set; }
 
         public bool CaughtSpeeding { get; set; }
+
     }
 }

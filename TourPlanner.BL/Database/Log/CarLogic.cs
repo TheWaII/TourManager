@@ -25,9 +25,9 @@ namespace TourPlanner.BL.Database.Log
             _iCarRepository.Insert(carData);
         }
 
-        public void DeleteLogs(CarData carData)
+        public void DeleteLogs(int logId)
         {
-            _iCarRepository.Delete(carData);
+            _iCarRepository.Delete(logId);
         }
 
         public void UpdateLogs(CarData carData)

@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using TourPlanner.Annotations;
 using TourPlanner.BL;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
@@ -200,7 +201,6 @@ namespace TourPlanner.ViewModels.Tour
 
 
         private ObservableCollection<LogData> _logCollection = new();
-
         public ObservableCollection<LogData> LogCollection
         {
             get => _logCollection;
@@ -213,8 +213,31 @@ namespace TourPlanner.ViewModels.Tour
         }
 
 
-        private TourData _selectedTourData;
+        private ObservableCollection<BikeData> _bikeCollection = new();
+        public ObservableCollection<BikeData> BikeCollection
+        {
+            get => _bikeCollection;
+            set
+            {
+                _bikeCollection = value;
+                OnPropertyChanged(nameof(BikeCollection));
+            }
+        }
 
+
+        private ObservableCollection<CarData> _carCollection = new();
+        public ObservableCollection<CarData> CarCollection
+        {
+            get => _carCollection;
+            set
+            {
+                _carCollection = value;
+                OnPropertyChanged(nameof(CarCollection));
+            }
+        }
+
+
+        private TourData _selectedTourData;
         public TourData SelectedTourData
         {
             get => _selectedTourData;
@@ -224,14 +247,11 @@ namespace TourPlanner.ViewModels.Tour
                 OnPropertyChanged(nameof(SelectedTourData));
 
                 RefreshLogList();
-
-
             }
         }
 
 
         private LogData _selectedDataForLog;
-
         public LogData SelectedDataForLog
         {
             get => _selectedDataForLog;
@@ -239,6 +259,8 @@ namespace TourPlanner.ViewModels.Tour
             {
                 _selectedDataForLog = value;
                 OnPropertyChanged(nameof(SelectedDataForLog));
+
+                RefreshBikeLog();
             }
         }
 
@@ -454,7 +476,8 @@ namespace TourPlanner.ViewModels.Tour
         public void RefreshLogList()
         {
             _logCollection.Clear();
-
+            _bikeCollection.Clear();
+            _carCollection.Clear();
             var dbLogLogic = new LogLogic();
 
 
@@ -470,9 +493,17 @@ namespace TourPlanner.ViewModels.Tour
                     LogDistance = item.LogDistance,
                     LogTotalTime = item.LogTotalTime,
                     LogRating = item.LogRating,
-                    LogTourType = item.LogTourType,
+                    LogType = item.LogType,
                     LogReport = item.LogReport
                 };
+
+                logData.BikeCar = logData.LogType switch
+                {
+                    1 => "Bike",
+                    2 => "Car",
+                    _ => "Unspecified"
+                };
+
                 if (logData.TourId == SelectedTourData.TourId)
                 {
                     _logCollection.Add(logData);
@@ -480,10 +511,73 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
+        public void RefreshBikeLog()
+        {
+            if (SelectedDataForLog == null) return;
+            _bikeCollection.Clear();
+            _carCollection.Clear();
+            switch (SelectedDataForLog.LogType)
+            {
+                case 1:
+                    {
+                        var dbBikeLogic = new BikeLogic();
+                        foreach (var bikeItem in dbBikeLogic.LoadBikes())
+                        {
+                            var bikeData = new BikeData
+                            {
+                                LogId = bikeItem.LogId,
+                                AvgHeartRate = bikeItem.AvgHeartRate,
+                                AvgSpeed = bikeItem.AvgSpeed,
+                                CaloriesBurnt = bikeItem.CaloriesBurnt,
+                                LowestHeartRate = bikeItem.LowestHeartRate,
+                                PeakHeartRate = bikeItem.PeakHeartRate
+                            };
+
+                            if (bikeData.LogId == SelectedDataForLog.LogId)
+                                _bikeCollection.Add(bikeData);
+                        }
+
+                        break;
+                    }
+                case 2:
+                    {
+                        var dbCarLogic = new CarLogic();
+                        foreach (var carItem in dbCarLogic.LoadCars())
+                        {
+                            var carData = new CarData
+                            {
+                                LogId = carItem.LogId,
+                                AvgSpeed = carItem.AvgSpeed,
+                                CaughtSpeeding = carItem.CaughtSpeeding,
+                                FuelCost = carItem.FuelCost,
+                                FuelUsed = carItem.FuelUsed,
+                                MaxSpeed = carItem.MaxSpeed
+                            };
+
+                            if (carData.LogId == SelectedDataForLog.LogId)
+                                _carCollection.Add(carData);
+                        }
+                        break;
+                    }
+            }
+        }
+
         public void DeleteLog()
         {
             var dbLogLogic = new LogLogic();
 
+            if (SelectedDataForLog == null) return;
+            switch (SelectedDataForLog.LogType)
+            {
+                case 1:
+                    var dbBikeLogic = new BikeLogic();
+                    dbBikeLogic.DeleteLogs(SelectedDataForLog.LogId);
+                    break;
+                case 2:
+                    var dbCarLogic = new CarLogic();
+                    dbCarLogic.DeleteLogs(SelectedDataForLog.LogId);
+                    break;
+            }
 
             dbLogLogic.DeleteLogs(SelectedDataForLog);
 
@@ -537,7 +631,6 @@ namespace TourPlanner.ViewModels.Tour
         }
 
         #endregion
-
 
     }
 }

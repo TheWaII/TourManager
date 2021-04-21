@@ -26,9 +26,9 @@ namespace TourPlanner.BL.Database.Log
             _iBikeRepository.Insert(bikeData);
         }
 
-        public void DeleteLogs(BikeData bikeData)
+        public void DeleteLogs(int logId)
         {
-            _iBikeRepository.Delete(bikeData);
+            _iBikeRepository.Delete(logId);
         }
 
         public void UpdateLogs(BikeData bikeData)

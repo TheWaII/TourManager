@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourPlanner.Views.UserControls
+namespace TourPlanner.Views.UserControls.Log
 {
     /// <summary>
-    /// Interaction logic for AddLogControl.xaml
+    /// Interaction logic for EditLogControl.xaml
     /// </summary>
-    public partial class AddLogControl : UserControl
+    public partial class EditLogControl : UserControl
     {
-        public AddLogControl()
+        public EditLogControl()
         {
             InitializeComponent();
         }

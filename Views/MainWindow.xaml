@@ -6,9 +6,10 @@
         xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
         xmlns:intr="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
 
-        xmlns:control="clr-namespace:TourPlanner.Views.UserControls"
         xmlns:views="clr-namespace:TourPlanner.Views"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:log="clr-namespace:TourPlanner.Views.UserControls.Log"
+        xmlns:tour="clr-namespace:TourPlanner.Views.UserControls.Tour"
         Title="Tour-Planner" Height="565" Width="741" MinHeight="800" MinWidth="1020" Icon="{Binding LogoImage}"
 >
     <Window.DataContext>
@@ -20,7 +21,7 @@
             <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowLoaded}" />
         </intr:EventTrigger>
         <intr:EventTrigger>
-            <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowExit, Mode=OneTime}"></intr:InvokeCommandAction>
+            <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowExit, Mode=OneTime}"/>
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
 
@@ -64,7 +65,7 @@
             <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right" Command="{Binding TourViewModel.EditTourToggle}" Background="White" BorderThickness="0">
                 <Image Source="{Binding EditImage}"/>
             </ToggleButton>
-            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right" Command="{Binding TourViewModel.DeleteLogCommand}" Background="White" BorderThickness="0">
+            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right" Command="{Binding TourViewModel.DeleteTourCommand}" Background="White" BorderThickness="0">
                 <Image Source="{Binding MinusImage}"/>
             </Button>
             <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right" Command="{Binding TourViewModel.AddTourToggle}" Background="White" BorderThickness="0">
@@ -102,7 +103,7 @@
             <Button Width="30" Name="BtnRefresh" DockPanel.Dock="Right" Command="{Binding TourViewModel.RefreshLogCommand}" Background="white" BorderThickness="0">
                 <Image Source ="{Binding ReloadImage}"/>
             </Button>
-            <ToggleButton Width="40" Name="TbtOptionsLog" DockPanel.Dock="Right" Background="White" BorderThickness="0">
+            <ToggleButton Width="40" Name="TbtOptionsLog" DockPanel.Dock="Right" Background="White" BorderThickness="0" Command="{Binding LogViewModel.EditLogToggle}">
                 <Image Source="{Binding EditImage}"/>
             </ToggleButton>
             <Button Width="40" Name="BtnRemoveLog" DockPanel.Dock="Right" Command="{Binding TourViewModel.DeleteLogCommand}" Background="White" BorderThickness="0">
@@ -115,15 +116,16 @@
 
         <!-- Tour Controls-->
         <Grid Column="1" Row="3">
-            <control:TourRouteDescriptionControl  Visibility="{Binding TourViewModel.RouteDescriptionVisibility}"/>
-            <control:AddTourControl Visibility="{Binding TourViewModel.AddTourVisibility}"/>
-            <control:EditTourControl Visibility="{Binding TourViewModel.EditTourVisibility}"/>
+            <tour:TourRouteDescriptionControl  Visibility="{Binding TourViewModel.RouteDescriptionVisibility}"/>
+            <tour:AddTourControl Visibility="{Binding TourViewModel.AddTourVisibility}"/>
+            <tour:EditTourControl Visibility="{Binding TourViewModel.EditTourVisibility}"/>
         </Grid>
 
         <!--Log Controls-->
         <Grid Column="1" Row="7">
-            <control:LogControl Visibility="{Binding LogViewModel.LogVisibility}"/>
-            <control:AddLogControl Visibility="{Binding LogViewModel.AddLogVisibility}"/>
+            <log:LogControl Visibility="{Binding LogViewModel.LogVisibility}"/>
+            <log:AddLogControl Visibility="{Binding LogViewModel.AddLogVisibility}"/>
+            <log:EditLogControl Visibility="{Binding LogViewModel.EditLogVisibility}"/>
         </Grid>
 
     </Grid>

@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="TourPlanner.Views.UserControls.AddLogControl"
+﻿<UserControl x:Class="TourPlanner.Views.UserControls.Log.AddLogControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             xmlns:local="clr-namespace:TourPlanner.Views.UserControls"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:vm ="clr-namespace:TourPlanner.ViewModels">
 
@@ -39,9 +38,9 @@
         <TextBox Grid.Row="0" Grid.Column="1" Name="TbxLogName" Text="{Binding (vm:MainViewModel.LogViewModel).Name}"/>
         <DatePicker Grid.Row="1" Grid.Column="1" Name="DpkLogDate" SelectedDate="{Binding (vm:MainViewModel.LogViewModel).Date}"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="TbxDistance" Text="{Binding (vm:MainViewModel.LogViewModel).Distance}"/>
-        
+
         <TextBox Grid.Row="3" Grid.Column="1" Name="TbxTime" Text="{Binding (vm:MainViewModel.LogViewModel).Time}"/>
-        
+
         <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Maximum="5" Minimum="1" Value="{Binding (vm:MainViewModel.LogViewModel).Rating}"/>
 
         <!--<controls:Rating Grid.Row="4" Grid.Column="1"  ItemCount="5" Name="RtgLogRating" Value="{Binding (vm:MainViewModel.LogViewModel).Rating , Mode=Default}"/>-->
@@ -58,7 +57,7 @@
         <!--Tour type-->
 
         <DockPanel Grid.Row="0" Grid.Column="2">
-            <RadioButton Content="None   "  Command="{Binding (vm:MainViewModel.LogViewModel).NoneRadioButton }" IsChecked="True"  Background="Azure"/>
+            <RadioButton Content="Unspecified   "  Command="{Binding (vm:MainViewModel.LogViewModel).UnspecifiedRadioButton }" IsChecked="True"  Background="Azure"/>
             <RadioButton Content="Bike Tour   "  Command="{Binding (vm:MainViewModel.LogViewModel).BikeRadioButton }" Background="Azure"/>
             <RadioButton Content="Car Tour   "  HorizontalAlignment="Left" Command="{Binding (vm:MainViewModel.LogViewModel).CarRadioButton}" Background="Azure"/>
         </DockPanel>
@@ -85,11 +84,11 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Average speed: "/>
             <Label Grid.Row="5" Grid.Column="0" Content="Calories burnt: "/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxPeakHeartRate"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxLowestHeartRate"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxAvgHeartRate"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxAvgSpeed"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Name="TbxCaloriesBurnt"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxPeakHeartRate" Text="{Binding (vm:MainViewModel.LogViewModel).BikeLogViewModel.PeakHeartRate}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxLowestHeartRate" Text ="{Binding (vm:MainViewModel.LogViewModel).BikeLogViewModel.LowestHeartRate}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxAvgHeartRate" Text ="{Binding (vm:MainViewModel.LogViewModel).BikeLogViewModel.AverageHeartRate}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxAvgSpeed" Text="{Binding (vm:MainViewModel.LogViewModel).BikeLogViewModel.AverageSpeed}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Name="TbxCaloriesBurnt" Text="{Binding (vm:MainViewModel.LogViewModel).BikeLogViewModel.CaloriesBurnt}"/>
         </Grid>
 
         <!--Car Tour-->
@@ -115,14 +114,14 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Fuel cost: "/>
             <Label Grid.Row="5" Grid.Column="0" Content="Caught speeding: "/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxMaxSpeed"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxAvgSped"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxFuelUsed"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxFuelCost"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxMaxSpeed" Text="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.MaxSpeed}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxAvgSped" Text="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.AverageSpeed}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxFuelUsed" Text="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.FuelUsed}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxFuelCost" Text="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.FuelCost}"/>
 
             <StackPanel Grid.Row="5" Grid.Column="1">
-                <RadioButton Content="Yes"/>
-                <RadioButton Content="No"/>
+                <RadioButton Content="Yes" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.Yes}"/>
+                <RadioButton Content="No" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.No}"/>
             </StackPanel>
         </Grid>
 

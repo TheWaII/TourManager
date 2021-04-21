@@ -21,9 +21,11 @@ namespace TourPlanner.Model.Log
 
         public int LogRating { get; set; }
 
-        public int LogTourType { get; set; }
+        public int LogType { get; set; }
 
         public string LogReport { get; set; }
+
+        public string BikeCar { get; set; }
 
     }
 }

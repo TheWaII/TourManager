@@ -15,6 +15,6 @@ namespace TourPlanner.DAL.Log.Bike
 
         void Update(BikeData bike);
 
-        void Delete(BikeData bike);
+        void Delete(int logId);
     }
 }

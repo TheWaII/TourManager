@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.Annotations;
 
 namespace TourPlanner.ViewModels.Log
 {
-    public class BikeLogViewModel : LogViewModel
+    public class BikeLogViewModel : INotifyPropertyChanged
     {
         private int _peakHeartRate;
 
@@ -73,5 +76,12 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

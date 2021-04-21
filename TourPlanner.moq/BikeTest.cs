@@ -66,14 +66,14 @@ namespace TourPlanner.Moq
             var bike = GetSampleBikes()[0];
 
             mock.Mock<IBikeRepository>()
-                .Setup(_ => _.Delete(bike));
+                .Setup(_ => _.Delete(bike.LogId));
 
             var cls = mock.Create<BikeLogic>();
 
-            cls.DeleteLogs(bike);
+            cls.DeleteLogs(bike.LogId);
 
             mock.Mock<IBikeRepository>()
-                .Verify(_ => _.Delete(bike), Times.Once);
+                .Verify(_ => _.Delete(bike.LogId), Times.Once);
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace TourPlanner.Moq
             var bike = GetSampleBikes()[0];
 
             mock.Mock<IBikeRepository>()
-                .Setup(_ => _.Delete(bike));
+                .Setup(_ => _.Delete(bike.LogId));
 
             var cls = mock.Create<BikeLogic>();
 

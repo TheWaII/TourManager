@@ -51,7 +51,7 @@ namespace TourPlanner.BL.Database.Log
                 LogDistance = variable.LogDistance,
                 LogTotalTime = variable.LogTotalTime,
                 LogRating = variable.LogRating,
-                LogTourType = variable.LogTourType,
+                LogType = variable.LogType,
                 LogReport = variable.LogReport
             }))
             {

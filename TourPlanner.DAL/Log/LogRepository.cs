@@ -15,21 +15,17 @@ namespace TourPlanner.DAL.Log
         public IEnumerable<LogData> GetLogs()
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
-            if (dbConnection.State == ConnectionState.Closed)
-                dbConnection.Open();
 
-            return dbConnection.Query<LogData>("SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport FROM Logs",
+            return dbConnection.Query<LogData>("SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport FROM Logs",
                 commandType: CommandType.Text);
         }
 
         public void Insert(LogData logs)
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
-            if (dbConnection.State == ConnectionState.Closed)
-                dbConnection.Open();
 
-            dbConnection.Query<LogData>(
-                "INSERT INTO Logs(TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogTourType, LogReport) VALUES (@TourId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogTourType, @LogReport)",
+            dbConnection.Execute(
+                "INSERT INTO Logs(TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport) VALUES (@TourId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogType, @LogReport)",
                 new
                 {
                     logs.TourId,
@@ -38,23 +34,18 @@ namespace TourPlanner.DAL.Log
                     logs.LogDistance,
                     logs.LogTotalTime,
                     logs.LogRating,
-                    logs.LogTourType,
+                    logs.LogType,
                     logs.LogReport
-                },
-                commandType: CommandType.Text);
+                });
 
         }
 
         public void Update(LogData logs)
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
-            if (dbConnection.State == ConnectionState.Closed)
-                dbConnection.Open();
 
-            dbConnection.Query<LogData>(
-                "UPDATE Logs" +
-                "SET LogId = @LogId, TourId = @TourId, LogName = @LogName, LogDate = @LogDate, LogDistance = @LogDistance, LogTotalTime = @LogTotalTime, LogRating = @LogRating, LogTourType = @LogTourType, " +
-                "LogReport =@LogReport) WHERE LogId = @LogId",
+            dbConnection.Execute(
+                "UPDATE Logs SET LogId = @LogId, TourId = @TourId, LogName = @LogName, LogDate = @LogDate, LogDistance = @LogDistance, LogTotalTime = @LogTotalTime, LogRating = @LogRating, LogType = @LogType, LogReport = @LogReport WHERE LogId = @LogId",
                 new
                 {
                     logs.LogId,
@@ -64,23 +55,17 @@ namespace TourPlanner.DAL.Log
                     logs.LogDistance,
                     logs.LogTotalTime,
                     logs.LogRating,
-                    logs.LogTourType,
+                    logs.LogType,
                     logs.LogReport
-                },
-                commandType: CommandType.Text);
+                });
         }
 
         public void Delete(LogData logs)
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
-            if (dbConnection.State == ConnectionState.Closed)
-                dbConnection.Open();
-            if (logs != null)
-            {
-                dbConnection.Query<LogData>("DELETE FROM logs WHERE LogId = @LogId",
-                    new { logs.LogId },
-                    commandType: CommandType.Text);
-            }
+            if (logs == null) return;
+            dbConnection.Execute("DELETE FROM logs WHERE LogId = @LogId",
+                new { logs.LogId });
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace TourPlanner.Views.UserControls
+namespace TourPlanner.Views.UserControls.Log
 {
     /// <summary>
     /// Interaction logic for LogControl.xaml

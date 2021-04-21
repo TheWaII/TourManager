@@ -15,6 +15,6 @@ namespace TourPlanner.DAL.Log.Car
 
         void Update(CarData car);
 
-        void Delete(CarData car);
+        void Delete(int logId);
     }
 }
