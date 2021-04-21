@@ -23,7 +23,7 @@ namespace TourPlanner.BL.Route
             }
 
             dynamic json = JObject.Parse(responseString);
-            double distance = json.route.distance;
+            double distance = json.route.distance * 1.6;
 
             return distance;
         }

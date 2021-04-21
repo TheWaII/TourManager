@@ -42,11 +42,23 @@
     <Reference Include="Catel.Core, Version=5.12.12.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Catel.Core.5.12.12\lib\net47\Catel.Core.dll</HintPath>
     </Reference>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="Gu.Wpf.Adorners, Version=2.1.1.0, Culture=neutral, PublicKeyToken=6dfb64f9972bd31d, processorArchitecture=MSIL">
       <HintPath>packages\Gu.Wpf.Adorners.2.1.1\lib\net45\Gu.Wpf.Adorners.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>packages\MahApps.Metro.2.4.4\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.4.0.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -68,12 +80,9 @@
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -100,7 +109,6 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.AccessControl.5.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
@@ -169,22 +177,22 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OldMainWindow.xaml.cs">
-      <DependentUpon>OldMainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\AddLogControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\AddLogControl.xaml.cs">
       <DependentUpon>AddLogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\AddTourControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\EditLogControl.xaml.cs">
+      <DependentUpon>EditLogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Tour\AddTourControl.xaml.cs">
       <DependentUpon>AddTourControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\EditTourControl.xaml.cs">
+    <Compile Include="Views\UserControls\Tour\EditTourControl.xaml.cs">
       <DependentUpon>EditTourControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\LogControl.xaml.cs">
+    <Compile Include="Views\UserControls\Log\LogControl.xaml.cs">
       <DependentUpon>LogControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\TourRouteDescriptionControl.xaml.cs">
+    <Compile Include="Views\UserControls\Tour\TourRouteDescriptionControl.xaml.cs">
       <DependentUpon>TourRouteDescriptionControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -222,27 +230,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OldMainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UserControls\AddLogControl.xaml">
+    <Page Include="Views\UserControls\Log\AddLogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\AddTourControl.xaml">
+    <Page Include="Views\UserControls\Log\EditLogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\EditTourControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\UserControls\LogControl.xaml">
+    <Page Include="Views\UserControls\Tour\AddTourControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\TourRouteDescriptionControl.xaml">
+    <Page Include="Views\UserControls\Tour\EditTourControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\Log\LogControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Tour\TourRouteDescriptionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,10 +262,6 @@
     <ProjectReference Include="TourPlanner.BL\TourPlanner.BL.csproj">
       <Project>{dd01266f-4cec-4742-b3e8-e4624cf3cb4a}</Project>
       <Name>TourPlanner.BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="TourPlanner.DAL\TourPlanner.DAL.csproj">
-      <Project>{5051B7A5-AC58-4151-8F61-88AFEBEECB53}</Project>
-      <Name>TourPlanner.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="TourPlanner.Model\TourPlanner.Model.csproj">
       <Project>{75d7bba4-0e6e-45c9-863c-2aaab164fa3c}</Project>
@@ -279,6 +283,9 @@
   <ItemGroup>
     <Resource Include="img\icons\edit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\reload.png" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -287,7 +294,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('packages\System.Runtime.WindowsRuntime.4.7.0\build\net461\System.Runtime.WindowsRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Runtime.WindowsRuntime.4.7.0\build\net461\System.Runtime.WindowsRuntime.targets'))" />
     <Error Condition="!Exists('packages\System.Runtime.WindowsRuntime.UI.Xaml.4.7.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Runtime.WindowsRuntime.UI.Xaml.4.7.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets'))" />
+    <Error Condition="!Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets'))" />
   </Target>
   <Import Project="packages\System.Runtime.WindowsRuntime.4.7.0\build\net461\System.Runtime.WindowsRuntime.targets" Condition="Exists('packages\System.Runtime.WindowsRuntime.4.7.0\build\net461\System.Runtime.WindowsRuntime.targets')" />
   <Import Project="packages\System.Runtime.WindowsRuntime.UI.Xaml.4.7.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets" Condition="Exists('packages\System.Runtime.WindowsRuntime.UI.Xaml.4.7.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" />
+  <Import Project="packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
 </Project>

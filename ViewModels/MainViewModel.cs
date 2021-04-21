@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using TourPlanner.BL.Database.Log;
+using TourPlanner.Commands;
+using TourPlanner.Model;
 using TourPlanner.ViewModels.Log;
 using TourPlanner.ViewModels.Tour;
+using TourPlanner.Model.Log;
 
 namespace TourPlanner.ViewModels
 {
@@ -16,8 +22,8 @@ namespace TourPlanner.ViewModels
         public LogViewModel LogViewModel { get; set; }
 
         public BikeLogViewModel BikeLogViewModel { get; set; }
-        public CarLogViewModel CarLogViewModel { get; set; }
 
+        public CarLogViewModel CarLogViewModel { get; set; }
 
         public string LogoImage => @"..\..\img\icons\logo.png";
 
@@ -26,6 +32,9 @@ namespace TourPlanner.ViewModels
         public string MinusImage => @"..\..\img\icons\minus.png";
 
         public string EditImage => @"..\..\img\icons\edit.png";
+
+        public string ReloadImage => @"..\..\img\icons\reload.png";
+
 
         public MainViewModel()
         {

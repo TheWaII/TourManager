@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using TourPlanner.BL.Database;
+using TourPlanner.Annotations;
+using TourPlanner.BL;
+using TourPlanner.BL.Database.Log;
+using TourPlanner.BL.Database.Tour;
 using TourPlanner.BL.Route;
 using TourPlanner.Commands;
 using TourPlanner.Model;
+using TourPlanner.Model.Log;
+using TourPlanner.Model.Tour;
+using TourPlanner.ViewModels.Log;
 
 namespace TourPlanner.ViewModels.Tour
 {
     public class TourViewModel : INotifyPropertyChanged, IValueConverter
     {
+
 
         #region Properties
         private string _name;
@@ -167,36 +178,89 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
-        public IEnumerable<Tours> MyFilteredItems
+        public IEnumerable<TourData> MyFilteredItems
         {
             get
             {
-                return SearchText == null ? Data : Data.Where(x => x.TourName.Contains(SearchText));
+                return SearchText == null ? TourCollection : TourCollection.Where(x => x.TourName.Contains(SearchText));
             }
         }
 
-        private ObservableCollection<Tours> _data = new();
+        private ObservableCollection<TourData> _tourCollection = new();
 
-        public ObservableCollection<Tours> Data
+        public ObservableCollection<TourData> TourCollection
         {
-            get => _data;
+            get => _tourCollection;
             set
             {
-                _data = value;
-                OnPropertyChanged(nameof(Data));
+                _tourCollection = value;
+                OnPropertyChanged(nameof(TourCollection));
 
             }
         }
 
-        private Tours _selectedTour;
 
-        public Tours SelectedTour
+        private ObservableCollection<LogData> _logCollection = new();
+        public ObservableCollection<LogData> LogCollection
         {
-            get => _selectedTour;
+            get => _logCollection;
             set
             {
-                _selectedTour = value;
-                OnPropertyChanged(nameof(SelectedTour));
+                _logCollection = value;
+                OnPropertyChanged(nameof(LogCollection));
+
+            }
+        }
+
+
+        private ObservableCollection<BikeData> _bikeCollection = new();
+        public ObservableCollection<BikeData> BikeCollection
+        {
+            get => _bikeCollection;
+            set
+            {
+                _bikeCollection = value;
+                OnPropertyChanged(nameof(BikeCollection));
+            }
+        }
+
+
+        private ObservableCollection<CarData> _carCollection = new();
+        public ObservableCollection<CarData> CarCollection
+        {
+            get => _carCollection;
+            set
+            {
+                _carCollection = value;
+                OnPropertyChanged(nameof(CarCollection));
+            }
+        }
+
+
+        private TourData _selectedTourData;
+        public TourData SelectedTourData
+        {
+            get => _selectedTourData;
+            set
+            {
+                _selectedTourData = value;
+                OnPropertyChanged(nameof(SelectedTourData));
+
+                RefreshLogList();
+            }
+        }
+
+
+        private LogData _selectedDataForLog;
+        public LogData SelectedDataForLog
+        {
+            get => _selectedDataForLog;
+            set
+            {
+                _selectedDataForLog = value;
+                OnPropertyChanged(nameof(SelectedDataForLog));
+
+                RefreshBikeLog();
             }
         }
 
@@ -207,6 +271,7 @@ namespace TourPlanner.ViewModels.Tour
         public RelayCommand AddTourCommand { get; }
 
         public RelayCommand DeleteTourCommand { get; }
+        public RelayCommand DeleteLogCommand { get; }
 
         public RelayCommand ValidateCommand { get; }
 
@@ -214,7 +279,12 @@ namespace TourPlanner.ViewModels.Tour
 
         public RelayCommand AddTourToggle { get; }
 
+
+        public RelayCommand RefreshLogCommand { get; }
+
         public ICommand WindowLoaded { get; set; }
+
+        public ICommand WindowExit { get; set; }
 
         #endregion
 
@@ -229,7 +299,7 @@ namespace TourPlanner.ViewModels.Tour
 
             AddTourCommand = new RelayCommand(o => SaveChanges(), o => CanUpdate);
 
-            WindowLoaded = new RelayCommand(o => RefreshList());
+            WindowLoaded = new RelayCommand(o => RefreshTourList());
 
             EditTourCommand = new RelayCommand(o => UpdateChanges());
 
@@ -237,8 +307,13 @@ namespace TourPlanner.ViewModels.Tour
 
             DeleteTourCommand = new RelayCommand(o => DeleteTour());
 
-        }
+            DeleteLogCommand = new RelayCommand(o => DeleteLog());
 
+            WindowExit = new RelayCommand(o => ExitWindow());
+
+            RefreshLogCommand = new RelayCommand(o => RefreshLogList());
+
+        }
         #endregion
 
         #region CanUpdate
@@ -249,18 +324,18 @@ namespace TourPlanner.ViewModels.Tour
 
 
         public bool CanUpdateValidate => !string.IsNullOrWhiteSpace(Source) && !string.IsNullOrWhiteSpace(Destination);
-        
+
 
         #endregion
 
-        public void RefreshList()
+        public void RefreshTourList()
         {
-            _data.Clear();
+            _tourCollection.Clear();
 
-            var dbDatabaseLogic = new DatabaseLogic();
-            foreach (var item in dbDatabaseLogic.LoadTours())
+            var dbTourLogic = new TourLogic();
+            foreach (var item in dbTourLogic.LoadTours())
             {
-                var tourData = new Tours
+                var tourData = new TourData
                 {
                     TourId = item.TourId,
                     TourName = item.TourName,
@@ -271,15 +346,15 @@ namespace TourPlanner.ViewModels.Tour
                     TourRoute = item.TourRoute
                 };
 
-                _data.Add(tourData);
+                _tourCollection.Add(tourData);
             }
         }
 
         public void SaveChanges()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
+            var dbTourLogic = new TourLogic();
 
-            var tour = new Tours
+            var tour = new TourData
             {
                 TourName = Name,
                 TourSource = Source,
@@ -288,7 +363,8 @@ namespace TourPlanner.ViewModels.Tour
                 TourDescription = Description
             };
 
-            dbDatabaseLogic.InsertTours(tour);
+            dbTourLogic.InsertTours(tour);
+
 
             Name = string.Empty;
             Source = string.Empty;
@@ -296,7 +372,7 @@ namespace TourPlanner.ViewModels.Tour
             Distance = 0;
             Description = string.Empty;
             ProgressBarColor = "Gray";
-            RefreshList();
+            RefreshTourList();
         }
 
         public void ToggleAddTour()
@@ -354,27 +430,25 @@ namespace TourPlanner.ViewModels.Tour
 
             var getMap = new GetMap();
 
-            SelectedTour.TourDistance = System.Convert.ToDouble(getDistance.Distance(SelectedTour.TourSource, SelectedTour.TourDestination));
+            SelectedTourData.TourDistance = System.Convert.ToDouble(getDistance.Distance(SelectedTourData.TourSource, SelectedTourData.TourDestination));
 
-            ProgressBarColor = SelectedTour.TourDistance != 0 ? "Green" : "Red";
+            ProgressBarColor = SelectedTourData.TourDistance != 0 ? "Green" : "Red";
 
-
-
-            getMap.SaveImage(SelectedTour.TourSource, SelectedTour.TourDestination);
+            getMap.SaveImage(SelectedTourData.TourSource, SelectedTourData.TourDestination);
         }
 
         public void UpdateChanges()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
-            var tour = new Tours
+            var dbDatabaseLogic = new TourLogic();
+            var tour = new TourData
             {
-                TourId = SelectedTour.TourId,
-                TourName = SelectedTour.TourName,
-                TourSource = SelectedTour.TourSource,
-                TourDestination = SelectedTour.TourDestination,
-                TourDistance = SelectedTour.TourDistance,
-                TourDescription = SelectedTour.TourDescription, 
-                TourRoute = SelectedTour.TourSource + "_" + SelectedTour.TourDestination
+                TourId = SelectedTourData.TourId,
+                TourName = SelectedTourData.TourName,
+                TourSource = SelectedTourData.TourSource,
+                TourDestination = SelectedTourData.TourDestination,
+                TourDistance = SelectedTourData.TourDistance,
+                TourDescription = SelectedTourData.TourDescription,
+                TourRoute = SelectedTourData.TourSource + "_" + SelectedTourData.TourDestination
             };
 
             dbDatabaseLogic.UpdateTours(tour);
@@ -385,17 +459,133 @@ namespace TourPlanner.ViewModels.Tour
             Distance = 0;
             Description = string.Empty;
             ProgressBarColor = "Gray";
-            RefreshList();
+            RefreshTourList();
         }
 
         public void DeleteTour()
         {
-            var dbDatabaseLogic = new DatabaseLogic();
+            var dbDatabaseLogic = new TourLogic();
 
-            dbDatabaseLogic.DeleteTours(SelectedTour);
+            dbDatabaseLogic.DeleteTours(SelectedTourData);
 
-            RefreshList();
+            RefreshTourList();
         }
+
+
+        #region Logs
+        public void RefreshLogList()
+        {
+            _logCollection.Clear();
+            _bikeCollection.Clear();
+            _carCollection.Clear();
+            var dbLogLogic = new LogLogic();
+
+
+            if (SelectedTourData == null) return;
+            foreach (var item in dbLogLogic.LoadLogs())
+            {
+                var logData = new LogData
+                {
+                    LogId = item.LogId,
+                    TourId = item.TourId,
+                    LogName = item.LogName,
+                    LogDate = item.LogDate,
+                    LogDistance = item.LogDistance,
+                    LogTotalTime = item.LogTotalTime,
+                    LogRating = item.LogRating,
+                    LogType = item.LogType,
+                    LogReport = item.LogReport
+                };
+
+                logData.BikeCar = logData.LogType switch
+                {
+                    1 => "Bike",
+                    2 => "Car",
+                    _ => "Unspecified"
+                };
+
+                if (logData.TourId == SelectedTourData.TourId)
+                {
+                    _logCollection.Add(logData);
+                }
+            }
+        }
+
+        public void RefreshBikeLog()
+        {
+            if (SelectedDataForLog == null) return;
+            _bikeCollection.Clear();
+            _carCollection.Clear();
+            switch (SelectedDataForLog.LogType)
+            {
+                case 1:
+                    {
+                        var dbBikeLogic = new BikeLogic();
+                        foreach (var bikeItem in dbBikeLogic.LoadBikes())
+                        {
+                            var bikeData = new BikeData
+                            {
+                                LogId = bikeItem.LogId,
+                                AvgHeartRate = bikeItem.AvgHeartRate,
+                                AvgSpeed = bikeItem.AvgSpeed,
+                                CaloriesBurnt = bikeItem.CaloriesBurnt,
+                                LowestHeartRate = bikeItem.LowestHeartRate,
+                                PeakHeartRate = bikeItem.PeakHeartRate
+                            };
+
+                            if (bikeData.LogId == SelectedDataForLog.LogId)
+                                _bikeCollection.Add(bikeData);
+                        }
+
+                        break;
+                    }
+                case 2:
+                    {
+                        var dbCarLogic = new CarLogic();
+                        foreach (var carItem in dbCarLogic.LoadCars())
+                        {
+                            var carData = new CarData
+                            {
+                                LogId = carItem.LogId,
+                                AvgSpeed = carItem.AvgSpeed,
+                                CaughtSpeeding = carItem.CaughtSpeeding,
+                                FuelCost = carItem.FuelCost,
+                                FuelUsed = carItem.FuelUsed,
+                                MaxSpeed = carItem.MaxSpeed
+                            };
+
+                            if (carData.LogId == SelectedDataForLog.LogId)
+                                _carCollection.Add(carData);
+                        }
+                        break;
+                    }
+            }
+        }
+
+        public void DeleteLog()
+        {
+            var dbLogLogic = new LogLogic();
+
+            if (SelectedDataForLog == null) return;
+            switch (SelectedDataForLog.LogType)
+            {
+                case 1:
+                    var dbBikeLogic = new BikeLogic();
+                    dbBikeLogic.DeleteLogs(SelectedDataForLog.LogId);
+                    break;
+                case 2:
+                    var dbCarLogic = new CarLogic();
+                    dbCarLogic.DeleteLogs(SelectedDataForLog.LogId);
+                    break;
+            }
+
+            dbLogLogic.DeleteLogs(SelectedDataForLog);
+
+            RefreshLogList();
+
+        }
+
+        #endregion
 
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -412,6 +602,11 @@ namespace TourPlanner.ViewModels.Tour
                 return BitmapFrame.Create(new Uri(@"..\..\img\route\error.jpeg", UriKind.Relative));
             }
 
+        }
+
+        private void ExitWindow()
+        {
+            new RemoveMaps(TourCollection);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -436,5 +631,6 @@ namespace TourPlanner.ViewModels.Tour
         }
 
         #endregion
+
     }
 }

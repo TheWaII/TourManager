@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace TourPlanner.Views.UserControls
+namespace TourPlanner.Views.UserControls.Tour
 {
     public partial class EditTourControl : UserControl
     {

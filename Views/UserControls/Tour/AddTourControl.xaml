@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TourPlanner.Views.UserControls.AddTourControl"
+﻿<UserControl x:Class="TourPlanner.Views.UserControls.Tour.AddTourControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -48,9 +48,6 @@
 
         <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate" Command="{Binding (vm:MainViewModel.TourViewModel).ValidateCommand}"/>
         <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add" Command="{Binding (vm:MainViewModel.TourViewModel).AddTourCommand}"/>
-
-
-
 
     </Grid>
 </UserControl>

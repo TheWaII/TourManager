@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlanner.Annotations;
 
 namespace TourPlanner.ViewModels.Log
 {
-    public class CarLogViewModel : LogViewModel
+    public class CarLogViewModel : INotifyPropertyChanged
     {
 
 
@@ -50,9 +53,9 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private double _fuelCost;
+        private decimal _fuelCost;
 
-        public double FuelCost
+        public decimal FuelCost
         {
             get => _fuelCost;
 
@@ -76,9 +79,9 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private int _caughtSpeeding;
+        private bool _caughtSpeeding;
 
-        public int CaughtSpeeding
+        public bool CaughtSpeeding
         {
             get => _caughtSpeeding;
             set
@@ -88,6 +91,36 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-       
+        private bool _yes;
+
+        public bool Yes
+        {
+            get => _yes;
+            set
+            {
+                _yes = value;
+                OnPropertyChanged(nameof(Yes));
+            }
+        }
+
+        private bool _no = true;
+
+        public bool No
+        {
+            get => _no;
+            set
+            {
+                _no = value;
+                OnPropertyChanged(nameof(No));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

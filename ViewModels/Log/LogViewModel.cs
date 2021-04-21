@@ -1,93 +1,116 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Catel.Collections;
+using Catel.Reflection;
 using TourPlanner.Annotations;
+using TourPlanner.BL.Database.Log;
+using TourPlanner.BL.Database.Tour;
 using TourPlanner.Commands;
+using TourPlanner.Model.Tour;
+using TourPlanner.Model.Log;
+using TourPlanner.ViewModels.Tour;
 
 namespace TourPlanner.ViewModels.Log
 {
     public class LogViewModel : INotifyPropertyChanged
     {
         #region properties
-        private string _logTitle;
 
-        public string LogTitle
+        private int _id = 0;
+
+        public int Id
         {
-            get => _logTitle;
+            get => _id;
             set
             {
-                _logTitle = value;
-                OnPropertyChanged(nameof(LogTitle));
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
 
-        private DateTime _logDate;
+        private string _name;
 
-        public DateTime LogDate
+        public string Name
         {
-            get => _logDate;
+            get => _name;
             set
             {
-                _logDate = value;
-                OnPropertyChanged(nameof(LogDate));
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _date;
+
+        public string Date
+        {
+            get => _date;
+            set
+            {
+                _date = value;
+                OnPropertyChanged(nameof(Date));
             }
         }
 
 
-        private double _logDistance;
+        private double _distance;
 
-        public double LogDistance
+        public double Distance
         {
-            get => _logDistance;
+            get => _distance;
 
             set
             {
-                _logDistance = value;
-                OnPropertyChanged(nameof(LogDistance));
+                _distance = value;
+                OnPropertyChanged(nameof(Distance));
             }
         }
 
 
-        private string _logTime;
+        private string _time;
 
-        public string LogTime
+        public string Time
         {
-            get => _logTime;
+            get => _time;
             set
             {
-                _logTime = value;
-                OnPropertyChanged(nameof(LogTime));
+                _time = value;
+                OnPropertyChanged(nameof(Time));
             }
         }
 
-        private int _logRating;
+        private int _rating = 1;
 
-        public int LogRating
+        public int Rating
         {
-            get => _logRating;
+            get => _rating;
 
             set
             {
-                _logRating = value;
-                OnPropertyChanged(nameof(LogRating));
+                _rating = value;
+                OnPropertyChanged(nameof(Rating));
             }
         }
 
-        private string _logReport;
+        private string _report;
 
-        public string LogReport
+        public string Report
         {
-            get => _logReport;
+            get => _report;
 
             set
             {
-                _logReport = value;
-                OnPropertyChanged(nameof(LogReport));
+                _report = value;
+                OnPropertyChanged(nameof(Report));
             }
         }
 
@@ -140,15 +163,15 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private bool _isCheckedNone = true;
+        private bool _isCheckedUnspecified = true;
 
-        public bool IsCheckedNone
+        public bool IsCheckedUnspecified
         {
-            get => _isCheckedNone;
+            get => _isCheckedUnspecified;
             set
             {
-                _isCheckedNone = value;
-                OnPropertyChanged(nameof(IsCheckedNone));
+                _isCheckedUnspecified = value;
+                OnPropertyChanged(nameof(IsCheckedUnspecified));
             }
         }
 
@@ -178,22 +201,196 @@ namespace TourPlanner.ViewModels.Log
         }
 
 
+        private TourData _selectedTourData;
+
+        public TourData SelectedTourData
+        {
+            get => _selectedTourData;
+            set
+            {
+                _selectedTourData = value;
+                OnPropertyChanged(nameof(SelectedTourData));
+            }
+        }
+
+        public BikeLogViewModel BikeLogViewModel { get; } = new();
+        public CarLogViewModel CarLogViewModel { get; } = new();
+
+
         #endregion
 
         public RelayCommand AddLogToggle { get; }
 
-        public RelayCommand NoneRadioButton { get; }
+        public RelayCommand EditLogToggle { get; }
+        public RelayCommand UnspecifiedRadioButton { get; }
         public RelayCommand BikeRadioButton { get; }
         public RelayCommand CarRadioButton { get; }
+        public RelayCommand AddLog { get; }
+
+
+        private ObservableCollection<LogData> _logCollection = new();
+
+        public ObservableCollection<LogData> LogCollection
+        {
+            get => _logCollection;
+            set
+            {
+                _logCollection = value;
+                OnPropertyChanged(nameof(LogCollection));
+
+            }
+        }
+
+        private ObservableCollection<BikeData> _bikeCollection = new();
+
+        public ObservableCollection<BikeData> BikeCollection
+        {
+            get => _bikeCollection;
+            set
+            {
+                _bikeCollection = value;
+                OnPropertyChanged(nameof(BikeCollection));
+
+            }
+        }
+
+        private BikeData _bikeEditCollection = new();
+
+        public BikeData BikeEditCollection
+        {
+            get => _bikeEditCollection;
+            set
+            {
+                _bikeEditCollection = value;
+                OnPropertyChanged(nameof(BikeEditCollection));
+            }
+        }
+
+        private ObservableCollection<CarData> _carCollection = new();
+
+        public ObservableCollection<CarData> CarCollection
+        {
+            get => _carCollection;
+            set
+            {
+                _carCollection = value;
+                OnPropertyChanged(nameof(CarCollection));
+
+            }
+        }
+
+        private CarData _carEditCollection = new();
+
+
+        public CarData CarEditCollection
+        {
+            get => _carEditCollection;
+            set
+            {
+                _carEditCollection = value;
+                OnPropertyChanged(nameof(CarEditCollection));
+            }
+        }
+
+        private string _editBikeVisibility = "Hidden";
+
+        public string EditBikeVisibility
+        {
+            get => _editBikeVisibility;
+            set
+            {
+                _editBikeVisibility = value;
+                OnPropertyChanged(nameof(EditBikeVisibility));
+            }
+        }
+
+        private string _editCarVisibility = "Hidden";
+
+        public string EditCarVisibility
+        {
+            get => _editCarVisibility;
+            set
+            {
+                _editCarVisibility = value;
+                OnPropertyChanged(nameof(EditCarVisibility));
+            }
+        }
+
+        private LogData _selectedLogData;
+
+        public LogData SelectedLogData
+        {
+            get => _selectedLogData;
+            set
+            {
+                _selectedLogData = value;
+                OnPropertyChanged(nameof(SelectedLogData));
+
+                if (SelectedLogData == null) return;
+                switch (SelectedLogData.LogType)
+                {
+                    case 1:
+                        EditBikeVisibility = "Visible";
+                        EditCarVisibility = "Hidden";
+                        var bikeQuery = BikeCollection.Where(b => b.LogId == SelectedLogData.LogId);
+                        bikeQuery.ForEach(x => BikeEditCollection = x);
+                        break;
+                    case 2:
+                        EditCarVisibility = "Visible";
+                        EditBikeVisibility = "Hidden";
+                        var carQuery = CarCollection.Where(c => c.LogId == SelectedLogData.LogId);
+                        carQuery.ForEach(x => CarEditCollection = x);
+                        break;
+                    default:
+                        EditCarVisibility = "Hidden";
+                        EditBikeVisibility = "Hidden";
+                        break;
+                }
+
+
+            }
+        }
+
+        public RelayCommand EditLog { get; set; }
 
 
         public LogViewModel()
         {
             AddLogToggle = new RelayCommand(o => ToggleAddLog());
-            NoneRadioButton = new RelayCommand(o => ToggleShowNone());
+            UnspecifiedRadioButton = new RelayCommand(o => ToggleShowUnspecified());
             BikeRadioButton = new RelayCommand(o => ToggleShowBike());
             CarRadioButton = new RelayCommand(o => ToggleShowCar());
+            AddLog = new RelayCommand(o => SaveChangesLog(), o => CanAddLog);
+
+            EditLogToggle = new RelayCommand(o => ToggleEditLog());
+
+            EditLog = new RelayCommand(o => UpdateChangesLog());
         }
+
+        private void ToggleEditLog()
+        {
+            IsCheckedEdit = IsCheckedEdit == false;
+
+            if (IsCheckedEdit)
+            {
+                EditLogVisibility = "Visible";
+                LogVisibility = "Hidden";
+            }
+            else
+            {
+                EditLogVisibility = "Hidden";
+                LogVisibility = "Visible";
+            }
+
+
+            RefreshLogList();
+        }
+
+        public bool IsCheckedEdit { get; set; }
+
+        public bool CanAddLog => Id != 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) &&
+                                 !string.IsNullOrWhiteSpace(Time) && Rating != 0 && !string.IsNullOrWhiteSpace(Report);
+
 
         private void ToggleAddLog()
         {
@@ -270,13 +467,11 @@ namespace TourPlanner.ViewModels.Log
             {
                 CarVisibility = "Hidden";
             }
-
-
         }
 
-        private void ToggleShowNone()
+        private void ToggleShowUnspecified()
         {
-            IsCheckedNone = IsCheckedNone == false;
+            IsCheckedUnspecified = IsCheckedUnspecified == false;
 
             if (!IsCheckedAdd) return;
             BikeVisibility = "Hidden";
@@ -286,6 +481,236 @@ namespace TourPlanner.ViewModels.Log
 
         }
 
+        public void SaveChangesLog()
+        {
+            var dbLogLogic = new LogLogic();
+
+            //convert date from mm/dd/yyyy to dd/mm/yyyy
+            var date = Date.Split(' ')[0];
+
+            var day = date.Split('/')[1];
+            var month = date.Split('/')[0];
+            var year = date.Split('/')[2];
+
+            if (Enumerable.Range(1, 9).Contains(Convert.ToInt32(day)))
+                day = "0" + day;
+            if (Enumerable.Range(1, 9).Contains(Convert.ToInt32(month)))
+                month = "0" + month;
+
+            var newDate = day + "/" + month + "/" + year;
+
+            var log = new LogData
+            {
+                TourId = Id,
+                LogName = Name,
+                LogDate = newDate,
+                LogDistance = Distance,
+                LogTotalTime = Time,
+                LogRating = Rating,
+                LogReport = Report
+            };
+
+            if (IsCheckedBike)
+                log.LogType = 1;
+            else if (IsCheckedCar)
+                log.LogType = 2;
+            else
+                log.LogType = 0;
+
+            dbLogLogic.InsertLog(log);
+
+            //if bike tour => add to bike table
+            if (IsCheckedBike)
+            {
+
+                var logData = dbLogLogic.LoadLogs().Where(x => x.LogName == log.LogName);
+
+                var logId = logData.Select(i => i.LogId).FirstOrDefault();
+
+                var dbBikeLogic = new BikeLogic();
+
+
+                var bike = new BikeData
+                {
+                    LogId = logId,
+                    PeakHeartRate = BikeLogViewModel.PeakHeartRate,
+                    LowestHeartRate = BikeLogViewModel.LowestHeartRate,
+                    AvgHeartRate = BikeLogViewModel.AverageHeartRate,
+                    AvgSpeed = BikeLogViewModel.AverageSpeed,
+                    CaloriesBurnt = BikeLogViewModel.CaloriesBurnt
+                };
+
+                dbBikeLogic.InsertLog(bike);
+                BikeLogViewModel.PeakHeartRate = 0;
+                BikeLogViewModel.LowestHeartRate = 0;
+                BikeLogViewModel.AverageHeartRate = 0;
+                BikeLogViewModel.AverageSpeed = 0;
+                BikeLogViewModel.CaloriesBurnt = 0;
+            }
+
+            //if car tour => add to car table
+            if (IsCheckedCar)
+            {
+                var logData = dbLogLogic.LoadLogs().Where(x => x.LogName == log.LogName);
+                var logId = logData.Select(i => i.LogId).FirstOrDefault();
+                var dbCarLogic = new CarLogic();
+
+                var car = new CarData
+                {
+                    LogId = logId,
+                    MaxSpeed = CarLogViewModel.MaxSpeed,
+                    AvgSpeed = CarLogViewModel.AverageSpeed,
+                    FuelUsed = CarLogViewModel.FuelUsed,
+                    FuelCost = CarLogViewModel.FuelCost
+                };
+
+                if (CarLogViewModel.Yes)
+                    car.CaughtSpeeding = true;
+                else if (CarLogViewModel.No)
+                    car.CaughtSpeeding = false;
+
+                dbCarLogic.InsertLog(car);
+                CarLogViewModel.MaxSpeed = 0;
+                CarLogViewModel.AverageSpeed = 0;
+                CarLogViewModel.FuelUsed = 0;
+                CarLogViewModel.FuelCost = 0;
+                CarLogViewModel.CaughtSpeeding = false;
+            }
+
+
+            Name = string.Empty;
+            Date = string.Empty;
+            Distance = 0;
+            Time = string.Empty;
+            Rating = 1;
+            Report = string.Empty;
+            Id = 0;
+        }
+
+        public void UpdateChangesLog()
+        {
+
+
+            var dbLogLogic = new LogLogic();
+
+            var logData = new LogData
+            {
+                LogId = SelectedLogData.LogId,
+                TourId = SelectedLogData.TourId,
+                LogName = SelectedLogData.LogName,
+                LogDate = SelectedLogData.LogDate,
+                LogDistance = SelectedLogData.LogDistance,
+                LogTotalTime = SelectedLogData.LogTotalTime,
+                LogRating = SelectedLogData.LogRating,
+                LogType = SelectedLogData.LogType,
+                LogReport = SelectedLogData.LogReport
+            };
+
+            dbLogLogic.UpdateLogs(logData);
+
+
+            switch (SelectedLogData.LogType)
+            {
+                case 1:
+                    {
+                        var dbBikeLogic = new BikeLogic();
+
+                        var bikeData = new BikeData()
+                        {
+                            LogId = SelectedLogData.LogId,
+                            PeakHeartRate = BikeEditCollection.PeakHeartRate,
+                            LowestHeartRate = BikeEditCollection.LowestHeartRate,
+                            AvgHeartRate = BikeEditCollection.AvgHeartRate,
+                            AvgSpeed = BikeEditCollection.AvgSpeed,
+                            CaloriesBurnt = BikeEditCollection.CaloriesBurnt
+                        };
+                        dbBikeLogic.UpdateLogs(bikeData);
+                        break;
+                    }
+                case 2:
+                    {
+                        var dbCarLogic = new CarLogic();
+
+                        var carData = new CarData
+                        {
+                            LogId = SelectedLogData.LogId,
+                            MaxSpeed = CarEditCollection.MaxSpeed,
+                            AvgSpeed = CarEditCollection.AvgSpeed,
+                            FuelUsed = CarEditCollection.FuelUsed,
+                            FuelCost = CarEditCollection.FuelCost,
+                            CaughtSpeeding = CarEditCollection.CaughtSpeeding
+                        };
+                        dbCarLogic.UpdateLogs(carData);
+                        break;
+                    }
+            }
+
+            BikeEditCollection = null;
+            CarEditCollection = null;
+            RefreshLogList();
+
+        }
+
+        public void RefreshLogList()
+        {
+            _logCollection.Clear();
+            _bikeCollection.Clear();
+            _carCollection.Clear();
+            
+            var dbLogLogic = new LogLogic();
+
+            foreach (var item in dbLogLogic.LoadLogs())
+            {
+                var logData = new LogData
+                {
+                    LogId = item.LogId,
+                    TourId = item.TourId,
+                    LogName = item.LogName,
+                    LogDate = item.LogDate,
+                    LogDistance = item.LogDistance,
+                    LogTotalTime = item.LogTotalTime,
+                    LogRating = item.LogRating,
+                    LogType = item.LogType,
+                    LogReport = item.LogReport
+                };
+
+                _logCollection.Add(logData);
+            }
+
+            var dbBikeLogic = new BikeLogic();
+
+            foreach (var item in dbBikeLogic.LoadBikes())
+            {
+                var bikeData = new BikeData
+                {
+                    LogId = item.LogId,
+                    PeakHeartRate = item.PeakHeartRate,
+                    LowestHeartRate = item.LowestHeartRate,
+                    AvgHeartRate = item.AvgHeartRate,
+                    AvgSpeed = item.AvgSpeed,
+                    CaloriesBurnt = item.CaloriesBurnt
+                };
+
+                _bikeCollection.Add(bikeData);
+            }
+
+            var dbCarLogic = new CarLogic();
+
+            foreach (var item in dbCarLogic.LoadCars())
+            {
+                var carData = new CarData
+                {
+                    LogId = item.LogId,
+                    MaxSpeed = item.MaxSpeed,
+                    AvgSpeed = item.AvgSpeed,
+                    FuelUsed = item.FuelUsed,
+                    FuelCost = item.FuelCost,
+                    CaughtSpeeding = item.CaughtSpeeding
+                };
+
+                _carCollection.Add(carData);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

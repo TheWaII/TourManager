@@ -1,8 +1,10 @@
-﻿namespace TourPlanner.BL.Route
+﻿using System.Configuration;
+
+namespace TourPlanner.BL.Route
 {
     public class MapApiStrings
     {
-        private const string Key = "omAA9i0xRW5N1d05cWYAVwE7lrzDM3sq";
+        private static string Key => ConfigurationManager.ConnectionStrings["key"].ConnectionString;
 
         internal string DistanceUrl(string source, string destination)
         {

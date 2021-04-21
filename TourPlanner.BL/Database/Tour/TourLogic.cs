@@ -1,30 +1,28 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
-using TourPlanner.DAL;
 using TourPlanner.DAL.Tour;
-using TourPlanner.Model;
+using TourPlanner.Model.Tour;
 
-namespace TourPlanner.BL.Database
+namespace TourPlanner.BL.Database.Tour
 {
-    public class DatabaseLogic
+    public class TourLogic
     {
         private readonly ITourRepository _iTourRepository = new TourRepository();
 
-        public DatabaseLogic() { }
+        public TourLogic() { }
 
-        public DatabaseLogic(ITourRepository iTourRepository)
+        public TourLogic(ITourRepository iTourRepository)
         {
             _iTourRepository = iTourRepository;
         }
 
-        public ObservableCollection<Tours> LoadTours()
+        public ObservableCollection<TourData> LoadTours()
         {
-            ObservableCollection<Tours> tourCollection = new();
+            ObservableCollection<TourData> tourCollection = new();
 
             var getTours = _iTourRepository.GetTours();
 
-            foreach (var tours in getTours.ToList().Select(variable => new Tours
+            foreach (var tours in getTours.ToList().Select(variable => new TourData
             {
                 TourId = variable.TourId,
                 TourName = variable.TourName,
@@ -41,20 +39,20 @@ namespace TourPlanner.BL.Database
             return tourCollection;
         }
 
-        public void InsertTours(Tours tours)
+        public void InsertTours(TourData tourData)
         {
-            tours.TourRoute = tours.TourSource + "_" + tours.TourDestination;
-            _iTourRepository.Insert(tours);
+            tourData.TourRoute = tourData.TourSource + "_" + tourData.TourDestination;
+            _iTourRepository.Insert(tourData);
         }
 
-        public void DeleteTours(Tours tours)
+        public void DeleteTours(TourData tourData)
         {
-            _iTourRepository.Delete(tours);
+            _iTourRepository.Delete(tourData);
         }
 
-        public void UpdateTours(Tours tours)
+        public void UpdateTours(TourData tourData)
         {
-            _iTourRepository.Update(tours);
+            _iTourRepository.Update(tourData);
         }
     }
 }

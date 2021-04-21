@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.Model", "TourPl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.DAL", "TourPlanner.DAL\TourPlanner.DAL.csproj", "{5051B7A5-AC58-4151-8F61-88AFEBEECB53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourPlanner.Moq", "TourPlanner.Moq\TourPlanner.Moq.csproj", "{636F800B-8D71-4B7D-8D71-F339A23815BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TourPlanner.Moq", "TourPlanner.Moq\TourPlanner.Moq.csproj", "{636F800B-8D71-4B7D-8D71-F339A23815BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
