@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 #config
 App.config
+TourPlanner.moq/App.config
