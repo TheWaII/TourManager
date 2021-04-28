@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TourPlanner.Model;
 using TourPlanner.Model.Tour;
 
 namespace TourPlanner.DAL.Tour
@@ -13,6 +12,5 @@ namespace TourPlanner.DAL.Tour
         void Update(TourData tourData);
 
         void Delete(TourData tourData);
-
     }
 }

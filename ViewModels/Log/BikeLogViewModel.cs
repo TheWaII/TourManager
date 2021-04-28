@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using TourPlanner.Annotations;
 
 namespace TourPlanner.ViewModels.Log
 {
     public class BikeLogViewModel : INotifyPropertyChanged
     {
+        private int _averageHeartRate;
+
+        private int _averageSpeed;
+
+        private int _caloriesBurnt;
+
+        private int _lowestHeartRate;
         private int _peakHeartRate;
 
         public int PeakHeartRate
@@ -24,8 +26,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private int _lowestHeartRate;
-
         public int LowestHeartRate
         {
             get => _lowestHeartRate;
@@ -36,8 +36,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(LowestHeartRate));
             }
         }
-
-        private int _averageHeartRate;
 
         public int AverageHeartRate
         {
@@ -50,8 +48,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private int _averageSpeed;
-
         public int AverageSpeed
         {
             get => _averageSpeed;
@@ -62,8 +58,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(AverageSpeed));
             }
         }
-
-        private int _caloriesBurnt;
 
         public int CaloriesBurnt
         {

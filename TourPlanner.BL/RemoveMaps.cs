@@ -9,15 +9,13 @@ namespace TourPlanner.BL
     {
         public RemoveMaps(IEnumerable<TourData> tours)
         {
-            var exclude = tours.Select(tourData => tourData.TourSource + "_" + tourData.TourDestination + ".jpeg").ToList();
+            var exclude = tours.Select(tourData => tourData.TourSource + "_" + tourData.TourDestination + ".jpeg")
+                .ToList();
             exclude.Add("error.jpeg");
 
             var files = Directory.GetFiles(@"..\..\img\route\").Where(s => !exclude.Contains(Path.GetFileName(s)));
 
-            foreach (var item in files)
-            {
-                File.Delete(item);
-            }
+            foreach (var item in files) File.Delete(item);
         }
     }
 }

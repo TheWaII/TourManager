@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
 using Npgsql;
-using TourPlanner.Model;
 using TourPlanner.Model.Log;
 
 namespace TourPlanner.DAL.Log
@@ -16,7 +12,8 @@ namespace TourPlanner.DAL.Log
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
 
-            return dbConnection.Query<LogData>("SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport FROM Logs",
+            return dbConnection.Query<LogData>(
+                "SELECT LogId, TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport FROM Logs",
                 commandType: CommandType.Text);
         }
 
@@ -37,7 +34,6 @@ namespace TourPlanner.DAL.Log
                     logs.LogType,
                     logs.LogReport
                 });
-
         }
 
         public void Update(LogData logs)
@@ -65,8 +61,7 @@ namespace TourPlanner.DAL.Log
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
             if (logs == null) return;
             dbConnection.Execute("DELETE FROM logs WHERE LogId = @LogId",
-                new { logs.LogId });
-
+                new {logs.LogId});
         }
     }
 }

@@ -2,17 +2,8 @@
 {
     public class TourData
     {
-        public int TourId { get; set; }
-        public string TourName { get; set; }
-        public string TourSource { get; set; }
-        public string TourDestination { get; set; }
-        public double TourDistance { get; set; }
-        public string TourDescription { get; set; }
-        public string TourRoute { get; set; } = "error";
-
-        public string RouteImage => @"../../img/route/" + TourRoute + ".jpeg";
-
-        public TourData(int tourId, string tourTourName, string tourSource, string tourDestination, double tourDistance, string tourDescription, string tourRoute)
+        public TourData(int tourId, string tourTourName, string tourSource, string tourDestination, double tourDistance,
+            string tourDescription, string tourRoute)
         {
             TourId = tourId;
             TourName = tourTourName;
@@ -28,7 +19,18 @@
             TourName = tourTourName;
         }
 
-        public TourData() { }
+        public TourData()
+        {
+        }
 
+        public int TourId { get; set; }
+        public string TourName { get; set; }
+        public string TourSource { get; set; }
+        public string TourDestination { get; set; }
+        public double TourDistance { get; set; }
+        public string TourDescription { get; set; }
+        public string TourRoute { get; set; } = "error";
+
+        public string RouteImage => @"../../img/route/" + TourRoute + ".jpeg";
     }
 }

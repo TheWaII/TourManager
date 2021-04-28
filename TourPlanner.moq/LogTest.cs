@@ -5,15 +5,12 @@ using Moq;
 using NUnit.Framework;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.DAL.Log;
-using TourPlanner.DAL.Tour;
-using TourPlanner.Model;
 using TourPlanner.Model.Log;
 
 namespace TourPlanner.Moq
 {
     public class LogTest
     {
-
         [Test]
         public void Verify_DatabaseConnectionStringExists()
         {
@@ -23,7 +20,6 @@ namespace TourPlanner.Moq
         [Test]
         public void Load_LogsAreLoaded()
         {
-
             var mock = AutoMock.GetLoose();
             mock.Mock<ILogRepository>()
                 .Setup(_ => _.GetLogs())
@@ -53,7 +49,6 @@ namespace TourPlanner.Moq
 
             mock.Mock<ILogRepository>()
                 .Verify(_ => _.Insert(log), Times.Once);
-
         }
 
         [Test]
@@ -98,12 +93,12 @@ namespace TourPlanner.Moq
             {
                 new LogData
                 {
-                    LogName =  "testLog", 
-                    LogDate =  "01.04.1997", 
-                    LogDistance = 1234.56, 
+                    LogName = "testLog",
+                    LogDate = "01.04.1997",
+                    LogDistance = 1234.56,
                     LogTotalTime = "20:22:33",
-                    LogRating = 2, 
-                    LogType = 1, 
+                    LogRating = 2,
+                    LogType = 1,
                     LogReport = "testLogReport"
                 }
             };
@@ -111,4 +106,3 @@ namespace TourPlanner.Moq
         }
     }
 }
-

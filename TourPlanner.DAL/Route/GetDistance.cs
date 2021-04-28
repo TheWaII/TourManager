@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace TourPlanner.BL.Route
+namespace TourPlanner.DAL.Route
 {
     public class GetDistance
     {
@@ -23,7 +23,7 @@ namespace TourPlanner.BL.Route
             }
 
             dynamic json = JObject.Parse(responseString);
-            double distance = json.route.distance * 1.6;
+            double distance = json.route.distance;
 
             return distance;
         }

@@ -1,37 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.Mime;
 using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using TourPlanner.Annotations;
 using TourPlanner.BL;
 using TourPlanner.BL.Database.Tour;
 using TourPlanner.Commands;
 using TourPlanner.Model.Tour;
-using TourPlanner.ViewModels.Tour;
-
 
 namespace TourPlanner.ViewModels
 {
     public class DockPanelViewModel : INotifyPropertyChanged
-    { 
+    {
         public readonly ObservableCollection<TourData> TourCollection = new();
-        public RelayCommand CloseCommand { get; }
-        
+
 
         public DockPanelViewModel()
         {
-            CloseCommand = new RelayCommand((_) =>
-            {
-                ApplicationExit();
-            });
+            CloseCommand = new RelayCommand(_ => { ApplicationExit(); });
         }
+
+        public RelayCommand CloseCommand { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void ApplicationExit()
         {
@@ -51,13 +42,11 @@ namespace TourPlanner.ViewModels
 
                 TourCollection.Add(tourData);
             }
-            
+
             new RemoveMaps(TourCollection);
-            
+
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

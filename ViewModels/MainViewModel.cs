@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using TourPlanner.BL.Database.Log;
-using TourPlanner.Commands;
-using TourPlanner.Model;
-using TourPlanner.ViewModels.Log;
+﻿using TourPlanner.ViewModels.Log;
 using TourPlanner.ViewModels.Tour;
-using TourPlanner.Model.Log;
 
 namespace TourPlanner.ViewModels
 {
     public class MainViewModel
     {
+        public MainViewModel()
+        {
+            DockPanelViewModel = new DockPanelViewModel();
+
+            TourViewModel = new TourViewModel();
+
+            LogViewModel = new LogViewModel();
+
+            BikeLogViewModel = new BikeLogViewModel();
+
+            CarLogViewModel = new CarLogViewModel();
+        }
+
         public DockPanelViewModel DockPanelViewModel { get; set; }
 
         public TourViewModel TourViewModel { get; set; }
@@ -34,20 +37,5 @@ namespace TourPlanner.ViewModels
         public string EditImage => @"..\..\img\icons\edit.png";
 
         public string ReloadImage => @"..\..\img\icons\reload.png";
-
-
-        public MainViewModel()
-        {
-            DockPanelViewModel = new DockPanelViewModel();
-
-            TourViewModel = new TourViewModel();
-
-            LogViewModel = new LogViewModel();
-
-            BikeLogViewModel = new BikeLogViewModel();
-
-            CarLogViewModel = new CarLogViewModel();
-
-        }
     }
 }

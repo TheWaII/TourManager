@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlanner.Model;
+﻿using System.Collections.Generic;
 using TourPlanner.Model.Log;
 
 namespace TourPlanner.DAL.Log
@@ -16,6 +12,5 @@ namespace TourPlanner.DAL.Log
         void Update(LogData logs);
 
         void Delete(LogData logs);
-
     }
 }

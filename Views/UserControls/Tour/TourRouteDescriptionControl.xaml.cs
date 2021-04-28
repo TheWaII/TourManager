@@ -3,7 +3,7 @@
 namespace TourPlanner.Views.UserControls.Tour
 {
     /// <summary>
-    /// Interaction logic for TourRouteDescriptionControl.xaml
+    ///     Interaction logic for TourRouteDescriptionControl.xaml
     /// </summary>
     public partial class TourRouteDescriptionControl : UserControl
     {

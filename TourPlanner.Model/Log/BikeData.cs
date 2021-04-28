@@ -13,6 +13,5 @@
         public int AvgSpeed { get; set; }
 
         public int CaloriesBurnt { get; set; }
-
     }
 }

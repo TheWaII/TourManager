@@ -1,134 +1,151 @@
 ﻿<UserControl x:Class="TourPlanner.Views.UserControls.Log.EditLogControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TourPlanner.Views.UserControls.Log"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TourPlanner.ViewModels"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="200" Height="100*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition MinHeight="200" Height="100*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" ItemsSource="{Binding (vm:MainViewModel.LogViewModel).LogCollection}" DisplayMemberPath="LogName"
-                 SelectedItem="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData}"/>
+        <ListBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="4"
+                 ItemsSource="{Binding (vm:MainViewModel.LogViewModel).LogCollection}" DisplayMemberPath="LogName"
+                 SelectedItem="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData}" />
 
         <!--Main-->
         <Grid Row="0" Column="1">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Name: "/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Date: "/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Distance: "/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Total time: "/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Rating: "/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Report: "/>
+            <Label Grid.Row="0" Grid.Column="0" Content="Name: " />
+            <Label Grid.Row="1" Grid.Column="0" Content="Date: " />
+            <Label Grid.Row="2" Grid.Column="0" Content="Distance: " />
+            <Label Grid.Row="3" Grid.Column="0" Content="Total time: " />
+            <Label Grid.Row="4" Grid.Column="0" Content="Rating: " />
+            <Label Grid.Row="5" Grid.Column="0" Content="Report: " />
 
 
-            <TextBox Grid.Row="0" Grid.Column="1" Name="TbxLogName" Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogName}"/>
-            <DatePicker Grid.Row="1" Grid.Column="1" Name="DpkLogDate" SelectedDate="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDate}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxDistance" Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDistance}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="TbxLogName"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogName}" />
+            <DatePicker Grid.Row="1" Grid.Column="1" Name="DpkLogDate"
+                        SelectedDate="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDate}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxDistance"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDistance}" />
 
-            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxTime" Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogTotalTime}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxTime"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogTotalTime}" />
 
-            <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Maximum="5" Minimum="1" Value="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogRating}"/>
+            <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Maximum="5" Minimum="1"
+                                Value="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogRating}" />
 
             <RichTextBox Grid.Row="5" Grid.Column="1" Name="RbxLogReport" Height="50">
                 <FlowDocument>
                     <Paragraph>
-                        <Run Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogReport, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Run
+                            Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogReport, UpdateSourceTrigger=PropertyChanged}" />
                     </Paragraph>
                 </FlowDocument>
             </RichTextBox>
         </Grid>
 
         <!--Bike Tour-->
-        <Grid Grid.Row="1" Grid.Column="1" Name="BikeTour" Visibility="{Binding (vm:MainViewModel.LogViewModel).EditBikeVisibility}">
+        <Grid Grid.Row="1" Grid.Column="1" Name="BikeTour"
+              Visibility="{Binding (vm:MainViewModel.LogViewModel).EditBikeVisibility}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Peak heart rate: "/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Lowest heart rate: "/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Average heart rate: "/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Average speed: "/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Calories burnt: "/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Peak heart rate: " />
+            <Label Grid.Row="2" Grid.Column="0" Content="Lowest heart rate: " />
+            <Label Grid.Row="3" Grid.Column="0" Content="Average heart rate: " />
+            <Label Grid.Row="4" Grid.Column="0" Content="Average speed: " />
+            <Label Grid.Row="5" Grid.Column="0" Content="Calories burnt: " />
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxPeakHeartRate" Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.PeakHeartRate}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxLowestHeartRate" Text ="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.LowestHeartRate}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxAvgHeartRate" Text ="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgHeartRate}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxAvgSpeed" Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgSpeed}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Name="TbxCaloriesBurnt" Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.CaloriesBurnt}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxPeakHeartRate"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.PeakHeartRate}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxLowestHeartRate"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.LowestHeartRate}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxAvgHeartRate"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgHeartRate}" />
+            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxAvgSpeed"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgSpeed}" />
+            <TextBox Grid.Row="5" Grid.Column="1" Name="TbxCaloriesBurnt"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.CaloriesBurnt}" />
         </Grid>
 
         <!--Car Tour-->
-        <Grid Grid.Row="1" Grid.Column="1" Name="CarTour" Visibility="{Binding (vm:MainViewModel.LogViewModel).EditCarVisibility}">
+        <Grid Grid.Row="1" Grid.Column="1" Name="CarTour"
+              Visibility="{Binding (vm:MainViewModel.LogViewModel).EditCarVisibility}">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="Max speed: " Grid.ColumnSpan="2"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Average speed: " Grid.ColumnSpan="2"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Fuel used: " Grid.ColumnSpan="2"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Fuel cost: " Grid.ColumnSpan="2"/>
-            <Label Grid.Row="5" Grid.Column="0" Content="Caught speeding: " Grid.ColumnSpan="2"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Max speed: " Grid.ColumnSpan="2" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Average speed: " Grid.ColumnSpan="2" />
+            <Label Grid.Row="3" Grid.Column="0" Content="Fuel used: " Grid.ColumnSpan="2" />
+            <Label Grid.Row="4" Grid.Column="0" Content="Fuel cost: " Grid.ColumnSpan="2" />
+            <Label Grid.Row="5" Grid.Column="0" Content="Caught speeding: " Grid.ColumnSpan="2" />
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxMaxSpeed" Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.MaxSpeed}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxAvgSped" Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.AvgSpeed}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxFuelUsed" Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelUsed}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxFuelCost" Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelCost}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="TbxMaxSpeed"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.MaxSpeed}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Name="TbxAvgSped"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.AvgSpeed}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Name="TbxFuelUsed"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelUsed}" />
+            <TextBox Grid.Row="4" Grid.Column="1" Name="TbxFuelCost"
+                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelCost}" />
 
             <StackPanel Grid.Row="5" Grid.Column="1">
-                <RadioButton Content="Yes" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.Yes}"/>
-                <RadioButton Content="No" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.No}"/>
+                <RadioButton Content="Yes" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.Yes}" />
+                <RadioButton Content="No" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.No}" />
             </StackPanel>
         </Grid>
 
-        <Button Grid.Row="2" Grid.Column="1" Content="Edit" Command="{Binding (vm:MainViewModel.LogViewModel).EditLog}"></Button>
+        <Button Grid.Row="2" Grid.Column="1" Content="Edit" Command="{Binding (vm:MainViewModel.LogViewModel).EditLog}" />
     </Grid>
 </UserControl>

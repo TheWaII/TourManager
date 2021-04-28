@@ -1,19 +1,16 @@
-﻿using Autofac.Extras.Moq;
+﻿using System.Collections.ObjectModel;
+using System.Configuration;
+using Autofac.Extras.Moq;
 using Moq;
 using NUnit.Framework;
-using System.Collections.ObjectModel;
-using System.Configuration;
 using TourPlanner.BL.Database.Tour;
-using TourPlanner.DAL;
 using TourPlanner.DAL.Tour;
-using TourPlanner.Model;
 using TourPlanner.Model.Tour;
 
 namespace TourPlanner.moq
 {
     public class TourTest
     {
-
         [Test]
         public void Verify_DatabaseConnectionStringExists()
         {
@@ -52,7 +49,6 @@ namespace TourPlanner.moq
 
             mock.Mock<ITourRepository>()
                 .Verify(_ => _.Insert(tour), Times.Once);
-
         }
 
         [Test]
@@ -102,7 +98,7 @@ namespace TourPlanner.moq
                     TourDestination = "testDestination",
                     TourDistance = 123.45,
                     TourDescription = "testDescription",
-                    TourRoute = "testSourceDestination",
+                    TourRoute = "testSourceDestination"
                 }
             };
             return output;

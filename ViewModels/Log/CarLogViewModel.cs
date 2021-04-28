@@ -1,20 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using TourPlanner.Annotations;
 
 namespace TourPlanner.ViewModels.Log
 {
     public class CarLogViewModel : INotifyPropertyChanged
     {
+        private int _averageSpeed;
+
+        private int _caloriesBurnt;
+
+        private bool _caughtSpeeding;
+
+        private decimal _fuelCost;
+
+        private int _fuelUsed;
 
 
         private int _maxSpeed;
+
+        private bool _no = true;
+
+        private bool _yes;
 
         public int MaxSpeed
         {
@@ -27,8 +34,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private int _averageSpeed;
-
         public int AverageSpeed
         {
             get => _averageSpeed;
@@ -39,8 +44,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(AverageSpeed));
             }
         }
-
-        private int _fuelUsed;
 
         public int FuelUsed
         {
@@ -53,8 +56,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private decimal _fuelCost;
-
         public decimal FuelCost
         {
             get => _fuelCost;
@@ -65,8 +66,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(FuelCost));
             }
         }
-
-        private int _caloriesBurnt;
 
         public int CaloriesBurnt
         {
@@ -79,8 +78,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private bool _caughtSpeeding;
-
         public bool CaughtSpeeding
         {
             get => _caughtSpeeding;
@@ -91,8 +88,6 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        private bool _yes;
-
         public bool Yes
         {
             get => _yes;
@@ -102,8 +97,6 @@ namespace TourPlanner.ViewModels.Log
                 OnPropertyChanged(nameof(Yes));
             }
         }
-
-        private bool _no = true;
 
         public bool No
         {

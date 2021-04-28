@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TourPlanner.Model.Log
+﻿namespace TourPlanner.Model.Log
 {
     public class CarData
     {
@@ -18,6 +13,5 @@ namespace TourPlanner.Model.Log
         public decimal FuelCost { get; set; }
 
         public bool CaughtSpeeding { get; set; }
-
     }
 }

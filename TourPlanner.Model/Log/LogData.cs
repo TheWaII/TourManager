@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TourPlanner.Model.Log
+﻿namespace TourPlanner.Model.Log
 {
     public class LogData
     {
@@ -26,6 +21,5 @@ namespace TourPlanner.Model.Log
         public string LogReport { get; set; }
 
         public string BikeCar { get; set; }
-
     }
 }

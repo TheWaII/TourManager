@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac.Extras.Moq;
 using Moq;
 using NUnit.Framework;
 using TourPlanner.BL.Database.Log;
-using TourPlanner.DAL.Log;
 using TourPlanner.DAL.Log.Car;
 using TourPlanner.Model.Log;
 
@@ -55,7 +49,6 @@ namespace TourPlanner.Moq
 
             mock.Mock<ICarRepository>()
                 .Verify(_ => _.Insert(car), Times.Once);
-
         }
 
         [Test]

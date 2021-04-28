@@ -3,7 +3,7 @@
 namespace TourPlanner.Views.UserControls.Log
 {
     /// <summary>
-    /// Interaction logic for LogControl.xaml
+    ///     Interaction logic for LogControl.xaml
     /// </summary>
     public partial class LogControl : UserControl
     {

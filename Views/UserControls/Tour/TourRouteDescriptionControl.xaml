@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="TourPlanner.Views.UserControls.Tour.TourRouteDescriptionControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm ="clr-namespace:TourPlanner.ViewModels"
+             xmlns:vm="clr-namespace:TourPlanner.ViewModels"
              xmlns:tour="clr-namespace:TourPlanner.ViewModels.Tour"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <UserControl.Resources>
-        <tour:TourViewModel x:Key ="TourViewModel"></tour:TourViewModel>
+        <tour:TourViewModel x:Key="TourViewModel" />
     </UserControl.Resources>
     <Grid Width="Auto">
         <TabControl>
@@ -15,30 +15,33 @@
                 <Grid Height="Auto" Width="Auto">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
 
 
                     <DockPanel Grid.Row="0">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="From:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource}"/>
-                            <Label Content="     "/>
-                            <Label Content="To:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination}"/>
-                            <Label Content="     "/>
-                            <Label Content="Distance:"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance}"/>
-                            <Label Content="KM"/>
+                            <Label Content="From:" />
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource}" />
+                            <Label Content="     " />
+                            <Label Content="To:" />
+                            <Label
+                                Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination}" />
+                            <Label Content="     " />
+                            <Label Content="Distance:" />
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance}" />
+                            <Label Content="KM" />
                         </StackPanel>
                     </DockPanel>
-                    <Image Grid.Row="1" Source="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.RouteImage, Converter={StaticResource TourViewModel}}" />
+                    <Image Grid.Row="1"
+                           Source="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.RouteImage, Converter={StaticResource TourViewModel}}" />
                 </Grid>
 
             </TabItem>
             <TabItem Header="Description">
-                <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDescription}" Background="Beige"></Label>
+                <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDescription}"
+                       Background="Beige" />
             </TabItem>
         </TabControl>
     </Grid>

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TourPlanner.DAL.Log;
-using TourPlanner.Model;
 using TourPlanner.Model.Log;
 
 namespace TourPlanner.BL.Database.Log
@@ -14,7 +9,9 @@ namespace TourPlanner.BL.Database.Log
     {
         private readonly ILogRepository _iLogRepository = new LogRepository();
 
-        public LogLogic() { }
+        public LogLogic()
+        {
+        }
 
         public LogLogic(ILogRepository iLogRepository)
         {
@@ -42,7 +39,7 @@ namespace TourPlanner.BL.Database.Log
 
             var getLogs = _iLogRepository.GetLogs();
 
-            foreach (var logs in getLogs.ToList().Select(variable => new LogData()
+            foreach (var logs in getLogs.ToList().Select(variable => new LogData
             {
                 LogId = variable.LogId,
                 TourId = variable.TourId,
@@ -54,9 +51,7 @@ namespace TourPlanner.BL.Database.Log
                 LogType = variable.LogType,
                 LogReport = variable.LogReport
             }))
-            {
                 logCollection.Add(logs);
-            }
 
             return logCollection;
         }

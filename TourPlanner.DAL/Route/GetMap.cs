@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Net;
-using System.Net.Mime;
 
-namespace TourPlanner.BL.Route
+namespace TourPlanner.DAL.Route
 {
     public class GetMap
     {
@@ -14,9 +12,7 @@ namespace TourPlanner.BL.Route
             using var wc = new WebClient();
             var url = _mapApiStrings.MapUrl(source, destination);
 
-
             wc.DownloadFileAsync(new Uri(url), @"../../img/route/" + source + "_" + destination + ".jpeg");
-            
         }
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using Dapper;
-using DapperQueryBuilder;
 using Npgsql;
-using TourPlanner.Model;
-using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 
 namespace TourPlanner.DAL.Tour
@@ -17,29 +12,39 @@ namespace TourPlanner.DAL.Tour
         {
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
 
-            return dbConnection.Query<TourData>("SELECT TourId, TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute from Tours");
-
+            return dbConnection.Query<TourData>(
+                "SELECT TourId, TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute from Tours");
         }
 
         public void Insert(TourData tourData)
         {
-
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
 
-            dbConnection.Execute("INSERT INTO Tours(TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute) VALUES(@TourName, @TourSource, @TourDestination, @TourDistance, @TourDescription, @TourRoute)",
-                    new { tourData.TourName, tourData.TourSource, tourData.TourDestination, tourData.TourDistance, tourData.TourDescription, tourData.TourRoute });
+            if (tourData == null) return;
+
+            dbConnection.Execute(
+                "INSERT INTO Tours(TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute) VALUES(@TourName, @TourSource, @TourDestination, @TourDistance, @TourDescription, @TourRoute)",
+                new
+                {
+                    tourData.TourName, tourData.TourSource, tourData.TourDestination, tourData.TourDistance,
+                    tourData.TourDescription, tourData.TourRoute
+                });
         }
 
         public void Update(TourData tourData)
         {
-
             using IDbConnection dbConnection = new NpgsqlConnection(Connection.ConnectionString);
+
+            if (tourData == null) return;
 
             dbConnection.Execute("UPDATE Tours " +
                                  "SET TourName = @TourName, TourSource = @TourSource, TourDestination = @TourDestination, TourDistance = @TourDistance, TourDescription = @TourDescription, TourRoute = @TourRoute" +
                                  " WHERE TourId = @TourId",
-                new { tourData.TourId, tourData.TourName, tourData.TourSource, tourData.TourDestination, tourData.TourDistance, tourData.TourDescription, tourData.TourRoute });
-
+                new
+                {
+                    tourData.TourId, tourData.TourName, tourData.TourSource, tourData.TourDestination,
+                    tourData.TourDistance, tourData.TourDescription, tourData.TourRoute
+                });
         }
 
         public void Delete(TourData tourData)
@@ -49,17 +54,16 @@ namespace TourPlanner.DAL.Tour
             if (tourData == null) return;
 
             dbConnection.Execute("DELETE FROM BikeTour WHERE LogId IN (select LogId from Logs WHERE TourId = @TourId)",
-                new {tourData.TourId });
+                new {tourData.TourId});
 
             dbConnection.Execute("DELETE FROM CarTour WHERE LogId IN (SELECT LogId from Logs WHERE TourId = @TourId)",
                 new {tourData.TourId});
 
             dbConnection.Execute("DELETE FROM tours WHERE TourId = @TourId",
-                new { tourData.TourId });
+                new {tourData.TourId});
 
             dbConnection.Execute("DELETE FROM LOGS WHERE TourId = @TourId",
-                new { tourData.TourId });
-            
+                new {tourData.TourId});
         }
     }
 }

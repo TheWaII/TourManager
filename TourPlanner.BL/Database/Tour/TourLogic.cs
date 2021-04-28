@@ -9,7 +9,9 @@ namespace TourPlanner.BL.Database.Tour
     {
         private readonly ITourRepository _iTourRepository = new TourRepository();
 
-        public TourLogic() { }
+        public TourLogic()
+        {
+        }
 
         public TourLogic(ITourRepository iTourRepository)
         {
@@ -32,9 +34,7 @@ namespace TourPlanner.BL.Database.Tour
                 TourDescription = variable.TourDescription,
                 TourRoute = variable.TourRoute
             }))
-            {
                 tourCollection.Add(tours);
-            }
 
             return tourCollection;
         }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autofac.Extras.Moq;
 using Moq;
 using NUnit.Framework;
 using TourPlanner.BL.Database.Log;
-using TourPlanner.DAL.Log;
 using TourPlanner.DAL.Log.Bike;
 using TourPlanner.Model.Log;
 
@@ -55,7 +49,6 @@ namespace TourPlanner.Moq
 
             mock.Mock<IBikeRepository>()
                 .Verify(_ => _.Insert(bike), Times.Once);
-
         }
 
         [Test]
@@ -100,11 +93,11 @@ namespace TourPlanner.Moq
             {
                 new BikeData
                 {
-                    LogId = 1, 
-                    PeakHeartRate = 140, 
-                    LowestHeartRate = 70, 
-                    AvgHeartRate = 100, 
-                    AvgSpeed = 20, 
+                    LogId = 1,
+                    PeakHeartRate = 140,
+                    LowestHeartRate = 70,
+                    AvgHeartRate = 100,
+                    AvgSpeed = 20,
                     CaloriesBurnt = 1000
                 }
             };

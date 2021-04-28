@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TourPlanner.DAL.Log.Car;
 using TourPlanner.Model.Log;
 
@@ -13,7 +9,9 @@ namespace TourPlanner.BL.Database.Log
     {
         private readonly ICarRepository _iCarRepository = new CarRepository();
 
-        public CarLogic() { }
+        public CarLogic()
+        {
+        }
 
         public CarLogic(ICarRepository iCarRepository)
         {
@@ -41,18 +39,16 @@ namespace TourPlanner.BL.Database.Log
 
             var getCar = _iCarRepository.GetCars();
 
-            foreach (var car in getCar.ToList().Select(variable => new CarData()
+            foreach (var car in getCar.ToList().Select(variable => new CarData
             {
                 LogId = variable.LogId,
                 MaxSpeed = variable.MaxSpeed,
                 AvgSpeed = variable.AvgSpeed,
-                FuelUsed = variable.FuelUsed, 
+                FuelUsed = variable.FuelUsed,
                 FuelCost = variable.FuelCost,
                 CaughtSpeeding = variable.CaughtSpeeding
             }))
-            {
                 carCollection.Add(car);
-            }
 
             return carCollection;
         }
