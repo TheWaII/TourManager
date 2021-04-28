@@ -41,6 +41,7 @@ namespace TourPlanner.ViewModels
                 };
 
                 TourCollection.Add(tourData);
+
             }
 
             new RemoveMaps(TourCollection);

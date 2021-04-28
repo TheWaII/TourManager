@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -14,11 +15,15 @@ using TourPlanner.BL.Route;
 using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
+using System.Reflection;
 
 namespace TourPlanner.ViewModels.Tour
 {
     public class TourViewModel : INotifyPropertyChanged, IValueConverter
     {
+
+
+
         #region Constructor
 
         public TourViewModel()
@@ -86,6 +91,7 @@ namespace TourPlanner.ViewModels.Tour
                     TourRoute = item.TourRoute
                 };
 
+
                 _tourCollection.Add(tourData);
             }
         }
@@ -104,7 +110,6 @@ namespace TourPlanner.ViewModels.Tour
             };
 
             dbTourLogic.InsertTours(tour);
-
 
             Name = string.Empty;
             Source = string.Empty;
@@ -488,7 +493,6 @@ namespace TourPlanner.ViewModels.Tour
         public bool CanUpdateValidate => !string.IsNullOrWhiteSpace(Source) && !string.IsNullOrWhiteSpace(Destination);
 
         #endregion
-
 
         #region Logs
 

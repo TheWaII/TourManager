@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -28,6 +29,7 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located

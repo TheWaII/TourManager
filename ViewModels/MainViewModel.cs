@@ -1,4 +1,6 @@
-﻿using TourPlanner.ViewModels.Log;
+﻿using System.Reflection;
+using log4net;
+using TourPlanner.ViewModels.Log;
 using TourPlanner.ViewModels.Tour;
 
 namespace TourPlanner.ViewModels
@@ -16,6 +18,7 @@ namespace TourPlanner.ViewModels
             BikeLogViewModel = new BikeLogViewModel();
 
             CarLogViewModel = new CarLogViewModel();
+
         }
 
         public DockPanelViewModel DockPanelViewModel { get; set; }
