@@ -1,0 +1,23 @@
+﻿.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.th, .td {
+    text-align: left;
+    padding-right: 10px;
+    padding: 5px;
+    font-size: 13px;
+}
+
+
+.tr:nth-child(odd) {
+    border-style: groove;
+    background-color: gainsboro;
+    border-color: black;
+}
+
+.th {
+    background-color: darkseagreen;
+    color: white;
+}

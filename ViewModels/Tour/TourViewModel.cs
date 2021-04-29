@@ -16,6 +16,7 @@ using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 using System.Reflection;
+using TourPlanner.BL.Reporting;
 
 namespace TourPlanner.ViewModels.Tour
 {
@@ -46,6 +47,8 @@ namespace TourPlanner.ViewModels.Tour
 
             DeleteLogCommand = new RelayCommand(o => DeleteLog());
 
+            SaveTourReport = new RelayCommand(o => CreateTourReport());
+
             WindowExit = new RelayCommand(o => ExitWindow());
 
             RefreshLogCommand = new RelayCommand(o => RefreshLogList());
@@ -75,6 +78,7 @@ namespace TourPlanner.ViewModels.Tour
 
         public void RefreshTourList()
         {
+
             _tourCollection.Clear();
 
             var dbTourLogic = new TourLogic();
@@ -90,7 +94,6 @@ namespace TourPlanner.ViewModels.Tour
                     TourDistance = item.TourDistance,
                     TourRoute = item.TourRoute
                 };
-
 
                 _tourCollection.Add(tourData);
             }
@@ -473,7 +476,7 @@ namespace TourPlanner.ViewModels.Tour
 
         public RelayCommand AddTourToggle { get; }
 
-
+        public RelayCommand SaveTourReport { get; }
         public RelayCommand RefreshLogCommand { get; }
 
         public ICommand WindowLoaded { get; set; }
@@ -539,47 +542,47 @@ namespace TourPlanner.ViewModels.Tour
             switch (SelectedDataForLog.LogType)
             {
                 case 1:
-                {
-                    var dbBikeLogic = new BikeLogic();
-                    foreach (var bikeItem in dbBikeLogic.LoadBikes())
                     {
-                        var bikeData = new BikeData
+                        var dbBikeLogic = new BikeLogic();
+                        foreach (var bikeItem in dbBikeLogic.LoadBikes())
                         {
-                            LogId = bikeItem.LogId,
-                            AvgHeartRate = bikeItem.AvgHeartRate,
-                            AvgSpeed = bikeItem.AvgSpeed,
-                            CaloriesBurnt = bikeItem.CaloriesBurnt,
-                            LowestHeartRate = bikeItem.LowestHeartRate,
-                            PeakHeartRate = bikeItem.PeakHeartRate
-                        };
+                            var bikeData = new BikeData
+                            {
+                                LogId = bikeItem.LogId,
+                                AvgHeartRate = bikeItem.AvgHeartRate,
+                                AvgSpeed = bikeItem.AvgSpeed,
+                                CaloriesBurnt = bikeItem.CaloriesBurnt,
+                                LowestHeartRate = bikeItem.LowestHeartRate,
+                                PeakHeartRate = bikeItem.PeakHeartRate
+                            };
 
-                        if (bikeData.LogId == SelectedDataForLog.LogId)
-                            _bikeCollection.Add(bikeData);
+                            if (bikeData.LogId == SelectedDataForLog.LogId)
+                                _bikeCollection.Add(bikeData);
+                        }
+
+                        break;
                     }
-
-                    break;
-                }
                 case 2:
-                {
-                    var dbCarLogic = new CarLogic();
-                    foreach (var carItem in dbCarLogic.LoadCars())
                     {
-                        var carData = new CarData
+                        var dbCarLogic = new CarLogic();
+                        foreach (var carItem in dbCarLogic.LoadCars())
                         {
-                            LogId = carItem.LogId,
-                            AvgSpeed = carItem.AvgSpeed,
-                            CaughtSpeeding = carItem.CaughtSpeeding,
-                            FuelCost = carItem.FuelCost,
-                            FuelUsed = carItem.FuelUsed,
-                            MaxSpeed = carItem.MaxSpeed
-                        };
+                            var carData = new CarData
+                            {
+                                LogId = carItem.LogId,
+                                AvgSpeed = carItem.AvgSpeed,
+                                CaughtSpeeding = carItem.CaughtSpeeding,
+                                FuelCost = carItem.FuelCost,
+                                FuelUsed = carItem.FuelUsed,
+                                MaxSpeed = carItem.MaxSpeed
+                            };
 
-                        if (carData.LogId == SelectedDataForLog.LogId)
-                            _carCollection.Add(carData);
+                            if (carData.LogId == SelectedDataForLog.LogId)
+                                _carCollection.Add(carData);
+                        }
+
+                        break;
                     }
-
-                    break;
-                }
             }
         }
 
@@ -603,6 +606,17 @@ namespace TourPlanner.ViewModels.Tour
             dbLogLogic.DeleteLogs(SelectedDataForLog);
 
             RefreshLogList();
+        }
+
+        public void CreateTourReport()
+        {
+            var rep = new Reporting();
+            rep.CreatePdf(SelectedTourData.TourId);
+        }
+
+        public void CreateTourStatistics()
+        {
+
         }
 
         #endregion

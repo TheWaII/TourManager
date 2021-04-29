@@ -40,5 +40,6 @@ namespace TourPlanner.ViewModels
         public string EditImage => @"..\..\img\icons\edit.png";
 
         public string ReloadImage => @"..\..\img\icons\reload.png";
+        public string SaveImage => @"..\..\img\icons\save.png";
     }
 }
