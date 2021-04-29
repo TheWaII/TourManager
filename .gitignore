@@ -365,3 +365,6 @@ FodyWeavers.xsd
 #config
 App.config
 TourPlanner.moq/App.config
+
+#Report
+Report/
