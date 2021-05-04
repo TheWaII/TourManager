@@ -100,7 +100,11 @@ namespace TourPlanner.BL.Reporting
             stringBuilder.Append("<img src='" + imagePath + "' style='width:100%; height:100%'>");
             stringBuilder.Append("</div>");
 
+<<<<<<< Updated upstream
             //Log
+=======
+            //unspecified
+>>>>>>> Stashed changes
             var logToPrint = logList.Where(data => data.TourId == tourId).ToList();
 
             stringBuilder.Append("<br>");
@@ -132,8 +136,13 @@ namespace TourPlanner.BL.Reporting
             }
 
             stringBuilder.Append("<br><br><br>");
+<<<<<<< Updated upstream
 
 
+=======
+                
+            //bike
+>>>>>>> Stashed changes
             if (logToPrint.Any(i => i.LogType == 1))
             {
                 stringBuilder.Append("<table class='table'><caption><EM> Bike </EM> </caption>");
@@ -182,7 +191,11 @@ namespace TourPlanner.BL.Reporting
 
             stringBuilder.Append("<br><br><br>");
 
+<<<<<<< Updated upstream
 
+=======
+            //car
+>>>>>>> Stashed changes
             if (logToPrint.Any(i => i.LogType == 2))
             {
                 stringBuilder.Append("<table class='table'><caption><EM> Car </EM> </caption>");

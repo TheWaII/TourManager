@@ -376,7 +376,9 @@ namespace TourPlanner.ViewModels.Tour
         {
             get
             {
-                return SearchText == null ? TourCollection : TourCollection.Where(x => x.TourName.Contains(SearchText));
+                //return SearchText == null ? TourCollection : TourCollection.Where(x => x.TourName.Contains(SearchText));
+                var tl = new TourLogic();
+                return tl.MyFilteredItems(SearchText, TourCollection);
             }
         }
 

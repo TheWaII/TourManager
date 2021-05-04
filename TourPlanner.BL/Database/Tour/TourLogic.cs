@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TourPlanner.DAL.Tour;
 using TourPlanner.Model.Tour;
@@ -37,6 +38,12 @@ namespace TourPlanner.BL.Database.Tour
                 tourCollection.Add(tours);
 
             return tourCollection;
+        }
+
+        public IEnumerable<TourData> MyFilteredItems(string searchText, IEnumerable<TourData> tourCollection)
+        {
+
+            return searchText == null ? tourCollection : tourCollection.Where(x => x.TourName.Contains(searchText));
         }
 
         public void InsertTours(TourData tourData)
