@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web;
+using System.Windows;
 using iText.Html2pdf;
+using iText.Kernel.Pdf;
+using Microsoft.Win32;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
 using TourPlanner.Model.Log;
@@ -34,11 +37,34 @@ namespace TourPlanner.BL.Reporting
             var path = "../../Report/" + file + "/" + file;
 
             var htmlFile = path + ".html";
-            var pdfFile = path + ".pdf";
+
+            var saveFileDialog = new SaveFileDialog { Filter = "PDF (*.pdf)|*.pdf", FileName = file };
+
+            saveFileDialog.ShowDialog();
+
+            var dialogResult = MessageBox.Show("Do you want to create a statistic report?" ,"Message", MessageBoxButton.YesNo);
+
+            switch (dialogResult)
+            {
+                case MessageBoxResult.Yes:
+                    var stat = new Statistic();
+                    stat.CreateStatistic(tourId);
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                case MessageBoxResult.None:
+                    break;
+                case MessageBoxResult.OK:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
             HtmlConverter.ConvertToPdf(
                 new FileInfo(htmlFile),
-                new FileInfo(pdfFile));
+                new FileInfo(Path.GetFullPath(saveFileDialog.FileName)));
 
             File.Delete(htmlFile);
         }
@@ -136,7 +162,7 @@ namespace TourPlanner.BL.Reporting
             stringBuilder.Append("<br><br><br>");
 
 
-                
+
             //bike
             if (logToPrint.Any(i => i.LogType == 1))
             {

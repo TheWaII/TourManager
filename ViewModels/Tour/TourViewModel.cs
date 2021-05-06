@@ -16,6 +16,7 @@ using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 using System.Reflection;
+using TourPlanner.BL.ImportExport;
 using TourPlanner.BL.Reporting;
 
 namespace TourPlanner.ViewModels.Tour
@@ -97,6 +98,12 @@ namespace TourPlanner.ViewModels.Tour
 
                 _tourCollection.Add(tourData);
             }
+
+            var export = new Export();
+
+            export.CreateJson(new TourData(1, "test", "vienna", "berlin", 123.234, "teastsd", "viennaberlin"),
+                new LogData(), new BikeData(), new CarData());
+
         }
 
         public void SaveChanges()
@@ -614,11 +621,6 @@ namespace TourPlanner.ViewModels.Tour
         {
             var rep = new Reporting();
             rep.CreatePdf(SelectedTourData.TourId);
-        }
-
-        public void CreateTourStatistics()
-        {
-
         }
 
         #endregion
