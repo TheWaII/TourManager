@@ -167,6 +167,7 @@
     <Compile Include="Database\Log\LogLogic.cs" />
     <Compile Include="Database\Tour\TourLogic.cs" />
     <Compile Include="ImportExport\Export.cs" />
+    <Compile Include="ImportExport\Import.cs" />
     <Compile Include="RemoveMaps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reporting\Reporting.cs" />

@@ -50,10 +50,14 @@ namespace TourPlanner.ViewModels.Tour
 
             SaveTourReport = new RelayCommand(o => CreateTourReport());
 
-            WindowExit = new RelayCommand(o => ExitWindow());
+            //WindowExit = new RelayCommand(o => ExitWindow());
+
+            RefreshTourCommand = new RelayCommand(o => RefreshTourList());
 
             RefreshLogCommand = new RelayCommand(o => RefreshLogList());
         }
+
+        public RelayCommand RefreshTourCommand { get; set; }
 
         #endregion
 
@@ -98,12 +102,6 @@ namespace TourPlanner.ViewModels.Tour
 
                 _tourCollection.Add(tourData);
             }
-
-            var export = new Export();
-
-            export.CreateJson(new TourData(1, "test", "vienna", "berlin", 123.234, "teastsd", "viennaberlin"),
-                new LogData(), new BikeData(), new CarData());
-
         }
 
         public void SaveChanges()
@@ -222,10 +220,10 @@ namespace TourPlanner.ViewModels.Tour
             RefreshTourList();
         }
 
-        private void ExitWindow()
-        {
-            new RemoveMaps(TourCollection);
-        }
+        //private void ExitWindow()
+        //{
+        //    new RemoveMaps(TourCollection);
+        //}
 
 
         #region Properties

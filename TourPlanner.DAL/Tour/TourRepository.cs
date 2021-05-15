@@ -46,9 +46,10 @@ namespace TourPlanner.DAL.Tour
             try
             {
                 dbConnection.Execute(
-                    "INSERT INTO Tours(TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute) VALUES(@TourName, @TourSource, @TourDestination, @TourDistance, @TourDescription, @TourRoute)",
+                    "INSERT INTO Tours(TourId, TourName, TourSource, TourDestination, TourDistance, TourDescription, TourRoute) VALUES(@TourId, @TourName, @TourSource, @TourDestination, @TourDistance, @TourDescription, @TourRoute)",
                     new
                     {
+                        tourData.TourId,
                         tourData.TourName,
                         tourData.TourSource,
                         tourData.TourDestination,
