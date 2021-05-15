@@ -212,7 +212,6 @@ namespace TourPlanner.BL.Reporting
 
             stringBuilder.Append("<br><br><br>");
 
-
             //car
             if (logToPrint.Any(i => i.LogType == 2))
             {
