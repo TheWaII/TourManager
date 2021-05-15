@@ -16,6 +16,7 @@ using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 using System.Reflection;
+using TourPlanner.BL.ImportExport;
 using TourPlanner.BL.Reporting;
 
 namespace TourPlanner.ViewModels.Tour
@@ -49,10 +50,14 @@ namespace TourPlanner.ViewModels.Tour
 
             SaveTourReport = new RelayCommand(o => CreateTourReport());
 
-            WindowExit = new RelayCommand(o => ExitWindow());
+            //WindowExit = new RelayCommand(o => ExitWindow());
+
+            RefreshTourCommand = new RelayCommand(o => RefreshTourList());
 
             RefreshLogCommand = new RelayCommand(o => RefreshLogList());
         }
+
+        public RelayCommand RefreshTourCommand { get; set; }
 
         #endregion
 
@@ -215,10 +220,10 @@ namespace TourPlanner.ViewModels.Tour
             RefreshTourList();
         }
 
-        private void ExitWindow()
-        {
-            new RemoveMaps(TourCollection);
-        }
+        //private void ExitWindow()
+        //{
+        //    new RemoveMaps(TourCollection);
+        //}
 
 
         #region Properties
@@ -614,11 +619,6 @@ namespace TourPlanner.ViewModels.Tour
         {
             var rep = new Reporting();
             rep.CreatePdf(SelectedTourData.TourId);
-        }
-
-        public void CreateTourStatistics()
-        {
-
         }
 
         #endregion

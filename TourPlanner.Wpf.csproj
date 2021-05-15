@@ -312,6 +312,15 @@
   <ItemGroup>
     <Resource Include="img\icons\save.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\stack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\bike.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\car.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

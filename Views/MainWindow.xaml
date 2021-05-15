@@ -35,7 +35,7 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" MinWidth="160" MaxWidth="452" />
+            <ColumnDefinition Width="210" MinWidth="200" MaxWidth="452" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -43,8 +43,10 @@
         <DockPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top" HorizontalAlignment="Stretch" Background="BurlyWood">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Open" VerticalAlignment="Top" />
-                    <MenuItem Header="_Export" VerticalAlignment="Stretch" />
+                    <MenuItem Header="_Import" VerticalAlignment="Top"
+                              Command="{Binding DockPanelViewModel.ImportCommand}"/>
+                    <MenuItem Header="_Export" VerticalAlignment="Stretch" 
+                              Command="{Binding DockPanelViewModel.ExportCommand}"/>
                     <Separator />
                     <MenuItem Header="_Close" VerticalAlignment="Stretch"
                               Command="{Binding DockPanelViewModel.CloseCommand}" />
@@ -59,10 +61,29 @@
                                Text="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}" />
 
         <!--Head of AddTour-->
-        <DockPanel Grid.Column="0" Grid.Row="2">
+        <!--<DockPanel Grid.Column="0" Grid.Row="2">
             <Label x:Name="LblTours" Content="Tours" Width="40" DockPanel.Dock="Left" />
             <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right"
                           Command="{Binding TourViewModel.EditTourToggle}" Background="White" BorderThickness="0">
+                <Image Source="{Binding EditImage}" />
+            </ToggleButton>
+            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right"
+                    Command="{Binding TourViewModel.DeleteTourCommand}" Background="White" BorderThickness="0">
+                <Image Source="{Binding MinusImage}" />
+            </Button>
+            <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right"
+                          Command="{Binding TourViewModel.AddTourToggle}" Background="White" BorderThickness="0">
+                <Image Source="{Binding PlusImage}" />
+            </ToggleButton>
+        </DockPanel>-->
+        <DockPanel Grid.Column="0" Grid.Row="2">
+            <Label x:Name="LblTours" Content="Logs:" DockPanel.Dock="Left" />
+            <Button Width="30" Name="BtnRefreshLog" DockPanel.Dock="Right"
+                    Command="{Binding TourViewModel.RefreshTourCommand}" Background="white" BorderThickness="0">
+                <Image Source="{Binding ReloadImage}" />
+            </Button>
+            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right" Background="White" BorderThickness="0"
+                          Command="{Binding TourViewModel.EditTourToggle}">
                 <Image Source="{Binding EditImage}" />
             </ToggleButton>
             <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right"

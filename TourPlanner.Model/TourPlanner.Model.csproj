@@ -78,6 +78,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllData.cs" />
     <Compile Include="Log\BikeData.cs" />
     <Compile Include="Log\CarData.cs" />
     <Compile Include="Log\LogData.cs" />

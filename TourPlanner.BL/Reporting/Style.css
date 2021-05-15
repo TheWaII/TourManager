@@ -21,3 +21,50 @@
     background-color: darkseagreen;
     color: white;
 }
+
+.header img {
+    float: right;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.header h3 {
+    text-align: center;
+}
+
+.header {
+    border-radius: 15px;
+    border: 2px solid darkseagreen;
+    margin-bottom: 10px;
+}
+
+
+.square {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 200px;
+    background-color: cadetblue;
+    float: left;
+}
+
+.triangleRight {
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 25px solid aliceblue;
+    border-left: 50px solid cadetblue;
+    border-bottom: 25px solid aliceblue;
+    float: left;
+}
+
+.text {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 58%;
+    display: inline-block;
+    background-color: aliceblue
+}

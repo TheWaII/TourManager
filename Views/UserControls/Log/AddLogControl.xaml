@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:vm="clr-namespace:TourPlanner.ViewModels">
+             xmlns:vm="clr-namespace:TourPlanner.ViewModels"
+             xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit">
 
     <Grid Background="AntiqueWhite" Height="Auto" Width="Auto">
         <Grid.RowDefinitions>
@@ -41,7 +42,7 @@
         <TextBox Grid.Row="2" Grid.Column="1" Name="TbxDistance"
                  Text="{Binding (vm:MainViewModel.LogViewModel).Distance}" />
 
-        <TextBox Grid.Row="3" Grid.Column="1" Name="TbxTime" Text="{Binding (vm:MainViewModel.LogViewModel).Time}" />
+        <xctk:WatermarkTextBox Grid.Row="3" Grid.Column="1" Name="TbxTime" Text="{Binding (vm:MainViewModel.LogViewModel).Time}" Watermark="HH:mm"/>
 
         <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Maximum="5" Minimum="1"
                             Value="{Binding (vm:MainViewModel.LogViewModel).Rating}" />
