@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TourPlanner.DAL.Log;
 using TourPlanner.Model.Log;
+using TourPlanner.Model.Tour;
 
 namespace TourPlanner.BL.Database.Log
 {
@@ -53,7 +55,19 @@ namespace TourPlanner.BL.Database.Log
             }))
                 logCollection.Add(logs);
 
+            var orderedCollection = logCollection.OrderBy(_ => _.TourId).ThenBy(_ => _.LogName);
+
+            logCollection = new ObservableCollection<LogData>(orderedCollection);
+
             return logCollection;
+        }
+
+
+        public IEnumerable<LogData> MyFilteredItems(string searchText, IEnumerable<LogData> logCollection)
+        {
+            return searchText == null
+                ? logCollection
+                : logCollection.Where(x => x.LogName.Contains(searchText));
         }
     }
 }

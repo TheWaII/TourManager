@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -172,6 +173,7 @@ namespace TourPlanner.ViewModels.Log
 
             get
             {
+
                 var regex = new Regex("[0-9]+:[0-5][0-9]$");
                 return Id != 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) &&
                        !string.IsNullOrWhiteSpace(Time) && Rating != 0 && !string.IsNullOrWhiteSpace(Report) &&
@@ -183,14 +185,19 @@ namespace TourPlanner.ViewModels.Log
         {
             get
             {
-                var regex = new Regex("[0-9]+:[0-5][0-9]$");
+                var regexDate = new Regex("[0-9]+:[0-5][0-9]$");
+
+                //var regexNumber = new Regex("(?<Number>[0-9])");
+
+                //var regexDecimal = new Regex("^-?(?:\\d+|\\d{1,3}(?:,\\d{3})+)?(?:\\.\\d+)?$");
+
                 return SelectedLogData != null &&
                        !string.IsNullOrWhiteSpace(SelectedLogData.LogName) &&
                        !string.IsNullOrWhiteSpace(SelectedLogData.LogDate) &&
                        !string.IsNullOrWhiteSpace(SelectedLogData.LogTotalTime) &&
                        !string.IsNullOrWhiteSpace(SelectedLogData.LogReport) &&
                        SelectedLogData.LogRating != 0 &&
-                       regex.IsMatch(SelectedLogData.LogTotalTime);
+                       regexDate.IsMatch(SelectedLogData.LogTotalTime);
             }
         }
 
@@ -389,7 +396,7 @@ namespace TourPlanner.ViewModels.Log
                 CarLogViewModel.MaxSpeed = 0;
                 CarLogViewModel.AverageSpeed = 0;
                 CarLogViewModel.FuelUsed = 0;
-                CarLogViewModel.FuelCost = 0;
+                CarLogViewModel.FuelCost = "0.0";
                 CarLogViewModel.CaughtSpeeding = false;
             }
 
@@ -525,11 +532,11 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        public void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            var regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
+        //public void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        //{
+        //    var regex = new Regex("[^0-9]+");
+        //    e.Handled = regex.IsMatch(e.Text);
+        //}
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -576,9 +583,9 @@ namespace TourPlanner.ViewModels.Log
         }
 
 
-        private double _distance;
+        private int _distance;
 
-        public double Distance
+        public int Distance
         {
             get => _distance;
 

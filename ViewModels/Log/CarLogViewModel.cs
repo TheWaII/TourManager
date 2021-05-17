@@ -12,10 +12,9 @@ namespace TourPlanner.ViewModels.Log
 
         private bool _caughtSpeeding;
 
-        private decimal _fuelCost;
+        private string _fuelCost;
 
         private int _fuelUsed;
-
 
         private int _maxSpeed;
 
@@ -56,7 +55,7 @@ namespace TourPlanner.ViewModels.Log
             }
         }
 
-        public decimal FuelCost
+        public string FuelCost
         {
             get => _fuelCost;
 

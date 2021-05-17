@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:TourPlanner.ViewModels"
              mc:Ignorable="d">
 
-    <Grid Background="AntiqueWhite" Height="Auto" Width="Auto">
+    <Grid Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Height="Auto" Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -24,25 +24,25 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Tour Name:" Grid.Row="0" Grid.Column="0" />
-        <Label Content="From:" Grid.Row="1" Grid.Column="0" />
-        <Label Content="To:" Grid.Row="2" Grid.Column="0" />
-        <Label Content="Distance (in miles):" Grid.Row="4" Grid.Column="0" />
+        <Label Content="Tour Name:" Grid.Row="0" Grid.Column="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+        <Label Content="From:" Grid.Row="1" Grid.Column="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+        <Label Content="To:" Grid.Row="2" Grid.Column="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+        <Label Content="Distance (in miles):" Grid.Row="4" Grid.Column="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
         <ProgressBar Grid.Row="3" Grid.Column="0"
-                     Background="{Binding (vm:MainViewModel.TourViewModel).ProgressBarColor}" />
-        <Label Content="Description:" Grid.Row="5" Grid.Column="0" />
+                     Background="{Binding (vm:MainViewModel.TourViewModel).ProgressBarColor}"/>
+        <Label Content="Description:" Grid.Row="5" Grid.Column="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
 
         <TextBox x:Name="TbxTitle" Grid.Row="0" Grid.Column="1"
-                 Text="{Binding (vm:MainViewModel.TourViewModel).Name, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding (vm:MainViewModel.TourViewModel).Name, UpdateSourceTrigger=PropertyChanged}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
         <TextBox x:Name="TbxFrom" Grid.Row="1" Grid.Column="1"
-                 Text="{Binding (vm:MainViewModel.TourViewModel).Source, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding (vm:MainViewModel.TourViewModel).Source, UpdateSourceTrigger=PropertyChanged}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
         <TextBox x:Name="TbxTo" Grid.Row="2" Grid.Column="1"
-                 Text="{Binding (vm:MainViewModel.TourViewModel).Destination, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding (vm:MainViewModel.TourViewModel).Destination, UpdateSourceTrigger=PropertyChanged}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
         <TextBox x:Name="TbxTOurDistance" Grid.Row="4" Grid.Column="1"
                  Text="{Binding (vm:MainViewModel.TourViewModel).Distance, UpdateSourceTrigger=PropertyChanged}"
-                 IsEnabled="False" />
+                 IsEnabled="False" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
 
-        <RichTextBox x:Name="RbxDescription" Grid.Row="5" Grid.Column="1">
+        <RichTextBox x:Name="RbxDescription" Grid.Row="5" Grid.Column="1" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
             <FlowDocument>
                 <Paragraph>
                     <Run
@@ -52,7 +52,7 @@
         </RichTextBox>
 
         <Button x:Name="BtnValidate" Grid.Row="3" Grid.Column="1" Content="Validate"
-                Command="{Binding (vm:MainViewModel.TourViewModel).ValidateCommand}" />
+                Command="{Binding (vm:MainViewModel.TourViewModel).ValidateCommand}"/>
         <Button x:Name="BtnAddTour" Grid.Row="6" Grid.Column="1" Content="Add"
                 Command="{Binding (vm:MainViewModel.TourViewModel).AddTourCommand}" />
 

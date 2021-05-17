@@ -38,7 +38,7 @@ namespace TourPlanner.BL.Reporting
                 new FileInfo(file + ".html"),
                 new FileInfo(Path.GetFullPath(saveFileDialog.FileName)));
 
-            //File.Delete(file);
+            File.Delete(file);
         }
 
 

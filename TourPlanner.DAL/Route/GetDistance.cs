@@ -32,7 +32,6 @@ namespace TourPlanner.DAL.Route
             {
                 dynamic json = JObject.Parse(responseString);
                 distance = json.route.distance;
-
             }
             catch (Exception e)
             {

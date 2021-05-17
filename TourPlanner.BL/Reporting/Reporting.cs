@@ -16,7 +16,6 @@ namespace TourPlanner.BL.Reporting
 {
     public class Reporting
     {
-
         public void CreatePdf(int tourId)
         {
             var tourLogic = new TourLogic();
@@ -31,7 +30,6 @@ namespace TourPlanner.BL.Reporting
             var carLogic = new CarLogic();
             var carList = carLogic.LoadCars();
 
-
             var file = TourReport(tourList, logList, bikeList, carList, tourId);
 
             var path = "../../Report/" + file + "/" + file;
@@ -42,7 +40,7 @@ namespace TourPlanner.BL.Reporting
 
             saveFileDialog.ShowDialog();
 
-            var dialogResult = MessageBox.Show("Do you want to create a statistic report?" ,"Message", MessageBoxButton.YesNo);
+            var dialogResult = MessageBox.Show("Do you want to create a statistic report?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             switch (dialogResult)
             {

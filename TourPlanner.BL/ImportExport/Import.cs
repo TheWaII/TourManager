@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using log4net;
 using log4net.Util;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -18,12 +21,27 @@ namespace TourPlanner.BL.ImportExport
 {
     public class Import
     {
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public void ImportJson()
         {
-            var openFileDialog = new OpenFileDialog();
+
+            var openFileDialog = new OpenFileDialog(){ Filter = "JSON (*.json)|*.json" };
+
+            Stream fileStream;
 
             openFileDialog.ShowDialog();
-            var fileStream = openFileDialog.OpenFile();
+
+            try
+            {
+                fileStream = openFileDialog.OpenFile();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No tours selected", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                _logger.Error(e.Message);
+                return;
+            }
 
             var streamReader = new StreamReader(fileStream);
 

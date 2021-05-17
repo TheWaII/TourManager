@@ -10,7 +10,7 @@
 
         public int FuelUsed { get; set; }
 
-        public decimal FuelCost { get; set; }
+        public string FuelCost { get; set; }
 
         public bool CaughtSpeeding { get; set; }
     }

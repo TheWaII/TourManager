@@ -37,13 +37,18 @@ namespace TourPlanner.BL.Database.Tour
             }))
                 tourCollection.Add(tours);
 
+            var orderedCollection = tourCollection.OrderBy(_ => _.TourId);
+
+            tourCollection = new ObservableCollection<TourData>(orderedCollection);
+
             return tourCollection;
         }
 
         public IEnumerable<TourData> MyFilteredItems(string searchText, IEnumerable<TourData> tourCollection)
         {
-
-            return searchText == null ? tourCollection : tourCollection.Where(x => x.TourName.Contains(searchText));
+            return searchText == null
+                ? tourCollection
+                : tourCollection.Where(x => x.TourName.Contains(searchText));
         }
 
         public void InsertTours(TourData tourData)

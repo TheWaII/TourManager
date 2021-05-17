@@ -179,6 +179,7 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\DarkModeViewModel.cs" />
     <Compile Include="ViewModels\Log\LogViewModel.cs" />
     <Compile Include="ViewModels\Log\BikeLogViewModel.cs" />
     <Compile Include="ViewModels\Log\CarLogViewModel.cs" />
@@ -320,6 +321,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\icons\car.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\lightOff.png" />
+    <Resource Include="img\icons\lightOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\editInverted.png" />
+    <Resource Include="img\icons\plusInverted.png" />
+    <Resource Include="img\icons\reloadInverted.png" />
+    <Resource Include="img\icons\saveInverted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\minusInverted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\icons\logoInverted.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

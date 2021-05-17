@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Windows;
 using Dapper;
 using log4net;
 using Npgsql;
@@ -26,7 +27,6 @@ namespace TourPlanner.DAL.Tour
             }
             catch (Exception e)
             {
-
                 Logger.Error(e.Message);
             }
 
@@ -104,7 +104,7 @@ namespace TourPlanner.DAL.Tour
             if (tourData == null)
             {
                 Logger.Error("TourData on Delete returned NULL");
-                Console.WriteLine("test");
+                MessageBox.Show("Please select a Tour to delete.", " ", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -126,8 +126,6 @@ namespace TourPlanner.DAL.Tour
             {
                 Logger.Error(e.Message);
             }
-
-          
         }
     }
 }

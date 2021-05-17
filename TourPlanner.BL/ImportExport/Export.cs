@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Crmf;
@@ -33,8 +34,8 @@ namespace TourPlanner.BL.ImportExport
 
             var json = JsonConvert.SerializeObject(allData, Formatting.Indented);
 
-            File.WriteAllText(saveFileDialog.FileName, json);
 
+            if (saveFileDialog.FileName != string.Empty) File.WriteAllText(saveFileDialog.FileName, json);
         }
     }
 }

@@ -16,6 +16,8 @@ using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using TourPlanner.BL.ImportExport;
 using TourPlanner.BL.Reporting;
 
@@ -83,7 +85,6 @@ namespace TourPlanner.ViewModels.Tour
 
         public void RefreshTourList()
         {
-
             _tourCollection.Clear();
 
             var dbTourLogic = new TourLogic();
@@ -377,13 +378,40 @@ namespace TourPlanner.ViewModels.Tour
             }
         }
 
+        private string _searchTextLog;
+
+        public string SearchTextLog
+        {
+            get => _searchTextLog;
+            set
+            {
+                _searchTextLog = value;
+
+                OnPropertyChanged(nameof(SearchTextLog));
+                OnPropertyChanged(nameof(FilteredLogs));
+            }
+        }
+
         public IEnumerable<TourData> MyFilteredItems
         {
             get
             {
                 //return SearchText == null ? TourCollection : TourCollection.Where(x => x.TourName.Contains(SearchText));
                 var tl = new TourLogic();
-                return tl.MyFilteredItems(SearchText, TourCollection);
+                var sortedList = tl.MyFilteredItems(SearchText, TourCollection);
+
+                return sortedList;
+            }
+        }
+
+        public IEnumerable<LogData> FilteredLogs
+        {
+            get
+            {
+                var ll = new LogLogic();
+                var sortedList = ll.MyFilteredItems(SearchTextLog, LogCollection);
+               
+                return sortedList;
             }
         }
 
@@ -450,9 +478,10 @@ namespace TourPlanner.ViewModels.Tour
                 OnPropertyChanged(nameof(SelectedTourData));
 
                 RefreshLogList();
+                SearchTextLog = "";
+
             }
         }
-
 
         private LogData _selectedDataForLog;
 
@@ -511,8 +540,8 @@ namespace TourPlanner.ViewModels.Tour
             _logCollection.Clear();
             _bikeCollection.Clear();
             _carCollection.Clear();
-            var dbLogLogic = new LogLogic();
 
+            var dbLogLogic = new LogLogic();
 
             if (SelectedTourData == null) return;
             foreach (var item in dbLogLogic.LoadLogs())
@@ -622,6 +651,7 @@ namespace TourPlanner.ViewModels.Tour
         }
 
         #endregion
+
 
         #region ProperteyChangedEventHandler
 

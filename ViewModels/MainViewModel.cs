@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 using log4net;
 using TourPlanner.ViewModels.Log;
 using TourPlanner.ViewModels.Tour;
@@ -19,6 +20,8 @@ namespace TourPlanner.ViewModels
 
             CarLogViewModel = new CarLogViewModel();
 
+            DarkModeViewModel = new DarkModeViewModel();
+
         }
 
         public DockPanelViewModel DockPanelViewModel { get; set; }
@@ -31,16 +34,9 @@ namespace TourPlanner.ViewModels
 
         public CarLogViewModel CarLogViewModel { get; set; }
 
-        public string LogoImage => @"..\..\img\icons\logo.png";
+        public DarkModeViewModel DarkModeViewModel { get; set; }
 
-        public string PlusImage => @"..\..\img\icons\plus.png";
+        
 
-        public string MinusImage => @"..\..\img\icons\minus.png";
-
-        public string EditImage => @"..\..\img\icons\edit.png";
-
-        public string ReloadImage => @"..\..\img\icons\reload.png";
-
-        public string SaveImage => @"..\..\img\icons\save.png";
     }
 }

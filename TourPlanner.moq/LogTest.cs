@@ -95,7 +95,7 @@ namespace TourPlanner.Moq
                 {
                     LogName = "testLog",
                     LogDate = "01.04.1997",
-                    LogDistance = 1234.56,
+                    LogDistance = 1234,
                     LogTotalTime = "20:22:33",
                     LogRating = 2,
                     LogType = 1,

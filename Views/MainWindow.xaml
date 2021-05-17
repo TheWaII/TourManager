@@ -7,11 +7,14 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:log="clr-namespace:TourPlanner.Views.UserControls.Log"
         xmlns:tour="clr-namespace:TourPlanner.Views.UserControls.Tour"
-        Title="Tour-Planner" Height="565" Width="741" MinHeight="800" MinWidth="1020" Icon="{Binding LogoImage}">
+        Title="Tour-Planner" Height="565" Width="741" MinHeight="800" MinWidth="1020" Icon="{Binding DarkModeViewModel.LogoImage}"
+        WindowStartupLocation="CenterScreen"
+        Background="{Binding DarkModeViewModel.ColorLight}">
+
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
-
+    
     <intr:Interaction.Triggers>
         <intr:EventTrigger>
             <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowLoaded}" />
@@ -22,12 +25,13 @@
     </intr:Interaction.Triggers>
 
 
+
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="23" />
             <RowDefinition Height="28" />
-            <RowDefinition Height="Auto" MinHeight="200" MaxHeight="600" />
+            <RowDefinition Height="Auto" MinHeight="200" MaxHeight="400" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="28" />
             <RowDefinition Height="Auto" />
@@ -35,70 +39,79 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210" MinWidth="200" MaxWidth="452" />
+            <ColumnDefinition Width="210" MinWidth="200" MaxWidth="500" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+
         <!--DockPanel-->
-        <DockPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" Width="Auto" Grid.ColumnSpan="2">
-            <Menu DockPanel.Dock="Top" HorizontalAlignment="Stretch" Background="BurlyWood">
-                <MenuItem Header="_File">
+
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Background="{Binding DarkModeViewModel.Header}">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+            <MenuItem Header="_File" Foreground="{Binding DarkModeViewModel.ColorDark}">
                     <MenuItem Header="_Import" VerticalAlignment="Top"
-                              Command="{Binding DockPanelViewModel.ImportCommand}"/>
+                              Command="{Binding DockPanelViewModel.ImportCommand}" Foreground="Black"/>
                     <MenuItem Header="_Export" VerticalAlignment="Stretch" 
-                              Command="{Binding DockPanelViewModel.ExportCommand}"/>
+                              Command="{Binding DockPanelViewModel.ExportCommand}" Foreground="Black"/>
                     <Separator />
                     <MenuItem Header="_Close" VerticalAlignment="Stretch"
-                              Command="{Binding DockPanelViewModel.CloseCommand}" />
+                              Command="{Binding DockPanelViewModel.CloseCommand}" Foreground="Black"/>
                 </MenuItem>
-                <MenuItem Header="_Help" VerticalAlignment="Stretch" />
-                <MenuItem Header="_About" VerticalAlignment="Stretch" />
-            </Menu>
-        </DockPanel>
+            <MenuItem Header="_Help" Foreground="{Binding DarkModeViewModel.ColorDark}">
+                <MenuItem Header = "_Tours" Command="{Binding DockPanelViewModel.HelpTourCommand}" Foreground="Black"/>
+                <MenuItem Header = "_Logs" Command="{Binding DockPanelViewModel.HelpLogCommand}" Foreground="Black"/>
+                <MenuItem Header = "_Import and Export" Command ="{Binding DockPanelViewModel.HelpImportExportCommand}" Foreground="Black"/>
+                <MenuItem Header = "_Report and Statistic" Command="{Binding DockPanelViewModel.HelpReportAndStatisticCommand}" Foreground="Black"/>
+                </MenuItem>
+
+                <MenuItem HorizontalAlignment="Right" Command="{Binding DarkModeViewModel.DarkModeToggle}" Background="Yellow">
+                    <MenuItem.Header>
+                        <Grid>
+                        <xctk:ButtonChrome BorderThickness="0" Background="Transparent" IsEnabled="False" HorizontalAlignment="Right" Visibility="{Binding DarkModeViewModel.DarkMode}">
+                            <Image HorizontalAlignment="Stretch" Source="{Binding DarkModeViewModel.LightBulbOff}"/>
+                        </xctk:ButtonChrome>
+                        <xctk:ButtonChrome BorderThickness="0" Background="Transparent" IsEnabled="False" HorizontalAlignment="Right" Visibility="{Binding DarkModeViewModel.LightMode}">
+                            <Image HorizontalAlignment="Stretch" Source="{Binding DarkModeViewModel.LightBulbOn}"/>
+                        </xctk:ButtonChrome>
+                    </Grid>
+                    </MenuItem.Header>
+                </MenuItem>
+
+
+        </Menu>
 
         <!--Search box-->
         <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Watermark="Search..."
-                               Text="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                               Text="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}" Background="{Binding DarkModeViewModel.ColorLight}" Foreground="{Binding DarkModeViewModel.ColorDark}"/>
 
         <!--Head of AddTour-->
-        <!--<DockPanel Grid.Column="0" Grid.Row="2">
-            <Label x:Name="LblTours" Content="Tours" Width="40" DockPanel.Dock="Left" />
-            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right"
-                          Command="{Binding TourViewModel.EditTourToggle}" Background="White" BorderThickness="0">
-                <Image Source="{Binding EditImage}" />
-            </ToggleButton>
-            <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right"
-                    Command="{Binding TourViewModel.DeleteTourCommand}" Background="White" BorderThickness="0">
-                <Image Source="{Binding MinusImage}" />
-            </Button>
-            <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right"
-                          Command="{Binding TourViewModel.AddTourToggle}" Background="White" BorderThickness="0">
-                <Image Source="{Binding PlusImage}" />
-            </ToggleButton>
-        </DockPanel>-->
         <DockPanel Grid.Column="0" Grid.Row="2">
-            <Label x:Name="LblTours" Content="Logs:" DockPanel.Dock="Left" />
+            <Label x:Name="LblTours" Content="Logs:" DockPanel.Dock="Left" Foreground="{Binding DarkModeViewModel.ColorDark}" />
             <Button Width="30" Name="BtnRefreshLog" DockPanel.Dock="Right"
-                    Command="{Binding TourViewModel.RefreshTourCommand}" Background="white" BorderThickness="0">
-                <Image Source="{Binding ReloadImage}" />
+                    Command="{Binding TourViewModel.RefreshTourCommand}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding  DarkModeViewModel.ReloadImage}" />
             </Button>
-            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right" Background="White" BorderThickness="0"
+            <ToggleButton Width="40" Name="TbtOptionsTour" DockPanel.Dock="Right" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0"
                           Command="{Binding TourViewModel.EditTourToggle}">
-                <Image Source="{Binding EditImage}" />
+                <Image Source="{Binding DarkModeViewModel.EditImage}" />
             </ToggleButton>
             <Button Width="40" Name="BtnRemoveTour" DockPanel.Dock="Right"
-                    Command="{Binding TourViewModel.DeleteTourCommand}" Background="White" BorderThickness="0">
-                <Image Source="{Binding MinusImage}" />
+                    Command="{Binding TourViewModel.DeleteTourCommand}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding DarkModeViewModel.MinusImage}" />
             </Button>
             <ToggleButton Width="40" Name="TbtAddTour" HorizontalAlignment="Right"
-                          Command="{Binding TourViewModel.AddTourToggle}" Background="White" BorderThickness="0">
-                <Image Source="{Binding PlusImage}" />
+                          Command="{Binding TourViewModel.AddTourToggle}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding  DarkModeViewModel.PlusImage}" />
             </ToggleButton>
         </DockPanel>
 
         <!--Tour List-->
         <ListBox Grid.Column="0" Grid.Row="3" Grid.RowSpan="5" ItemsSource="{Binding TourViewModel.MyFilteredItems}"
-                 SelectedItem="{Binding TourViewModel.SelectedTourData}">
+                 SelectedItem="{Binding TourViewModel.SelectedTourData}" Background="{Binding DarkModeViewModel.ColorLight}" Foreground="{Binding DarkModeViewModel.ColorDark}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -106,59 +119,71 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="100" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding  TourName}" />
+                        <TextBlock >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}: {1}">
+                                    <Binding Path="TourId" />
+                                    <Binding Path="TourName" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
         <!--Grid Splitter-->
-        <GridSplitter Grid.Row="2" Grid.RowSpan="7" Grid.Column="0" Width="5" Background="Wheat" />
-        <GridSplitter Grid.Row="4" Grid.Column="1" Height="5" HorizontalAlignment="Stretch" Background="Wheat" />
+        <GridSplitter Grid.Row="2" Grid.RowSpan="7" Grid.Column="0" Width="5" Background="{Binding DarkModeViewModel.Wood}" />
+        <GridSplitter Grid.Row="4" Grid.Column="1" Height="5" HorizontalAlignment="Stretch" Background="{Binding DarkModeViewModel.Wood}" />
 
         <!--Tour Title Display-->
-        <Label x:Name="LblTitle" Grid.Column="1" Grid.Row="2" Content="Title: " />
+        <Label x:Name="LblTitle" Grid.Column="1" Grid.Row="2" Content="Title: " Foreground="{Binding DarkModeViewModel.ColorDark}"/>
         <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center"
-               Content="{Binding TourViewModel.SelectedTourData.TourName}" FontWeight="UltraBold" />
+               Content="{Binding TourViewModel.SelectedTourData.TourName}" FontWeight="UltraBold" Foreground="{Binding DarkModeViewModel.ColorDark}"/>
 
         <!--Log Buttons-->
         <DockPanel Grid.Column="1" Grid.Row="5">
-            <Label x:Name="LblLogs" Content="Logs:" DockPanel.Dock="Left" />
-            <Button Width="30" Name="BtnRefresh" DockPanel.Dock="Right"
-                    Command="{Binding TourViewModel.RefreshLogCommand}" Background="white" BorderThickness="0">
-                <Image Source="{Binding ReloadImage}" />
+            <Label x:Name="LblLogs" Content="Logs:" DockPanel.Dock="Left" Foreground="{Binding DarkModeViewModel.ColorDark}"/>
+
+            <Button Width="30" Name="BtnRefresh" DockPanel.Dock="Right" 
+                    Command="{Binding TourViewModel.RefreshLogCommand}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding DarkModeViewModel.ReloadImage}"/>
             </Button>
-            <ToggleButton Width="40" Name="TbtOptionsLog" DockPanel.Dock="Right" Background="White" BorderThickness="0"
-                          Command="{Binding LogViewModel.EditLogToggle}">
-                <Image Source="{Binding EditImage}" />
+            <ToggleButton Width="40" Name="TbtOptionsLog" DockPanel.Dock="Right" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0" 
+                              Command="{Binding LogViewModel.EditLogToggle}">
+                <Image Source="{Binding DarkModeViewModel.EditImage}" />
             </ToggleButton>
             <Button Width="40" Name="BtnRemoveLog" DockPanel.Dock="Right"
-                    Command="{Binding TourViewModel.DeleteLogCommand}" Background="White" BorderThickness="0">
-                <Image Source="{Binding MinusImage}" />
+                        Command="{Binding TourViewModel.DeleteLogCommand}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding DarkModeViewModel.MinusImage}" />
             </Button>
             <ToggleButton Width="40" Name="TbtAddLog" HorizontalAlignment="Right"
-                          Command="{Binding LogViewModel.AddLogToggle}" Background="White" BorderThickness="0">
-                <Image Source="{Binding PlusImage}" />
+                              Command="{Binding LogViewModel.AddLogToggle}" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0">
+                <Image Source="{Binding DarkModeViewModel.PlusImage}" />
             </ToggleButton>
+
         </DockPanel>
 
         <!-- Tour Controls-->
         <Grid Column="1" Row="3">
-            <tour:TourRouteDescriptionControl Visibility="{Binding TourViewModel.RouteDescriptionVisibility}" />
-            <tour:AddTourControl Visibility="{Binding TourViewModel.AddTourVisibility}" />
-            <tour:EditTourControl Visibility="{Binding TourViewModel.EditTourVisibility}" />
+            <tour:TourRouteDescriptionControl Visibility="{Binding TourViewModel.RouteDescriptionVisibility}" Background="{Binding DarkModeViewModel.ColorLight}"/>
+            <tour:AddTourControl Visibility="{Binding TourViewModel.AddTourVisibility}"/>
+            <tour:EditTourControl Visibility="{Binding TourViewModel.EditTourVisibility}"/>
         </Grid>
 
         <!--Log Controls-->
         <Grid Column="1" Row="7" RowSpan="2">
-            <log:LogControl Visibility="{Binding LogViewModel.LogVisibility}" />
-            <log:AddLogControl Visibility="{Binding LogViewModel.AddLogVisibility}" />
-            <log:EditLogControl Visibility="{Binding LogViewModel.EditLogVisibility}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="326*"/>
+            </Grid.ColumnDefinitions>
+            <log:LogControl Visibility="{Binding LogViewModel.LogVisibility}" Grid.ColumnSpan="2"/>
+            <log:AddLogControl Visibility="{Binding LogViewModel.AddLogVisibility}" Grid.ColumnSpan="2" Grid.Column="0" />
+            <log:EditLogControl Visibility="{Binding LogViewModel.EditLogVisibility}" Grid.ColumnSpan="2" Grid.Column="0" />
         </Grid>
 
-        <Button Grid.Row="8" Grid.Column="0" Background="White" BorderThickness="0" Command="{Binding TourViewModel.SaveTourReport}">
-            <Image Source="{Binding SaveImage}"></Image>
+        <Button Grid.Row="8" Grid.Column="0" Background="{Binding DarkModeViewModel.ColorLight}" BorderThickness="0" Command="{Binding TourViewModel.SaveTourReport}">
+            <Image Source="{Binding DarkModeViewModel.SaveImage}"></Image>
         </Button>
-
     </Grid>
 </Window>

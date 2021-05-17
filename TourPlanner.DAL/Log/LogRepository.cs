@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
+using System.Windows;
 using Dapper;
 using log4net;
 using Npgsql;
@@ -108,6 +109,7 @@ namespace TourPlanner.DAL.Log
             if (logs == null)
             {
                 Logger.Error("LogData on Delete was NULL");
+                MessageBox.Show("Please select a Log to delete.", " ", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

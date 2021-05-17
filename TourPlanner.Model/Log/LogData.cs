@@ -12,7 +12,7 @@ namespace TourPlanner.Model.Log
 
         public string LogDate { get; set; }
 
-        public double LogDistance { get; set; }
+        public int LogDistance { get; set; }
 
         public string LogTotalTime { get; set; }
 

@@ -97,7 +97,7 @@ namespace TourPlanner.Moq
                     MaxSpeed = 140,
                     AvgSpeed = 70,
                     FuelUsed = 100,
-                    FuelCost = 20,
+                    FuelCost = "20",
                     CaughtSpeeding = true
                 }
             };
