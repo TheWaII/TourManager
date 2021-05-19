@@ -47,7 +47,8 @@ namespace TourPlanner.DAL.Log
             try
             {
                 dbConnection.Execute(
-                    "INSERT INTO Logs(TourId, LogId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport) VALUES (@TourId, @LogId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogType, @LogReport)",
+                    "INSERT INTO Logs(TourId, LogId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport) " +
+                    "VALUES (@TourId, @LogId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogType, @LogReport)",
                     new
                     {
                         logs.LogId,

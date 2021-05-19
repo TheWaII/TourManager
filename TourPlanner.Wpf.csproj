@@ -93,6 +93,7 @@
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -277,6 +278,10 @@
     <ProjectReference Include="TourPlanner.BL\TourPlanner.BL.csproj">
       <Project>{dd01266f-4cec-4742-b3e8-e4624cf3cb4a}</Project>
       <Name>TourPlanner.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="TourPlanner.DAL\TourPlanner.DAL.csproj">
+      <Project>{5051B7A5-AC58-4151-8F61-88AFEBEECB53}</Project>
+      <Name>TourPlanner.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="TourPlanner.Model\TourPlanner.Model.csproj">
       <Project>{75d7bba4-0e6e-45c9-863c-2aaab164fa3c}</Project>
