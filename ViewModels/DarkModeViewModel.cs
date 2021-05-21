@@ -22,7 +22,7 @@ namespace TourPlanner.ViewModels
         public static string LogoImageNormal => @"..\..\img\icons\logo.png";
         public static string LogoImageInverted => @"..\..\img\icons\logoInverted.png";
 
-        public string _logoImage = LogoImageNormal;
+        private string _logoImage = LogoImageNormal;
 
         public string LogoImage
         {

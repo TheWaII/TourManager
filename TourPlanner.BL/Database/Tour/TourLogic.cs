@@ -51,22 +51,19 @@ namespace TourPlanner.BL.Database.Tour
             return tourCollection;
         }
 
-        public IEnumerable<TourData> MyFilteredItems(string searchText, IEnumerable<TourData> tourCollection)
+        public IEnumerable<TourData> MyFilteredItems(string searchText, ObservableCollection<TourData> tourCollection)
         {
             var logs = new LogLogic().LoadLogs();
 
             var logCollection = logs.Where(logData => logData.LogName.Contains(searchText));
 
-            var tourData = tourCollection as TourData[] ?? tourCollection.ToArray();
-            var myFilteredItems = tourCollection as TourData[] ?? tourData.ToArray();
-
-            var toursLogs = myFilteredItems.Where(x =>
+            var toursLogs = tourCollection.Where(x =>
                 x.TourId == (logCollection.Where(logData => logData.TourId == x.TourId)).Select(x=>x.TourId).FirstOrDefault());
 
-            var tours = myFilteredItems.Where(x => x.TourName.Contains(searchText));
+            var tours = tourCollection.Where(x => x.TourName.Contains(searchText));
 
             if (searchText == null)
-                return tourData;
+                return tourCollection;
 
             var filteredItems = toursLogs as TourData[] ?? toursLogs.ToArray();
             return !filteredItems.Any() ? tours : filteredItems;
