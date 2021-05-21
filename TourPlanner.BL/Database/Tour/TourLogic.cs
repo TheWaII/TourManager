@@ -1,7 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using Aspose.Pdf.Annotations;
+using ComLib.Lang;
+using Toolkit.Core.Extensions;
+using TourPlanner.BL.Database.Log;
 using TourPlanner.DAL.Tour;
+using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 
 namespace TourPlanner.BL.Database.Tour
@@ -44,11 +51,24 @@ namespace TourPlanner.BL.Database.Tour
             return tourCollection;
         }
 
-        public IEnumerable<TourData> MyFilteredItems(string searchText, IEnumerable<TourData> tourCollection)
+        public IEnumerable<TourData> MyFilteredItems(string searchText, ObservableCollection<TourData> tourCollection)
         {
-            return searchText == null
-                ? tourCollection
-                : tourCollection.Where(x => x.TourName.Contains(searchText));
+            var logs = new LogLogic().LoadLogs();
+
+            var logCollection = logs.Where(logData => logData.LogName.Contains(searchText));
+
+            var toursLogs = tourCollection.Where(x =>
+                x.TourId == (logCollection.Where(logData => logData.TourId == x.TourId)).Select(x=>x.TourId).FirstOrDefault());
+
+            var tours = tourCollection.Where(x => x.TourName.Contains(searchText));
+
+            if (searchText == null)
+                return tourCollection;
+
+            var filteredItems = toursLogs as TourData[] ?? toursLogs.ToArray();
+            return !filteredItems.Any() ? tours : filteredItems;
+
+            //return searchText == null ? myFilteredItems : myFilteredItems.Where(tourData => tourData.TourName.Contains(searchText));
         }
 
         public void InsertTours(TourData tourData)

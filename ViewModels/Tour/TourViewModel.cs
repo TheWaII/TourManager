@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -16,17 +18,22 @@ using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Windows;
+using log4net;
+using Npgsql;
 using TourPlanner.BL.ImportExport;
 using TourPlanner.BL.Reporting;
+using TourPlanner.DAL;
 
 namespace TourPlanner.ViewModels.Tour
 {
     public class TourViewModel : INotifyPropertyChanged, IValueConverter
     {
 
-
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         #region Constructor
 
@@ -39,7 +46,7 @@ namespace TourPlanner.ViewModels.Tour
             ValidateCommandEdit = new RelayCommand(o => ValidateEdit());
 
             AddTourCommand = new RelayCommand(o => SaveChanges(), o => CanUpdate);
-
+            
             WindowLoaded = new RelayCommand(o => RefreshTourList());
 
             EditTourCommand = new RelayCommand(o => UpdateChanges());
