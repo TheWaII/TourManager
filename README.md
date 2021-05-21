@@ -1,4 +1,4 @@
-# TourManager
+# Tour Planner
 This is a desktop application where you can **create** tours. These tours consist of *name*, *source*, *destination*, *distance* and *description*. The added tours can also be **edited** and **deleted**. These tours can also have logs, which can either be *unspecified*, *bike log* or a *car log*. The logs consist of *name*, *date*, *distance*, *total time*, *rating*, and *report*. If the user wished to add *bike* or *car log*, they are offered additional parameters which they can add. These include *peak heart rate (HR)*, *lowest HR*, *average HR*, *average speed* and *calories burnt* for bike logs and *max speed*, *average speed*, *fuel used*, *fuel cost* and *caught speeding* for car logs.
 
 ## App Architecture
