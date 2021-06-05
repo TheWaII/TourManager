@@ -18,27 +18,34 @@
         </Grid.ColumnDefinitions>
         <!--Main-->
 
-        <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Watermark="Search..." Text="{Binding (vm:MainViewModel.TourViewModel).SearchTextLog, 
-            UpdateSourceTrigger=PropertyChanged}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+        <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Watermark="Search..."
+                               Text="{Binding (vm:MainViewModel.TourViewModel).SearchTextLog, 
+            UpdateSourceTrigger=PropertyChanged}"
+                               Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"
+                               Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
 
         <ListView Grid.Column="0" Grid.RowSpan="2" Grid.Row="1"
                   ItemsSource="{Binding (vm:MainViewModel.TourViewModel).FilteredLogs}"
-                  SelectedItem="{Binding (vm:MainViewModel.TourViewModel).SelectedDataForLog}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
+                  SelectedItem="{Binding (vm:MainViewModel.TourViewModel).SelectedDataForLog}"
+                  Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"
+                  Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
             <ListView.View>
-                    <GridView>
-                    <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding LogName}"/>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="Auto" DisplayMemberBinding="{Binding LogName}" />
                     <GridViewColumn Header="Date" Width="Auto" DisplayMemberBinding="{Binding LogDate}" />
-                        <GridViewColumn Header="Distance" Width="Auto" DisplayMemberBinding="{Binding LogDistance}" />
-                        <GridViewColumn Header="Total Time" Width="Auto" DisplayMemberBinding="{Binding LogTotalTime}" />
-                        <GridViewColumn Header="Rating" Width="Auto" DisplayMemberBinding="{Binding LogRating}" />
-                        <GridViewColumn Header="Type" Width="Auto" DisplayMemberBinding="{Binding BikeCar}" />
-                        <GridViewColumn Header="Report" Width="Auto" DisplayMemberBinding="{Binding LogReport}" />
-                    </GridView>
-                </ListView.View>
-             </ListView>
+                    <GridViewColumn Header="Distance" Width="Auto" DisplayMemberBinding="{Binding LogDistance}" />
+                    <GridViewColumn Header="Total Time" Width="Auto" DisplayMemberBinding="{Binding LogTotalTime}" />
+                    <GridViewColumn Header="Rating" Width="Auto" DisplayMemberBinding="{Binding LogRating}" />
+                    <GridViewColumn Header="Type" Width="Auto" DisplayMemberBinding="{Binding BikeCar}" />
+                    <GridViewColumn Header="Report" Width="Auto" DisplayMemberBinding="{Binding LogReport}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <!--Bike-->
-        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).BikeCollection}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
+        <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).BikeCollection}"
+                  Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"
+                  Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Peak Heart Rate" Width="Auto"
@@ -53,7 +60,9 @@
         </ListView>
 
         <!--Car-->
-        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).CarCollection}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
+        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding (vm:MainViewModel.TourViewModel).CarCollection}"
+                  Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"
+                  Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Max Speed" Width="Auto" DisplayMemberBinding="{Binding MaxSpeed}" />

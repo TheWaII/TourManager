@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
-using ControlzEx.Standard;
 using TourPlanner.Annotations;
 using TourPlanner.Commands;
 
@@ -14,15 +7,46 @@ namespace TourPlanner.ViewModels
 {
     public class DarkModeViewModel : INotifyPropertyChanged
     {
-
         public static string White = "White";
         public static string Black = "Black";
         public static string BurlyWood = "BurlyWood";
 
-        public static string LogoImageNormal => @"..\..\img\icons\logo.png";
-        public static string LogoImageInverted => @"..\..\img\icons\logoInverted.png";
+        private string _colorDark = Black;
+
+        private string _colorLight = White;
+
+        private string _darkMode = "Hidden";
+
+
+        private bool _darkModeBoolean;
+
+        private string _editImage = EditImageNormal;
+
+        private string _header = BurlyWood;
+
+
+        private string _lightMode = "Visible";
 
         private string _logoImage = LogoImageNormal;
+
+        private string _minusImage = MinusImageNormal;
+
+        private string _plusImage = PlusImageNormal;
+
+        private string _reloadImage = ReloadImageNormal;
+
+
+        private string _saveImage = SaveImageNormal;
+
+        private string _wood = BurlyWood;
+
+        public DarkModeViewModel()
+        {
+            DarkModeToggle = new RelayCommand(o => SetDarkMode());
+        }
+
+        public static string LogoImageNormal => @"..\..\img\icons\logo.png";
+        public static string LogoImageInverted => @"..\..\img\icons\logoInverted.png";
 
         public string LogoImage
         {
@@ -34,7 +58,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _plusImage = PlusImageNormal;
         public string PlusImage
         {
             get => _plusImage;
@@ -45,7 +68,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _minusImage = MinusImageNormal;
         public string MinusImage
         {
             get => _minusImage;
@@ -56,7 +78,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _editImage = EditImageNormal;
         public string EditImage
         {
             get => _editImage;
@@ -67,7 +88,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _reloadImage = ReloadImageNormal;
         public string ReloadImage
         {
             get => _reloadImage;
@@ -78,8 +98,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-
-        private string _saveImage = SaveImageNormal;
         public string SaveImage
         {
             get => _saveImage;
@@ -105,8 +123,6 @@ namespace TourPlanner.ViewModels
         public static string SaveImageNormal => @"..\..\img\icons\save.png";
         public static string SaveImageInverted => @"..\..\img\icons\saveInverted.png";
 
-        private string _colorLight = White;
-
         public string ColorLight
         {
             get => _colorLight;
@@ -116,8 +132,6 @@ namespace TourPlanner.ViewModels
                 OnPropertyChanged(nameof(ColorLight));
             }
         }
-
-        private string _colorDark = Black;
 
         public string ColorDark
         {
@@ -129,8 +143,6 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        private string _wood = BurlyWood;
-
 
         public string Wood
         {
@@ -141,8 +153,6 @@ namespace TourPlanner.ViewModels
                 OnPropertyChanged(nameof(Wood));
             }
         }
-
-        private string _header = BurlyWood;
 
         public string Header
         {
@@ -159,10 +169,6 @@ namespace TourPlanner.ViewModels
 
         public static string LightBulbOff => @"..\..\img\icons\lightOff.png";
 
-
-
-        private string _lightMode = "Visible";
-
         public string LightMode
         {
             get => _lightMode;
@@ -170,12 +176,8 @@ namespace TourPlanner.ViewModels
             {
                 _lightMode = value;
                 OnPropertyChanged(nameof(LightMode));
-
             }
         }
-
-        private string _darkMode = "Hidden";
-
 
 
         public string DarkMode
@@ -188,15 +190,10 @@ namespace TourPlanner.ViewModels
             }
         }
 
-        public DarkModeViewModel()
-        {
-            DarkModeToggle = new RelayCommand(o => SetDarkMode());
-        }
-
         public RelayCommand DarkModeToggle { get; }
 
 
-        private bool _darkModeBoolean;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         public void SetDarkMode()
@@ -218,7 +215,6 @@ namespace TourPlanner.ViewModels
                 EditImage = EditImageInverted;
                 ReloadImage = ReloadImageInverted;
                 SaveImage = SaveImageInverted;
-
             }
             else
             {
@@ -237,9 +233,6 @@ namespace TourPlanner.ViewModels
                 SaveImage = SaveImageNormal;
             }
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

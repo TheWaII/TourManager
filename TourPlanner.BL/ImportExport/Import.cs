@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using log4net;
-using log4net.Util;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
 using TourPlanner.Model;
-using TourPlanner.Model.Log;
-using TourPlanner.Model.Tour;
 
 namespace TourPlanner.BL.ImportExport
 {
@@ -25,8 +17,7 @@ namespace TourPlanner.BL.ImportExport
 
         public void ImportJson()
         {
-
-            var openFileDialog = new OpenFileDialog(){ Filter = "JSON (*.json)|*.json" };
+            var openFileDialog = new OpenFileDialog {Filter = "JSON (*.json)|*.json"};
 
             Stream fileStream;
 
@@ -53,31 +44,18 @@ namespace TourPlanner.BL.ImportExport
             var carLogic = new CarLogic();
 
 
-
             var tour = JsonConvert.DeserializeObject<AllData>(json);
 
 
             if (tour == null) return;
 
-            foreach (var tourData in tour.TourData)
-            {
-                tourLogic.InsertTours(tourData);
-            }
+            foreach (var tourData in tour.TourData) tourLogic.InsertTours(tourData);
 
-            foreach (var logData in tour.LogData)
-            {
-                logLogic.InsertLog(logData);
-            }
+            foreach (var logData in tour.LogData) logLogic.InsertLog(logData);
 
-            foreach (var bikeData in tour.BikeData)
-            {
-                bikeLogic.InsertLog(bikeData);
-            }
-            
-            foreach (var carData in tour.CarData)
-            {
-                carLogic.InsertLog(carData);
-            }
+            foreach (var bikeData in tour.BikeData) bikeLogic.InsertLog(bikeData);
+
+            foreach (var carData in tour.CarData) carLogic.InsertLog(carData);
         }
     }
 }

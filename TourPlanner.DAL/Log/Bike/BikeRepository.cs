@@ -100,7 +100,6 @@ namespace TourPlanner.DAL.Log.Bike
             try
             {
                 dbConnection.Execute("DELETE FROM BikeTour WHERE LogId = @logId");
-
             }
             catch (Exception e)
             {

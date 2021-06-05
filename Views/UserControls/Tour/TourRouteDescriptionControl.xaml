@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:TourPlanner.ViewModels"
              xmlns:tour="clr-namespace:TourPlanner.ViewModels.Tour"
-             mc:Ignorable="d"
-             >
+             mc:Ignorable="d">
     <UserControl.Resources>
         <tour:TourViewModel x:Key="TourViewModel" />
     </UserControl.Resources>
@@ -23,16 +22,21 @@
 
                     <DockPanel Grid.Row="0" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}">
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="From:" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                            <Label Content="From:"
+                                   Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourSource}"
+                                   Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
                             <Label Content="     " />
-                            <Label Content="To:" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                            <Label Content="To:" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
                             <Label
-                                Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                                Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDestination}"
+                                Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
                             <Label Content="     " />
-                            <Label Content="Distance:" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                            <Label Content="KM" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                            <Label Content="Distance:"
+                                   Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                            <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDistance}"
+                                   Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                            <Label Content="KM" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
                         </StackPanel>
                     </DockPanel>
                     <Image Grid.Row="1"
@@ -43,7 +47,7 @@
             <TabItem Header="Description" Foreground="Black">
                 <Grid Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}">
                     <Label Content="{Binding (vm:MainViewModel.TourViewModel).SelectedTourData.TourDescription}"
-                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
                 </Grid>
             </TabItem>
         </TabControl>

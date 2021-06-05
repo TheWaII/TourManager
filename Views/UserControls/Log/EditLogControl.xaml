@@ -19,15 +19,17 @@
 
         <ListBox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                  SelectedItem="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData}"
-                 ItemsSource="{Binding (vm:MainViewModel.LogViewModel).LogCollection}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
+                 ItemsSource="{Binding (vm:MainViewModel.LogViewModel).LogCollection}"
+                 Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"
+                 Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,10,3,10">
                         <TextBlock>
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0}.    {1}">
-                                    <Binding Path="TourId"/>
-                                    <Binding Path="LogName"/>
+                                    <Binding Path="TourId" />
+                                    <Binding Path="LogName" />
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
@@ -60,32 +62,50 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Name: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Date: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Distance: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="Total time: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                    <Label Grid.Row="4" Grid.Column="0" Content="Rating: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
-                    <Label Grid.Row="5" Grid.Column="0" Content="Report: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Date: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Distance: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Total time: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Rating: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Report: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
 
 
                     <TextBox Grid.Row="0" Grid.Column="1" Name="TbxLogName"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogName}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogName}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <DatePicker Grid.Row="1" Grid.Column="1" Name="DpkLogDate"
-                        SelectedDate="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDate}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                SelectedDate="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDate}"
+                                Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <xctk:DecimalUpDown Grid.Row="2" Grid.Column="1" Name="TbxDistance"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDistance}" Minimum="0" Increment="0.1" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogDistance}"
+                                        Minimum="0" Increment="0.1"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
 
                     <TextBox Grid.Row="3" Grid.Column="1" Name="TbxTime"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogTotalTime}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogTotalTime}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
 
                     <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Maximum="5" Minimum="1"
-                                Value="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogRating}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
+                                        Value="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogRating}"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
 
-                    <RichTextBox Grid.Row="5" Grid.Column="1" Name="RbxLogReport" Height="50" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}">
+                    <RichTextBox Grid.Row="5" Grid.Column="1" Name="RbxLogReport" Height="50"
+                                 Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                 Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}">
                         <FlowDocument>
                             <Paragraph>
                                 <Run
-                            Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogReport, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding (vm:MainViewModel.LogViewModel).SelectedLogData.LogReport, UpdateSourceTrigger=PropertyChanged}" />
                             </Paragraph>
                         </FlowDocument>
                     </RichTextBox>
@@ -93,7 +113,7 @@
 
                 <!--Bike Tour-->
                 <Grid Grid.Row="1" Name="BikeTour"
-              Visibility="{Binding (vm:MainViewModel.LogViewModel).EditBikeVisibility}">
+                      Visibility="{Binding (vm:MainViewModel.LogViewModel).EditBikeVisibility}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -108,27 +128,47 @@
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="Peak heart rate: "  Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="2" Grid.Column="0" Content="Lowest heart rate: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="3" Grid.Column="0" Content="Average heart rate: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="4" Grid.Column="0" Content="Average speed: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="5" Grid.Column="0" Content="Calories burnt: " Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Peak heart rate: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Lowest heart rate: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Average heart rate: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Average speed: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Calories burnt: "
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
 
                     <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Name="TbxPeakHeartRate"
-                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.PeakHeartRate}" Minimum="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.PeakHeartRate}"
+                                        Minimum="0"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <xctk:IntegerUpDown Grid.Row="2" Grid.Column="1" Name="TbxLowestHeartRate"
-                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.LowestHeartRate}" Minimum="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.LowestHeartRate}"
+                                        Minimum="0"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" Name="TbxAvgHeartRate"
-                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgHeartRate}" Minimum="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgHeartRate}"
+                                        Minimum="0"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Name="TbxAvgSpeed"
-                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgSpeed}" Minimum="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.AvgSpeed}"
+                                        Minimum="0"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Name="TbxCaloriesBurnt"
-                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.CaloriesBurnt}" Minimum="0" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                                        Text="{Binding (vm:MainViewModel.LogViewModel).BikeEditCollection.CaloriesBurnt}"
+                                        Minimum="0"
+                                        Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                                        Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                 </Grid>
 
                 <!--Car Tour-->
                 <Grid Grid.Row="1" Name="CarTour"
-              Visibility="{Binding (vm:MainViewModel.LogViewModel).EditCarVisibility}">
+                      Visibility="{Binding (vm:MainViewModel.LogViewModel).EditCarVisibility}">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -144,24 +184,39 @@
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="1" Grid.Column="0" Content="Max speed: " Grid.ColumnSpan="2" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="2" Grid.Column="0" Content="Average speed: " Grid.ColumnSpan="2" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="3" Grid.Column="0" Content="Fuel used: " Grid.ColumnSpan="2" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
-                    <Label Grid.Row="4" Grid.Column="0" Content="Fuel cost: " Grid.ColumnSpan="2" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"  />
-                    <Label Grid.Row="5" Grid.Column="0" Content="Caught speeding: " Grid.ColumnSpan="2" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Max speed: " Grid.ColumnSpan="2"
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Average speed: " Grid.ColumnSpan="2"
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Fuel used: " Grid.ColumnSpan="2"
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Fuel cost: " Grid.ColumnSpan="2"
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Caught speeding: " Grid.ColumnSpan="2"
+                           Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" />
 
                     <TextBox Grid.Row="1" Grid.Column="1" Name="TbxMaxSpeed"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.MaxSpeed}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.MaxSpeed}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <TextBox Grid.Row="2" Grid.Column="1" Name="TbxAvgSped"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.AvgSpeed}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.AvgSpeed}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <TextBox Grid.Row="3" Grid.Column="1" Name="TbxFuelUsed"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelUsed}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelUsed}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
                     <TextBox Grid.Row="4" Grid.Column="1" Name="TbxFuelCost"
-                     Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelCost}" Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}" Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}"/>
+                             Text="{Binding (vm:MainViewModel.LogViewModel).CarEditCollection.FuelCost}"
+                             Foreground="{Binding (vm:MainViewModel.DarkModeViewModel).ColorDark}"
+                             Background="{Binding (vm:MainViewModel.DarkModeViewModel).ColorLight}" />
 
                     <StackPanel Grid.Row="5" Grid.Column="1">
-                        <RadioButton Content="Yes" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.Yes}" />
-                        <RadioButton Content="No" IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.No}" />
+                        <RadioButton Content="Yes"
+                                     IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.Yes}" />
+                        <RadioButton Content="No"
+                                     IsChecked="{Binding (vm:MainViewModel.LogViewModel).CarLogViewModel.No}" />
                     </StackPanel>
                 </Grid>
                 <Button Grid.Row="2" Content="Edit" Command="{Binding (vm:MainViewModel.LogViewModel).EditLog}" />

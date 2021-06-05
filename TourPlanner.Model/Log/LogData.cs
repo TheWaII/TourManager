@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TourPlanner.Model.Log
+﻿namespace TourPlanner.Model.Log
 {
     public class LogData
     {

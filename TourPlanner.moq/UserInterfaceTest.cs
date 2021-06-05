@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac.Extras.Moq;
-using NUnit.Framework;
-using TourPlanner.BL.Database.Log;
-using TourPlanner.DAL.Log;
+﻿using NUnit.Framework;
 using TourPlanner.ViewModels.Tour;
 
 namespace TourPlanner.UnitTests
@@ -48,7 +40,7 @@ namespace TourPlanner.UnitTests
         {
             var tourViewModel = new TourViewModel
             {
-                Name = "testName", 
+                Name = "testName",
                 Destination = "testDest",
                 Distance = 0
             };
@@ -70,6 +62,5 @@ namespace TourPlanner.UnitTests
 
             Assert.IsTrue(tourViewModel.CanUpdateValidate);
         }
-
     }
 }
