@@ -5,11 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using Catel.Collections;
-using TourPlanner.Annotations;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
+using TourPlanner.Properties;
 
 namespace TourPlanner.ViewModels.Log
 {

@@ -7,7 +7,7 @@ using TourPlanner.BL.Database.Tour;
 using TourPlanner.DAL.Tour;
 using TourPlanner.Model.Tour;
 
-namespace TourPlanner.moq
+namespace TourPlanner.UnitTests.Mocking
 {
     public class TourTest
     {

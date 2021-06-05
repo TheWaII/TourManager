@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using TourPlanner.Annotations;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
 using TourPlanner.BL.ImportExport;
 using TourPlanner.Commands;
 using TourPlanner.Model.Tour;
+using TourPlanner.Properties;
 
 namespace TourPlanner.ViewModels
 {
