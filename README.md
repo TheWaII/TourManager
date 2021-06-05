@@ -52,4 +52,4 @@ A unique feature I have built in is the dark mode. This allows the user to switc
 ![Dark mode](img/Readme/darkmode.gif) 
 
 
-##### Total time:  75.4
+###### Total time:  75.4

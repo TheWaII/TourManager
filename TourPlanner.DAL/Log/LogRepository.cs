@@ -64,6 +64,27 @@ namespace TourPlanner.DAL.Log
             }
             catch (Exception e)
             {
+                try
+                {
+                    dbConnection.Execute(
+                        "INSERT INTO Logs(TourId, LogName, LogDate, LogDistance, LogTotalTime, LogRating, LogType, LogReport) " +
+                        "VALUES (@TourId, @LogName, @LogDate, @LogDistance, @LogTotalTime, @LogRating, @LogType, @LogReport)",
+                        new
+                        {
+                            logs.TourId,
+                            logs.LogName,
+                            logs.LogDate,
+                            logs.LogDistance,
+                            logs.LogTotalTime,
+                            logs.LogRating,
+                            logs.LogType,
+                            logs.LogReport
+                        });
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception.Message);
+                }
                 Logger.Error(e.Message);
             }
 

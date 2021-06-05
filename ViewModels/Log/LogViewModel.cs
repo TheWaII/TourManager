@@ -175,7 +175,7 @@ namespace TourPlanner.ViewModels.Log
             {
 
                 var regex = new Regex("[0-9]+:[0-5][0-9]$");
-                return Id != 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) &&
+                return Id >= 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) &&
                        !string.IsNullOrWhiteSpace(Time) && Rating != 0 && !string.IsNullOrWhiteSpace(Report) &&
                        regex.IsMatch(Time);
             }

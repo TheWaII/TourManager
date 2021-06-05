@@ -7,7 +7,7 @@ using TourPlanner.BL.Database.Log;
 using TourPlanner.DAL.Log.Bike;
 using TourPlanner.Model.Log;
 
-namespace TourPlanner.Moq
+namespace TourPlanner.UnitTests.Mocking
 {
     public class BikeTest
     {

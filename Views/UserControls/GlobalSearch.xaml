@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="TourPlanner.Views.UserControls.GlobalSearch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourPlanner.Views.UserControls"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             x:Name="UcGlobalSearch">
+    <Grid DataContext="{Binding ElementName=UcGlobalSearch}">
+
+        <xctk:WatermarkTextBox Grid.Column="0" Watermark="Search...">
+            <xctk:WatermarkTextBox.Text>
+                <Binding Path="SearchText" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.RelativeSource>
+                        <RelativeSource Mode="FindAncestor" AncestorType="{x:Type local:GlobalSearch}" />
+                    </Binding.RelativeSource>
+                </Binding>
+            </xctk:WatermarkTextBox.Text>
+        </xctk:WatermarkTextBox>
+
+        <!--, UpdateSourceTrigger=PropertyChanged}" Background="{Binding DarkModeViewModel.ColorLight}" Foreground="{Binding DarkModeViewModel.ColorDark}"/> -->
+
+    </Grid>
+</UserControl>

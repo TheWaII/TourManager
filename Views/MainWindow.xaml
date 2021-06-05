@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModels="clr-namespace:TourPlanner.ViewModels"
         xmlns:intr="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
-
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:log="clr-namespace:TourPlanner.Views.UserControls.Log"
         xmlns:tour="clr-namespace:TourPlanner.Views.UserControls.Tour"
+        xmlns:userControls="clr-namespace:TourPlanner.Views.UserControls"
         Title="Tour-Planner" Height="565" Width="741" MinHeight="800" MinWidth="1020" Icon="{Binding DarkModeViewModel.LogoImage}"
         WindowStartupLocation="CenterScreen"
         Background="{Binding DarkModeViewModel.ColorLight}">
 
     <Window.DataContext>
-        <viewModels:MainViewModel />
+        <viewModels:MainViewModel/>
     </Window.DataContext>
-    
+
     <intr:Interaction.Triggers>
         <intr:EventTrigger>
             <intr:InvokeCommandAction Command="{Binding TourViewModel.WindowLoaded}" />
@@ -24,9 +24,7 @@
         </intr:EventTrigger>
     </intr:Interaction.Triggers>
 
-
-
-    <Grid ShowGridLines="False">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="23" />
@@ -80,13 +78,11 @@
                     </Grid>
                     </MenuItem.Header>
                 </MenuItem>
-
-
         </Menu>
 
         <!--Search box-->
-        <xctk:WatermarkTextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Watermark="Search..."
-                               Text="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}" Background="{Binding DarkModeViewModel.ColorLight}" Foreground="{Binding DarkModeViewModel.ColorDark}"/>
+
+        <userControls:GlobalSearch Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" SearchText="{Binding TourViewModel.SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"/>
 
         <!--Head of AddTour-->
         <DockPanel Grid.Column="0" Grid.Row="2">
@@ -139,7 +135,8 @@
         <!--Tour Title Display-->
         <Label x:Name="LblTitle" Grid.Column="1" Grid.Row="2" Content="Title: " Foreground="{Binding DarkModeViewModel.ColorDark}"/>
         <Label x:Name="LblTitleName" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center"
-               Content="{Binding TourViewModel.SelectedTourData.TourName}" FontWeight="UltraBold" Foreground="{Binding DarkModeViewModel.ColorDark}"/>
+               Content="{Binding TourViewModel.SelectedTourData.TourName}" FontWeight="UltraBold" 
+               Foreground="{Binding DarkModeViewModel.ColorDark}"/>
 
         <!--Log Buttons-->
         <DockPanel Grid.Column="1" Grid.Row="5">

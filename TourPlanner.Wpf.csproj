@@ -190,6 +190,9 @@
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\GlobalSearch.xaml.cs">
+      <DependentUpon>GlobalSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\Log\AddLogControl.xaml.cs">
       <DependentUpon>AddLogControl.xaml</DependentUpon>
     </Compile>
@@ -243,6 +246,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GlobalSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

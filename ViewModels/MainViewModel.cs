@@ -36,7 +36,5 @@ namespace TourPlanner.ViewModels
 
         public DarkModeViewModel DarkModeViewModel { get; set; }
 
-        
-
     }
 }

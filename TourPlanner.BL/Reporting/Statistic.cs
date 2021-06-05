@@ -16,7 +16,7 @@ namespace TourPlanner.BL.Reporting
         public void CreateStatistic(int tourId)
         {
             var tourLogic = new TourLogic();
-            var tourList = tourLogic.LoadTours();
+            //var tourList = tourLogic.LoadTours();
 
             var logLogic = new LogLogic();
             var logList = logLogic.LoadLogs();
@@ -53,9 +53,13 @@ namespace TourPlanner.BL.Reporting
             head.Append("<br> <br> <br>");
 
 
-            File.WriteAllText(fileName + ".html", head + General(logList, tourId) +
-                                        Bike(logList, bikeList, tourId) +
-                                        Car(logList, carList, tourId) + "</body>");
+            
+                File.WriteAllText(fileName + ".html", head + General(logList, tourId) +
+                                                      Bike(logList, bikeList, tourId) +
+                                                      Car(logList, carList, tourId) + "</body>");
+            
+            
+           
 
             return fileName;
         }
@@ -65,15 +69,16 @@ namespace TourPlanner.BL.Reporting
         {
             var logToPrint = logList.Where(data => data.TourId == tourId).ToList();
 
-
             var parseTime = logToPrint.Select(x => TimeSpan.Parse(x.LogTotalTime));
 
+            
             var totalTime = new TimeSpan(parseTime.Sum(r => r.Duration().Ticks));
 
-            var distanceTraveled = logToPrint.Select(x => x.LogDistance).Sum();
-            var longestTour = logToPrint.Select(x => x.LogDistance).Max();
-            var shortestTour = logToPrint.Select(x => x.LogDistance).Min();
-            var avgTour = logToPrint.Select(x => x.LogDistance).Average();
+            var distanceTraveled = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Sum();
+
+            var longestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Max();
+            var shortestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Min();
+            var avgTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Average();
 
 
             var stringBuilder = new StringBuilder();
@@ -121,13 +126,13 @@ namespace TourPlanner.BL.Reporting
 
             var totalTime = new TimeSpan(parseTime.Sum(r => r.Duration().Ticks));
 
-            var distanceTraveled = logToPrint.Select(x => x.LogDistance).Sum();
-            var longestTour = logToPrint.Select(x => x.LogDistance).Max();
-            var shortestTour = logToPrint.Select(x => x.LogDistance).Min();
-            var avgTour = logToPrint.Select(x => x.LogDistance).Average();
-            var peakHeartRate = bikeData.Select(x => x.PeakHeartRate).Max();
-            var lowestHeartRate = bikeData.Select(x => x.LowestHeartRate).Min();
-            var avgHeartRate = bikeData.Select(x => x.AvgHeartRate).Average();
+            var distanceTraveled = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Sum();
+            var longestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Max();
+            var shortestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Min();
+            var avgTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Average();
+            var peakHeartRate = bikeData.Select(x => x.PeakHeartRate).DefaultIfEmpty(0).Max();
+            var lowestHeartRate = bikeData.Select(x => x.LowestHeartRate).DefaultIfEmpty(0).Min();
+            var avgHeartRate = bikeData.Select(x => x.AvgHeartRate).DefaultIfEmpty(0).Average();
 
 
             var stringBuilder = new StringBuilder();
@@ -184,11 +189,11 @@ namespace TourPlanner.BL.Reporting
             var parseTime = logToPrint.Select(x => TimeSpan.Parse(x.LogTotalTime));
 
             var totalTime = new TimeSpan(parseTime.Sum(r => r.Duration().Ticks));
-            var distanceTraveled = logToPrint.Select(x => x.LogDistance).Sum();
-            var longestTour = logToPrint.Select(x => x.LogDistance).Max();
-            var shortestTour = logToPrint.Select(x => x.LogDistance).Min();
-            var avgTour = logToPrint.Select(x => x.LogDistance).Average();
-            var fuelUsed = carData.Select(x => x.FuelUsed).Max();
+            var distanceTraveled = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Sum();
+            var longestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Max();
+            var shortestTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Min();
+            var avgTour = logToPrint.Select(x => x.LogDistance).DefaultIfEmpty(0).Average();
+            var fuelUsed = carData.Select(x => x.FuelUsed).DefaultIfEmpty(0).Max();
             var timesCaughtSpeeding = carData.Count(x => x.CaughtSpeeding);
 
             var stringBuilder = new StringBuilder();

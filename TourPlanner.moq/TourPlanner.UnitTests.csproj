@@ -7,15 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspose.PDF" Version="21.4.0" />
     <PackageReference Include="Autofac.Extras.Moq" Version="6.0.0" />
-    <PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
-    <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
     <PackageReference Include="Moq" Version="4.16.1" />
-    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
   </ItemGroup>
@@ -24,6 +21,7 @@
     <ProjectReference Include="..\TourPlanner.BL\TourPlanner.BL.csproj" />
     <ProjectReference Include="..\TourPlanner.DAL\TourPlanner.DAL.csproj" />
     <ProjectReference Include="..\TourPlanner.Model\TourPlanner.Model.csproj" />
+    <ProjectReference Include="..\TourPlanner.Wpf.csproj" />
   </ItemGroup>
 
 </Project>
