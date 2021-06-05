@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using TourPlanner.Annotations;
+using TourPlanner.Properties;
 
 namespace TourPlanner.ViewModels.Log
 {
