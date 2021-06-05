@@ -1,4 +1,4 @@
-# TourManager
+# Tour Planner
 This is a desktop application where you can **create** tours. These tours consist of *name*, *source*, *destination*, *distance* and *description*. The added tours can also be **edited** and **deleted**. These tours can also have logs, which can either be *unspecified*, *bike log* or a *car log*. The logs consist of *name*, *date*, *distance*, *total time*, *rating*, and *report*. If the user wished to add *bike* or *car log*, they are offered additional parameters which they can add. These include *peak heart rate (HR)*, *lowest HR*, *average HR*, *average speed* and *calories burnt* for bike logs and *max speed*, *average speed*, *fuel used*, *fuel cost* and *caught speeding* for car logs.
 
 ## App Architecture
@@ -34,7 +34,7 @@ This layer is for testing. There are tests which mock the database (as the name 
 
 The MVVM pattern was chosen as it was required for this project. The UX design was also somewhat premade for orientation with some exceptions.
 
-![Class diagram](img/Readme/classDiagram.png)
+![Class diagram](https://github.com/TheWaII/TourManager/blob/feature/img/readme/classDiagram.png)
 
 
 My goal with the design was to make a seemless design where the user does not have to open many different windows but can work on a single window without losing the track of where to find something. This is the reason I do not have any extra windows (except for error messages and help). 
@@ -49,7 +49,7 @@ I tested the databse functionality because I wanted to check if everything works
 ## Unique features
 A unique feature I have built in is the dark mode. This allows the user to switch the color scheme of the application. If they want a more brighter look, they can set the color scheme to default. However, for people who are more comfortable with a dark enviorment, they may turn on the dark mode by clicking the lamp button on the top right corner. 
 
-![Dark mode](img/Readme/darkmode.gif) 
+![Dark mode](https://github.com/TheWaII/TourManager/blob/feature/img/readme/darkmode.gif) 
 
 
 ###### Total time:  75.4
