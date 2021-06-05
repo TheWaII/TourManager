@@ -78,10 +78,9 @@ namespace TourPlanner.DAL.Tour
                 {
                     Logger.Error(exception.Message);
                 }
-              
+
                 Logger.Error(e.Message);
             }
-
         }
 
         public void Update(TourData tourData)
@@ -129,17 +128,19 @@ namespace TourPlanner.DAL.Tour
 
             try
             {
-                dbConnection.Execute("DELETE FROM BikeTour WHERE LogId IN (select LogId from Logs WHERE TourId = @TourId)",
-                    new { tourData.TourId });
+                dbConnection.Execute(
+                    "DELETE FROM BikeTour WHERE LogId IN (select LogId from Logs WHERE TourId = @TourId)",
+                    new {tourData.TourId});
 
-                dbConnection.Execute("DELETE FROM CarTour WHERE LogId IN (SELECT LogId from Logs WHERE TourId = @TourId)",
-                    new { tourData.TourId });
+                dbConnection.Execute(
+                    "DELETE FROM CarTour WHERE LogId IN (SELECT LogId from Logs WHERE TourId = @TourId)",
+                    new {tourData.TourId});
 
                 dbConnection.Execute("DELETE FROM tours WHERE TourId = @TourId",
-                    new { tourData.TourId });
+                    new {tourData.TourId});
 
                 dbConnection.Execute("DELETE FROM LOGS WHERE TourId = @TourId",
-                    new { tourData.TourId });
+                    new {tourData.TourId});
             }
             catch (Exception e)
             {

@@ -24,7 +24,6 @@ namespace TourPlanner.BL.Route
             Logger.Info("Got distance from route " + source + " to " + destination + ".");
 
             return distance;
-
         }
     }
 }

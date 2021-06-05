@@ -4,17 +4,17 @@
 }
 
 .th, .td {
-    text-align: left;
-    padding-right: 10px;
-    padding: 5px;
     font-size: 13px;
+    padding: 5px;
+    padding-right: 10px;
+    text-align: left;
 }
 
 
 .tr:nth-child(odd) {
-    border-style: groove;
     background-color: gainsboro;
     border-color: black;
+    border-style: groove;
 }
 
 .th {
@@ -24,47 +24,45 @@
 
 .header img {
     float: right;
-    width: 50px;
     height: 50px;
     margin-right: 10px;
+    width: 50px;
 }
 
-.header h3 {
-    text-align: center;
-}
+.header h3 { text-align: center; }
 
 .header {
-    border-radius: 15px;
     border: 2px solid darkseagreen;
+    border-radius: 15px;
     margin-bottom: 10px;
 }
 
 
 .square {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    height: 50px;
-    width: 200px;
     background-color: cadetblue;
     float: left;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 200px;
 }
 
 .triangleRight {
-    width: 0;
-    height: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-top: 25px solid aliceblue;
-    border-left: 50px solid cadetblue;
     border-bottom: 25px solid aliceblue;
+    border-left: 50px solid cadetblue;
+    border-top: 25px solid aliceblue;
     float: left;
+    height: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 0;
 }
 
 .text {
+    background-color: aliceblue;
+    display: inline-block;
     margin-bottom: 10px;
     margin-top: 10px;
     width: 58%;
-    display: inline-block;
-    background-color: aliceblue
 }

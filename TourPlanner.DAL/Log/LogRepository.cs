@@ -85,9 +85,9 @@ namespace TourPlanner.DAL.Log
                 {
                     Logger.Error(exception.Message);
                 }
+
                 Logger.Error(e.Message);
             }
-
         }
 
         public void Update(LogData logs)
@@ -121,7 +121,6 @@ namespace TourPlanner.DAL.Log
             {
                 Logger.Error(e.Message);
             }
-
         }
 
         public void Delete(LogData logs)
@@ -138,13 +137,12 @@ namespace TourPlanner.DAL.Log
             try
             {
                 dbConnection.Execute("DELETE FROM logs WHERE LogId = @LogId",
-                    new { logs.LogId });
+                    new {logs.LogId});
             }
             catch (Exception e)
             {
                 Logger.Error(e.Message);
             }
-
         }
     }
 }

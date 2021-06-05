@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TourPlanner.ViewModels;
 
 namespace TourPlanner.Views
 {

@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using TourPlanner.DAL.Log;
 using TourPlanner.Model.Log;
-using TourPlanner.Model.Tour;
 
 namespace TourPlanner.BL.Database.Log
 {

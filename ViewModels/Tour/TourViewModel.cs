@@ -2,73 +2,25 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Globalization;
-using System.IO;
-using System.Linq;
+using System.Reflection;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using TourPlanner.BL;
+using log4net;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
+using TourPlanner.BL.Reporting;
 using TourPlanner.BL.Route;
 using TourPlanner.Commands;
 using TourPlanner.Model.Log;
 using TourPlanner.Model.Tour;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-using System.Windows;
-using log4net;
-using Npgsql;
-using TourPlanner.BL.ImportExport;
-using TourPlanner.BL.Reporting;
-using TourPlanner.DAL;
 
 namespace TourPlanner.ViewModels.Tour
 {
     public class TourViewModel : INotifyPropertyChanged, IValueConverter
     {
-
         private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        #region Constructor
-
-        public TourViewModel()
-        {
-            AddTourToggle = new RelayCommand(o => ToggleAddTour());
-
-            ValidateCommand = new RelayCommand(o => Validate(), o => CanUpdateValidate);
-
-            ValidateCommandEdit = new RelayCommand(o => ValidateEdit());
-
-            AddTourCommand = new RelayCommand(o => SaveChanges(), o => CanUpdate);
-            
-            WindowLoaded = new RelayCommand(o => RefreshTourList());
-
-            EditTourCommand = new RelayCommand(o => UpdateChanges());
-
-            EditTourToggle = new RelayCommand(o => ToggleEditTour());
-
-            DeleteTourCommand = new RelayCommand(o => DeleteTour());
-
-            DeleteLogCommand = new RelayCommand(o => DeleteLog());
-
-            SaveTourReport = new RelayCommand(o => CreateTourReport());
-
-            //WindowExit = new RelayCommand(o => ExitWindow());
-
-            RefreshTourCommand = new RelayCommand(o => RefreshTourList());
-
-            RefreshLogCommand = new RelayCommand(o => RefreshLogList());
-        }
-
-        public RelayCommand RefreshTourCommand { get; set; }
-
-        #endregion
 
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -227,6 +179,41 @@ namespace TourPlanner.ViewModels.Tour
 
             RefreshTourList();
         }
+
+        #region Constructor
+
+        public TourViewModel()
+        {
+            AddTourToggle = new RelayCommand(o => ToggleAddTour());
+
+            ValidateCommand = new RelayCommand(o => Validate(), o => CanUpdateValidate);
+
+            ValidateCommandEdit = new RelayCommand(o => ValidateEdit());
+
+            AddTourCommand = new RelayCommand(o => SaveChanges(), o => CanUpdate);
+
+            WindowLoaded = new RelayCommand(o => RefreshTourList());
+
+            EditTourCommand = new RelayCommand(o => UpdateChanges());
+
+            EditTourToggle = new RelayCommand(o => ToggleEditTour());
+
+            DeleteTourCommand = new RelayCommand(o => DeleteTour());
+
+            DeleteLogCommand = new RelayCommand(o => DeleteLog());
+
+            SaveTourReport = new RelayCommand(o => CreateTourReport());
+
+            //WindowExit = new RelayCommand(o => ExitWindow());
+
+            RefreshTourCommand = new RelayCommand(o => RefreshTourList());
+
+            RefreshLogCommand = new RelayCommand(o => RefreshLogList());
+        }
+
+        public RelayCommand RefreshTourCommand { get; set; }
+
+        #endregion
 
         //private void ExitWindow()
         //{
@@ -417,7 +404,7 @@ namespace TourPlanner.ViewModels.Tour
             {
                 var ll = new LogLogic();
                 var sortedList = ll.MyFilteredItems(SearchTextLog, LogCollection);
-               
+
                 return sortedList;
             }
         }
@@ -486,7 +473,6 @@ namespace TourPlanner.ViewModels.Tour
 
                 RefreshLogList();
                 SearchTextLog = "";
-
             }
         }
 
@@ -585,47 +571,47 @@ namespace TourPlanner.ViewModels.Tour
             switch (SelectedDataForLog.LogType)
             {
                 case 1:
+                {
+                    var dbBikeLogic = new BikeLogic();
+                    foreach (var bikeItem in dbBikeLogic.LoadBikes())
                     {
-                        var dbBikeLogic = new BikeLogic();
-                        foreach (var bikeItem in dbBikeLogic.LoadBikes())
+                        var bikeData = new BikeData
                         {
-                            var bikeData = new BikeData
-                            {
-                                LogId = bikeItem.LogId,
-                                AvgHeartRate = bikeItem.AvgHeartRate,
-                                AvgSpeed = bikeItem.AvgSpeed,
-                                CaloriesBurnt = bikeItem.CaloriesBurnt,
-                                LowestHeartRate = bikeItem.LowestHeartRate,
-                                PeakHeartRate = bikeItem.PeakHeartRate
-                            };
+                            LogId = bikeItem.LogId,
+                            AvgHeartRate = bikeItem.AvgHeartRate,
+                            AvgSpeed = bikeItem.AvgSpeed,
+                            CaloriesBurnt = bikeItem.CaloriesBurnt,
+                            LowestHeartRate = bikeItem.LowestHeartRate,
+                            PeakHeartRate = bikeItem.PeakHeartRate
+                        };
 
-                            if (bikeData.LogId == SelectedDataForLog.LogId)
-                                _bikeCollection.Add(bikeData);
-                        }
-
-                        break;
+                        if (bikeData.LogId == SelectedDataForLog.LogId)
+                            _bikeCollection.Add(bikeData);
                     }
+
+                    break;
+                }
                 case 2:
+                {
+                    var dbCarLogic = new CarLogic();
+                    foreach (var carItem in dbCarLogic.LoadCars())
                     {
-                        var dbCarLogic = new CarLogic();
-                        foreach (var carItem in dbCarLogic.LoadCars())
+                        var carData = new CarData
                         {
-                            var carData = new CarData
-                            {
-                                LogId = carItem.LogId,
-                                AvgSpeed = carItem.AvgSpeed,
-                                CaughtSpeeding = carItem.CaughtSpeeding,
-                                FuelCost = carItem.FuelCost,
-                                FuelUsed = carItem.FuelUsed,
-                                MaxSpeed = carItem.MaxSpeed
-                            };
+                            LogId = carItem.LogId,
+                            AvgSpeed = carItem.AvgSpeed,
+                            CaughtSpeeding = carItem.CaughtSpeeding,
+                            FuelCost = carItem.FuelCost,
+                            FuelUsed = carItem.FuelUsed,
+                            MaxSpeed = carItem.MaxSpeed
+                        };
 
-                            if (carData.LogId == SelectedDataForLog.LogId)
-                                _carCollection.Add(carData);
-                        }
-
-                        break;
+                        if (carData.LogId == SelectedDataForLog.LogId)
+                            _carCollection.Add(carData);
                     }
+
+                    break;
+                }
             }
         }
 

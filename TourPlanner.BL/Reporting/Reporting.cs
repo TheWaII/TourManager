@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using iText.Html2pdf;
-using iText.Kernel.Pdf;
 using Microsoft.Win32;
 using TourPlanner.BL.Database.Log;
 using TourPlanner.BL.Database.Tour;
@@ -36,11 +35,12 @@ namespace TourPlanner.BL.Reporting
 
             var htmlFile = path + ".html";
 
-            var saveFileDialog = new SaveFileDialog { Filter = "PDF (*.pdf)|*.pdf", FileName = file };
+            var saveFileDialog = new SaveFileDialog {Filter = "PDF (*.pdf)|*.pdf", FileName = file};
 
             saveFileDialog.ShowDialog();
 
-            var dialogResult = MessageBox.Show("Do you want to create a statistic report?", " ", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var dialogResult = MessageBox.Show("Do you want to create a statistic report?", " ", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
 
             switch (dialogResult)
             {
@@ -67,9 +67,9 @@ namespace TourPlanner.BL.Reporting
             File.Delete(htmlFile);
         }
 
-        private static string TourReport(IReadOnlyCollection<TourData> tourList, IEnumerable<LogData> logList, IReadOnlyCollection<BikeData> bikeList, IReadOnlyCollection<CarData> carList, int tourId)
+        private static string TourReport(IReadOnlyCollection<TourData> tourList, IEnumerable<LogData> logList,
+            IReadOnlyCollection<BikeData> bikeList, IReadOnlyCollection<CarData> carList, int tourId)
         {
-
             var tourName = tourList.Single(item => item.TourId == tourId).TourName;
 
             var path = "../../Report/" + tourName + "/" + tourName;
@@ -77,12 +77,15 @@ namespace TourPlanner.BL.Reporting
 
             Directory.CreateDirectory("../../Report/" + tourName);
 
-            File.WriteAllText(reportFile, HtmlTourReport(tourList, logList, bikeList, carList, tourId, reportFile, tourName));
+            File.WriteAllText(reportFile,
+                HtmlTourReport(tourList, logList, bikeList, carList, tourId, reportFile, tourName));
 
             return tourName;
         }
 
-        private static string HtmlTourReport(IReadOnlyCollection<TourData> tourList, IEnumerable<LogData> logList, IReadOnlyCollection<BikeData> bikeList, IReadOnlyCollection<CarData> carList, int tourId, string reportFile, string tourName)
+        private static string HtmlTourReport(IReadOnlyCollection<TourData> tourList, IEnumerable<LogData> logList,
+            IReadOnlyCollection<BikeData> bikeList, IReadOnlyCollection<CarData> carList, int tourId, string reportFile,
+            string tourName)
         {
             var stringBuilder = new StringBuilder();
 
@@ -93,7 +96,8 @@ namespace TourPlanner.BL.Reporting
             var imagePath = "../../img/route/" + source + "_" + destination + ".jpeg";
 
             //HTML
-            stringBuilder.Append("<html><head><link rel='stylesheet' type='text/css' href='../../TourPlanner.BL/Reporting/Style.css'></head><body>");
+            stringBuilder.Append(
+                "<html><head><link rel='stylesheet' type='text/css' href='../../TourPlanner.BL/Reporting/Style.css'></head><body>");
 
             //Title
             stringBuilder.Append("<h1 style='text-align: center;'>" + tourName + "</h1>");
@@ -105,7 +109,8 @@ namespace TourPlanner.BL.Reporting
 
             stringBuilder.Append("<tr>");
             stringBuilder.Append("<th width='100px'> <img src='../../img/icons/house.png' width='30' height='30'/>");
-            stringBuilder.Append("<th width='100px'> <img src='../../img/icons/destination.png' width='30' height='30'/>");
+            stringBuilder.Append(
+                "<th width='100px'> <img src='../../img/icons/destination.png' width='30' height='30'/>");
             stringBuilder.Append("<th width='100px'> <img src='../../img/icons/distance.png' width='30' height='30'/>");
             stringBuilder.Append("</tr>");
 
@@ -143,7 +148,6 @@ namespace TourPlanner.BL.Reporting
                                      "<th class='th'>Report</th>" +
                                      "</tr>");
                 foreach (var item in logToPrint.Where(item => item.LogType == 0))
-                {
                     stringBuilder.AppendFormat("<tr class='tr'><td class='td'>{0}" +
                                                "</td><td class='td'>{1}" +
                                                "</td><td class='td'>{2} KM" +
@@ -151,14 +155,13 @@ namespace TourPlanner.BL.Reporting
                                                "</td><td class='td'>{4}" +
                                                "</td><td class='td'>{5}" +
                                                "</td></tr>",
-                        item.LogName, item.LogDate, item.LogDistance, item.LogTotalTime, item.LogRating, item.LogReport);
-                }
+                        item.LogName, item.LogDate, item.LogDistance, item.LogTotalTime, item.LogRating,
+                        item.LogReport);
 
                 stringBuilder.Append("</table>");
             }
 
             stringBuilder.Append("<br><br><br>");
-
 
 
             //bike
@@ -180,7 +183,6 @@ namespace TourPlanner.BL.Reporting
                                      "</tr>");
                 foreach (var item in logToPrint.Where(item => item.LogType == 1))
                 {
-
                     var peakHeartRate = bikeList.Single(i => i.LogId == item.LogId).PeakHeartRate;
                     var lowestHeartRate = bikeList.Single(i => i.LogId == item.LogId).LowestHeartRate;
                     var avgHeartRate = bikeList.Single(i => i.LogId == item.LogId).AvgHeartRate;
@@ -199,7 +201,6 @@ namespace TourPlanner.BL.Reporting
                                                "</td><td class='td'>{9}" +
                                                "</td><td class='td'>{10}</td>" +
                                                "</tr>",
-
                         item.LogName, item.LogDate, item.LogDistance, item.LogTotalTime, item.LogRating,
                         peakHeartRate, lowestHeartRate, avgHeartRate, avgSpeed, calBurnt,
                         item.LogReport);
@@ -229,7 +230,6 @@ namespace TourPlanner.BL.Reporting
                                      "</tr>");
                 foreach (var item in logToPrint.Where(item => item.LogType == 2))
                 {
-
                     var maxSpeed = carList.Single(i => i.LogId == item.LogId).MaxSpeed;
                     var avgSpeed = carList.Single(i => i.LogId == item.LogId).AvgSpeed;
                     var fuelUsed = carList.Single(i => i.LogId == item.LogId).FuelUsed;
@@ -248,7 +248,6 @@ namespace TourPlanner.BL.Reporting
                                                "</td><td class='td'>{9}" +
                                                "</td><td class='td'>{10}</td>" +
                                                "</tr>",
-
                         item.LogName, item.LogDate, item.LogDistance, item.LogTotalTime, item.LogRating,
                         maxSpeed, avgSpeed, fuelUsed, fuelCost, caughtSpeeding,
                         item.LogReport);

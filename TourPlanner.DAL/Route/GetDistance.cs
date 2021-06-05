@@ -16,8 +16,8 @@ namespace TourPlanner.DAL.Route
         public double Distance(string source, string destination)
         {
             //https://stackoverflow.com/questions/27108264/how-to-properly-make-a-http-web-get-request
-            var request = (HttpWebRequest)WebRequest.Create(_mapApiStrings.DistanceUrl(source, destination));
-            var response = (HttpWebResponse)request.GetResponse();
+            var request = (HttpWebRequest) WebRequest.Create(_mapApiStrings.DistanceUrl(source, destination));
+            var response = (HttpWebResponse) request.GetResponse();
             string responseString;
 
             using (var stream = response.GetResponseStream())
@@ -37,6 +37,7 @@ namespace TourPlanner.DAL.Route
             {
                 Logger.Error(e.Message);
             }
+
             return distance;
         }
     }

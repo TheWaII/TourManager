@@ -4,7 +4,6 @@ using System.Data;
 using System.Reflection;
 using Dapper;
 using log4net;
-using log4net.Repository.Hierarchy;
 using Npgsql;
 using TourPlanner.Model.Log;
 
@@ -25,7 +24,6 @@ namespace TourPlanner.DAL.Log.Car
                 list = dbConnection.Query<CarData>(
                     "SELECT LogId, MaxSpeed, AvgSpeed, FuelUsed, FuelCost, CaughtSpeeding from CarTour",
                     commandType: CommandType.Text);
-
             }
             catch (Exception e)
             {
@@ -56,7 +54,6 @@ namespace TourPlanner.DAL.Log.Car
             {
                 Logger.Error(e.Message);
             }
-           
         }
 
         public void Update(CarData car)
@@ -80,7 +77,6 @@ namespace TourPlanner.DAL.Log.Car
             {
                 Logger.Error(e.Message);
             }
-          
         }
 
         public void Delete(int logId)
@@ -90,7 +86,6 @@ namespace TourPlanner.DAL.Log.Car
             try
             {
                 dbConnection.Execute("DELETE FROM CarTour WHERE LogId = @logId", commandType: CommandType.Text);
-
             }
             catch (Exception e)
             {

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using System.Windows.Input;
 using Catel.Collections;
 using TourPlanner.Annotations;
 using TourPlanner.BL.Database.Log;
@@ -51,7 +49,6 @@ namespace TourPlanner.ViewModels.Log
             EditLogToggle = new RelayCommand(o => ToggleEditLog());
 
             EditLog = new RelayCommand(o => UpdateChangesLog(), o => CanEditLog);
-
         }
 
         public RelayCommand AddLogToggle { get; }
@@ -170,10 +167,8 @@ namespace TourPlanner.ViewModels.Log
 
         public bool CanAddLog
         {
-
             get
             {
-
                 var regex = new Regex("[0-9]+:[0-5][0-9]$");
                 return Id >= 0 && !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Date) &&
                        !string.IsNullOrWhiteSpace(Time) && Rating != 0 && !string.IsNullOrWhiteSpace(Report) &&
@@ -433,37 +428,37 @@ namespace TourPlanner.ViewModels.Log
             switch (SelectedLogData.LogType)
             {
                 case 1:
-                    {
-                        var dbBikeLogic = new BikeLogic();
+                {
+                    var dbBikeLogic = new BikeLogic();
 
-                        var bikeData = new BikeData
-                        {
-                            LogId = SelectedLogData.LogId,
-                            PeakHeartRate = BikeEditCollection.PeakHeartRate,
-                            LowestHeartRate = BikeEditCollection.LowestHeartRate,
-                            AvgHeartRate = BikeEditCollection.AvgHeartRate,
-                            AvgSpeed = BikeEditCollection.AvgSpeed,
-                            CaloriesBurnt = BikeEditCollection.CaloriesBurnt
-                        };
-                        dbBikeLogic.UpdateLogs(bikeData);
-                        break;
-                    }
+                    var bikeData = new BikeData
+                    {
+                        LogId = SelectedLogData.LogId,
+                        PeakHeartRate = BikeEditCollection.PeakHeartRate,
+                        LowestHeartRate = BikeEditCollection.LowestHeartRate,
+                        AvgHeartRate = BikeEditCollection.AvgHeartRate,
+                        AvgSpeed = BikeEditCollection.AvgSpeed,
+                        CaloriesBurnt = BikeEditCollection.CaloriesBurnt
+                    };
+                    dbBikeLogic.UpdateLogs(bikeData);
+                    break;
+                }
                 case 2:
-                    {
-                        var dbCarLogic = new CarLogic();
+                {
+                    var dbCarLogic = new CarLogic();
 
-                        var carData = new CarData
-                        {
-                            LogId = SelectedLogData.LogId,
-                            MaxSpeed = CarEditCollection.MaxSpeed,
-                            AvgSpeed = CarEditCollection.AvgSpeed,
-                            FuelUsed = CarEditCollection.FuelUsed,
-                            FuelCost = CarEditCollection.FuelCost,
-                            CaughtSpeeding = CarEditCollection.CaughtSpeeding
-                        };
-                        dbCarLogic.UpdateLogs(carData);
-                        break;
-                    }
+                    var carData = new CarData
+                    {
+                        LogId = SelectedLogData.LogId,
+                        MaxSpeed = CarEditCollection.MaxSpeed,
+                        AvgSpeed = CarEditCollection.AvgSpeed,
+                        FuelUsed = CarEditCollection.FuelUsed,
+                        FuelCost = CarEditCollection.FuelCost,
+                        CaughtSpeeding = CarEditCollection.CaughtSpeeding
+                    };
+                    dbCarLogic.UpdateLogs(carData);
+                    break;
+                }
             }
 
             BikeEditCollection = null;

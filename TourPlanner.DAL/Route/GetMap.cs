@@ -18,7 +18,6 @@ namespace TourPlanner.DAL.Route
             try
             {
                 wc.DownloadFileAsync(new Uri(url), @"../../img/route/" + source + "_" + destination + ".jpeg");
-
             }
             catch (Exception e)
             {
